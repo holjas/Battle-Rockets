@@ -2,6 +2,8 @@ import "./App.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import RocketStats from "./RocketStats.js";
+import UserInput from "./UserInput";
+import moon from "./images/moon-phase.png" 
 
 function App() {
   const [rocket, setRocket] = useState([]);
@@ -20,8 +22,17 @@ function App() {
 
   return (
     <div className='App'>
-      <h1>🚀👩‍🚀🚀👨‍🚀🚀BATLLE ROCKETS GOOOOOO 🚀👩‍🚀🚀👨‍🚀🚀</h1>
-      {rocket.map((singleRocket) => {
+      <header>
+      <h1>Battle Rockets</h1>
+      <h2></h2>
+      <p></p>
+      <UserInput />
+      <div className="flexMoon">
+      <img className="moon"src={moon}/>
+      <p>Ready</p>
+      </div>
+
+      {/* {rocket.map((singleRocket) => {
         return (
           <RocketStats
             name={singleRocket.name}
@@ -32,7 +43,8 @@ function App() {
             description={singleRocket.description}
           />
         );
-      })}
+      })} */}
+      </header>
     </div>
   );
 }

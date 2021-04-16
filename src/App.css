@@ -1,1 +1,28 @@
+
+
 /* CSS */
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Teko:wght@500&display=swap");
+
+:root {
+  --black: #121212;
+  --white: #F0F0F0;
+  --blue: #003049;
+  --red: #D62828;
+  --yellow: #FCBF49;
+  --fontHeading: "Teko", sans-serif;
+  --fontBody: "Lato", sans-serif;
+}
+
+h1, h2 {
+    font-family: var(--fontHeading);
+    margin:0px;
+    color:var(--white);
+    font-size:5rem;
+    text-align: center;
+    padding-top: 25px;
+}
+header {
+    background-image: url('/src/space-galaxy-background/93034.jpg');
+    background-size: cover;
+    height: 100vh;
+}
