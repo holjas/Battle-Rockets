@@ -5,78 +5,87 @@ import GameStart from "./GameStart";
 import firebase from "./firebase";
 import Lobby from "./Lobby";
 
-function create_UUID() {
-  var dt = new Date().getTime();
-  var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-    /[xy]/g,
-    function (c) {
-      var r = (dt + Math.random() * 16) % 16 | 0;
-      dt = Math.floor(dt / 16);
-      return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
-    }
-  );
-  return uuid;
-}
-
 function App() {
-  // const [data, setData] = useState({});
+  const [data, setData] = useState({});
   const [token, setToken] = useState(null);
-  // const [playerAssignedToken, setPlayerAssignedToken] = useState("");
+
+  //create a token when component first mounts
+  useEffect(() => {
+    //generate a token, borrowed from somewhere off the internet
+    function create_UUID() {
+      var dt = new Date().getTime();
+      var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+        /[xy]/g,
+        function (c) {
+          var r = (dt + Math.random() * 16) % 16 | 0;
+          dt = Math.floor(dt / 16);
+          return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
+        }
+      );
+      return uuid;
+    }
+    setToken(create_UUID());
+  }, []);
 
   useEffect(() => {
-    //create a token
-    setToken(create_UUID());
-    //pull from firebase what's there
-    // const dbRef = firebase.database().ref();
-    // dbRef.on("value", (response) => {
-    //   setData(response.val());
-    // });
-
-    // setPlayerAssignedToken(token);
-  }, []);
-  console.log("iam token", token);
-  // console.log("iam Player assigned token", playerAssignedToken);
-  // const handleShowGameStart = () => {
-  //   setgameStartSection(false);
-  // };
-
-  // const { plaerys: players } = data;
+    //pull from firebase what's there (runs when token is assigned)
+    const dbRef = firebase.database().ref();
+    dbRef.on("value", (response) => {
+      setData(response.val());
+    });
+  }, [token]);
 
   //destructure the data returned from firebase,
-  // const { players = {} } = data;
+  const { players = {} } = data;
   //checking that two players have 'entered' the game
-  // const enoughPlayers = Object.keys(players).length === 2;
+  const enoughPlayers = Object.keys(players).length === 2;
   //when two player are confirmed, push P1/P2 info to firebase
-  // useEffect(() => {
-  //   if (enoughPlayers) {
-  //     const [playerOne, playerTwo] = Object.values(players);
-  //     const pOne = firebase.database().ref().child("playerOne");
-  //     const pTwo = firebase.database().ref().child("playerTwo");
+  useEffect(() => {
+    if (enoughPlayers) {
+      const [playerOne, playerTwo] = Object.values(players);
+      const pOne = firebase.database().ref().child("playerOne");
+      const pTwo = firebase.database().ref().child("playerTwo");
 
-  //     pOne.push(playerOne);
-  //     pTwo.push(playerTwo);
-  //   }
-  // }, [enoughPlayers]);
+      pOne.push(playerOne);
+      pTwo.push(playerTwo);
+    }
 
-  // const { playerOne = {}, playerTwo = {} } = data;
+    // for (const key in data.playerOne) {
+    //   console.log(data.playerOne[key].token);
+    // }
 
-  // if (Object.values(playerOne).token === token) {
-  //   console.log("I'm player one");
-  // }
+    // for (const key in data.playerTwo) {
+    //   console.log(data.playerTwo[key].token);
+    //   const firebaseToken = data.playerTwo[key].token;
+    //   if (firebaseToken === token) {
+    //     console.log("IAM PLAYER TWO");
+    //   }
+    // }
+  }, [enoughPlayers]);
 
-  // if (Object.values(playerTwo).token === token) {
-  //   console.log("I'm player two");
-  // }
+  for (const key in data.playerOne) {
+    console.log(data.playerOne[key].token, "FIREBASE TOKEN");
+    console.log(token, "REGULAR TOKEN");
+    const firebaseToken = data.playerOne[key].token;
+    if (firebaseToken === token) {
+      console.log("IAM PLAYER ONE");
+    }
+  }
+  for (const key in data.playerTwo) {
+    console.log(data.playerTwo[key].token, "FIREBASE TOKEN");
+    console.log(token, "REGULAR TOKEN");
+    const firebaseToken = data.playerTwo[key].token;
+    if (firebaseToken === token) {
+      console.log("IAM PLAYER TWO");
+    }
+  }
 
+  //Game Start component to capture user name
   const addPlayer = (name) => {
     const dbRef = firebase.database().ref().child("players");
     dbRef.push({
       playerName: name,
       token: token,
-      rocketSelection: {
-        rocketOne: "one",
-        rocketTwo: "two",
-      },
     });
   };
 
