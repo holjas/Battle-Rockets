@@ -1,45 +1,46 @@
-import { useState, useEffect } from "react";
-import firebase from "./firebase";
+import { useState } from "react";
 
-function GameStart() {
-  //   const [playerOne, setPlayerOne] = useState(false);
-  //   const [playerTwo, setPlayerTwo] = useState(false);
-  const [isPlayerOneReady, setIsPlayerOneReady] = useState(false);
-  const [isPlayerTwoReady, setIsPlayerTwoReady] = useState(false);
+function GameStart(props) {
+  // const [isPlayerOneReady, setIsPlayerOneReady] = useState(false);
+  // const [isPlayerTwoReady, setIsPlayerTwoReady] = useState(false);
   const [playerOneName, setPlayerOneName] = useState("");
   const [playerTwoName, setPlayerTwoName] = useState("");
+  const { addPlayer } = props;
 
   //handleClick, to confirm when players are ready. Also captures their names.
   const handleIsPlayerReady = (player) => {
-    if (player === "one") {
-      setIsPlayerOneReady(true);
-      const dbRef = firebase.database().ref().child("playerOne");
-      dbRef.push({
-        playerName: playerOneName,
-        rocketSelection: {
-          rocketOne: "one",
-          rocketTwo: "two",
-        },
-      });
-    }
-    if (player === "two") {
-      setIsPlayerTwoReady(true);
-      const dbRef = firebase.database().ref().child("playerTwo");
-      dbRef.push({
-        playerName: playerTwoName,
-        rocketSelection: {
-          rocketOne: "one",
-          rocketTwo: "two",
-        },
-      });
-    }
+    addPlayer(player);
+    // if (player === "one") {
+    //   setIsPlayerOneReady(true);
+    //   const dbRef = firebase.database().ref().child("playerOne");
+    //   dbRef.push({
+    //     playerName: playerOneName,
+    //     rocketSelection: {
+    //       rocketOne: "one",
+    //       rocketTwo: "two",
+    //     },
+    //   });
+    //   setPlayerOneName("");
+    // }
+    // if (player === "two") {
+    //   setIsPlayerTwoReady(true);
+    //   const dbRef = firebase.database().ref().child("playerTwo");
+    //   dbRef.push({
+    //     playerName: playerTwoName,
+    //     rocketSelection: {
+    //       rocketOne: "one",
+    //       rocketTwo: "two",
+    //     },
+    //   });
+    //   setPlayerTwoName("");
+    // }
   };
-  //confirm that both players are ready and game can start
-  useEffect(() => {
-    if (isPlayerOneReady && isPlayerTwoReady) {
-      console.log("we're both ready, now start the game");
-    }
-  }, [isPlayerOneReady, isPlayerTwoReady]);
+  //confirm that both players are ready and game can start. gameStart Section will be hidden, and next section will appear
+  // useEffect(() => {
+  //   if (isPlayerOneReady && isPlayerTwoReady) {
+  //     props.handleShowGameStart();
+  //   }
+  // }, [isPlayerOneReady, isPlayerTwoReady]);
   //captures text input
   const handleChange = (event, playerNumber) => {
     if (playerNumber === "one") {
@@ -60,11 +61,12 @@ function GameStart() {
       ></input>
       <button
         onClick={() => {
-          handleIsPlayerReady("one");
+          handleIsPlayerReady(playerOneName);
         }}
       >
         player one
       </button>
+
       <input
         type="text"
         onChange={(event) => handleChange(event, "two")}
@@ -72,7 +74,7 @@ function GameStart() {
       ></input>
       <button
         onClick={() => {
-          handleIsPlayerReady("two");
+          handleIsPlayerReady(playerTwoName);
         }}
       >
         player two
