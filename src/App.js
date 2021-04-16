@@ -19,18 +19,19 @@ function create_UUID() {
 }
 
 function App() {
-  const [data, setData] = useState({});
+  // const [data, setData] = useState({});
   const [token, setToken] = useState(null);
   // const [playerAssignedToken, setPlayerAssignedToken] = useState("");
 
   useEffect(() => {
-    //pull from firebase what's there
-    const dbRef = firebase.database().ref();
-    dbRef.on("value", (response) => {
-      setData(response.val());
-    });
     //create a token
     setToken(create_UUID());
+    //pull from firebase what's there
+    // const dbRef = firebase.database().ref();
+    // dbRef.on("value", (response) => {
+    //   setData(response.val());
+    // });
+
     // setPlayerAssignedToken(token);
   }, []);
   console.log("iam token", token);
@@ -42,20 +43,20 @@ function App() {
   // const { plaerys: players } = data;
 
   //destructure the data returned from firebase,
-  const { players = {} } = data;
+  // const { players = {} } = data;
   //checking that two players have 'entered' the game
-  const enoughPlayers = Object.keys(players).length === 2;
+  // const enoughPlayers = Object.keys(players).length === 2;
   //when two player are confirmed, push P1/P2 info to firebase
-  useEffect(() => {
-    if (enoughPlayers) {
-      const [playerOne, playerTwo] = Object.values(players);
-      const pOne = firebase.database().ref().child("playerOne");
-      const pTwo = firebase.database().ref().child("playerTwo");
+  // useEffect(() => {
+  //   if (enoughPlayers) {
+  //     const [playerOne, playerTwo] = Object.values(players);
+  //     const pOne = firebase.database().ref().child("playerOne");
+  //     const pTwo = firebase.database().ref().child("playerTwo");
 
-      pOne.push(playerOne);
-      pTwo.push(playerTwo);
-    }
-  }, [enoughPlayers, players]);
+  //     pOne.push(playerOne);
+  //     pTwo.push(playerTwo);
+  //   }
+  // }, [enoughPlayers]);
 
   // const { playerOne = {}, playerTwo = {} } = data;
 
