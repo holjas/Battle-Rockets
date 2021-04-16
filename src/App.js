@@ -21,31 +21,31 @@ function create_UUID() {
 function App() {
   const [data, setData] = useState({});
   const [token, setToken] = useState(null);
-  const [playerAssignedToken, setPlayerAssignedToken] = useState("");
+  // const [playerAssignedToken, setPlayerAssignedToken] = useState("");
 
   useEffect(() => {
-    //create a token
-    setToken(create_UUID());
-    //
-    setPlayerAssignedToken(token);
     //pull from firebase what's there
     const dbRef = firebase.database().ref();
     dbRef.on("value", (response) => {
-      console.log(response.val());
       setData(response.val());
     });
+    //create a token
+    setToken(create_UUID());
+    // setPlayerAssignedToken(token);
   }, []);
   console.log("iam token", token);
-  console.log("iam Player assigned token", playerAssignedToken);
+  // console.log("iam Player assigned token", playerAssignedToken);
   // const handleShowGameStart = () => {
   //   setgameStartSection(false);
   // };
 
   // const { plaerys: players } = data;
 
+  //destructure the data returned from firebase,
   const { players = {} } = data;
+  //checking that two players have 'entered' the game
   const enoughPlayers = Object.keys(players).length === 2;
-
+  //when two player are confirmed, push P1/P2 info to firebase
   useEffect(() => {
     if (enoughPlayers) {
       const [playerOne, playerTwo] = Object.values(players);
@@ -55,17 +55,17 @@ function App() {
       pOne.push(playerOne);
       pTwo.push(playerTwo);
     }
-  }, [enoughPlayers]);
+  }, [enoughPlayers, players]);
 
-  const { playerOne = {}, playerTwo = {} } = data;
+  // const { playerOne = {}, playerTwo = {} } = data;
 
-  if (Object.values(playerOne).token === token) {
-    console.log("I'm player one");
-  }
+  // if (Object.values(playerOne).token === token) {
+  //   console.log("I'm player one");
+  // }
 
-  if (Object.values(playerTwo).token === token) {
-    console.log("I'm player two");
-  }
+  // if (Object.values(playerTwo).token === token) {
+  //   console.log("I'm player two");
+  // }
 
   const addPlayer = (name) => {
     const dbRef = firebase.database().ref().child("players");
