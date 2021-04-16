@@ -1,1 +1,11 @@
-/* CSS */
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Teko:wght@500&display=swap");
+
+:root {
+  --black: #121212;
+  --white: #f0f0f0;
+  --blue: #003049;
+  --red: #d62828;
+  --yellow: #fcbf49;
+  --fontHeading: "Teko", sans-serif;
+  --fontBody: "Lato", sans-serif;
+}
