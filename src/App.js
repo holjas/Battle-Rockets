@@ -17,7 +17,7 @@ function App() {
     });
   }, []);
 
-  const playerOne = data.playerOne;
+  const { playerOne, playerTwo } = data;
 
   // const playerTwo = data.playerTwo;
 
@@ -74,7 +74,7 @@ function App() {
     <div className="App">
       <h1>🚀👩‍🚀🚀👨‍🚀🚀BATLLE ROCKETS GOOOOOO 🚀👩‍🚀🚀👨‍🚀🚀</h1>
 
-      <GameStart playerOne={playerOne} />
+      <GameStart playerOne={playerOne} playerTwo={playerTwo} />
 
       <Lobby />
       {/* Button for testing only */}

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import firebase from "./firebase";
 
 function GameStart(props) {
-  const { playerOne } = props;
+  const { playerOne, playerTwo } = props;
 
   const [playerOneName, setPlayerOneName] = useState("");
   const [playerTwoName, setPlayerTwoName] = useState("");
@@ -42,6 +42,20 @@ function GameStart(props) {
     setToken(create_UUID());
   }, []);
 
+  if (playerOne) {
+    const { token: playerTokenFirebase } = Object.values(playerOne)[0];
+    if (token === playerTokenFirebase) {
+      console.log("You are player one");
+    }
+  }
+
+  if (playerTwo) {
+    const { token: playerTokenFirebase } = Object.values(playerTwo)[0];
+    if (token === playerTokenFirebase) {
+      console.log("You are player two");
+    }
+  }
+
   return (
     <section>
       {!playerOne && (
@@ -64,7 +78,7 @@ function GameStart(props) {
       )}
       {playerOne && (
         <div>
-          <p>Player One {playerOneName} has already entered the game.</p>
+          <p>Player One has already entered the game.</p>
           <p>Waiting for player two to enter the game...</p>
 
           <input
