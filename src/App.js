@@ -1,12 +1,15 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-// import { HashRouter, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import GameStart from "./GameStart";
 import firebase from "./firebase";
-import Lobby from "./Lobby";
+import RocketLobby from "./RocketLobby";
 
 function App() {
   const [data, setData] = useState({});
+  const [localAssignedToken, setLocalAssignedToken] = useState("");
+  const [playerOnePath, setPlayerOnePath] = useState(false);
+  const [playerTwoPath, setPlayerTwoPath] = useState(false);
 
   //pull from firebase what's there (runs when token is assigned)
   useEffect(() => {
@@ -16,70 +19,58 @@ function App() {
       // console.log(response.val());
     });
   }, []);
-
   const { playerOne, playerTwo } = data;
-
-  // const playerTwo = data.playerTwo;
-
-  //destructure the data returned from firebase,
-  // const { players = {} } = data;
-  //checking that two players have 'entered' the game
-  // const enoughPlayers = Object.keys(players).length === 2;
-  //when two player are confirmed, push P1/P2 info to firebase
-  // useEffect(() => {
-  //   if (enoughPlayers) {
-  //     const [playerOne, playerTwo] = Object.values(players);
-  //     const pOne = firebase.database().ref().child("playerOne");
-  //     const pTwo = firebase.database().ref().child("playerTwo");
-
-  //     pOne.push(playerOne);
-  //     pTwo.push(playerTwo);
-  //   }
-
-  //   // for (const key in data.playerOne) {
-  //   //   console.log(data.playerOne[key].token);
-  //   //   if (data.playerOne[key].token === token) console.log("Iam player one");
-  //   // }
-
-  //   // for (const key in data) {
-  //   //   console.log(data.playerOne[key].token, "FIREBASE TOKEN");
-  //   //   console.log(token, "REGULAR TOKEN");
-  //   //   const firebaseToken = data.playerOne[key].token;
-  //   //   if (firebaseToken === token) {
-  //   //     console.log("IAM PLAYER ONE");
-  //   //   }
-  //   // }
-  // }, [enoughPlayers]);
-
-  // for (const key in data.playerOne) {
-  //   console.log(data.playerOne[key].token);
-  //   if (data.playerOne[key].token === token) console.log("Iam player one");
-  // }
-
-  //Game Start component to capture user name
-  // const addPlayer = (name) => {
-  //   const dbRef = firebase.database().ref().child("players");
-  //   dbRef.push({
-  //     playerName: name,
-  //     token: token,
-  //   });
-  // };
 
   // button for clearing firebase. testing only!!!!!
   const removeEverything = () => {
     firebase.database().ref("playerOne").set(false);
     firebase.database().ref("playerTwo").set(false);
   };
+  //capture the local token number
+  function captureTheToken(localToken) {
+    setLocalAssignedToken(localToken);
+  }
+  useEffect(() => {
+    for (const key in playerOne) {
+      const firebaseToken = playerOne[key].token;
+      if (firebaseToken === localAssignedToken) {
+        console.log("i'm player one. set");
+        setPlayerOnePath(true);
+      }
+    }
+    for (const key in playerTwo) {
+      const firebaseToken = playerTwo[key].token;
+      if (firebaseToken === localAssignedToken) {
+        console.log("you're player two. wait your turn");
+        setPlayerTwoPath(true);
+      }
+    }
+  }, [localAssignedToken]);
+
+  //THE RETURN
   return (
-    <div className="App">
-      <h1>🚀👩‍🚀🚀👨‍🚀🚀BATLLE ROCKETS GOOOOOO 🚀👩‍🚀🚀👨‍🚀🚀</h1>
+    <Router>
+      <div className="App">
+        {/* Button for testing only */}
+        <button onClick={removeEverything}>CLEAR ALL</button>
+        {/* Button for testing only */}
+        <h1>🚀👩‍🚀🚀👨‍🚀🚀BATLLE ROCKETS GOOOOOO 🚀👩‍🚀🚀👨‍🚀🚀</h1>
 
-      <GameStart playerOne={playerOne} playerTwo={playerTwo} />
-
-      <Lobby />
-      {/* Button for testing only */}
-      <button onClick={removeEverything}>CLEAR ALL</button>
-    </div>
+        {/* once both players have both entered the game, GameStart will hide */}
+        {!playerTwo && (
+          <GameStart
+            playerOne={playerOne}
+            playerTwo={playerTwo}
+            captureTheToken={captureTheToken}
+          />
+        )}
+        {/* Rocket selection lobby. player diverge here to make rocket selections */}
+        {playerOnePath && !playerTwo && <RocketLobby player={playerOne} />}
+        {console.log("playerone object", playerOne)}
+        {playerTwo && <RocketLobby player={playerTwo} />}
+        {console.log("playertwo object", playerTwo)}
+      </div>
+    </Router>
   );
 }
 

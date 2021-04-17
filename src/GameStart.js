@@ -2,29 +2,13 @@ import { useState, useEffect } from "react";
 import firebase from "./firebase";
 
 function GameStart(props) {
-  const { playerOne, playerTwo } = props;
+  const { playerOne, playerTwo, captureTheToken } = props;
 
   const [playerOneName, setPlayerOneName] = useState("");
   const [playerTwoName, setPlayerTwoName] = useState("");
   const [token, setToken] = useState(null);
 
-  //handleClick, to confirm when players are ready. Also captures their names.
-  const handleIsPlayerReady = (player, playerNumber) => {
-    firebase.database().ref().child(playerNumber).push({
-      name: player,
-      token: token,
-    });
-  };
-  //captures text input
-  const handleChange = (event, playerNumber) => {
-    if (playerNumber === "one") {
-      setPlayerOneName(event.target.value);
-    }
-    if (playerNumber === "two") {
-      setPlayerTwoName(event.target.value);
-    }
-  };
-  //create a token when component first mounts
+  //create a token when component first mounts (borrowed from somewhere off the internet)
   useEffect(() => {
     //generate a token, borrowed from somewhere off the internet
     function create_UUID() {
@@ -41,7 +25,24 @@ function GameStart(props) {
     }
     setToken(create_UUID());
   }, []);
+  //handleClick, to confirm when players are ready by capturing their name and assigned token
+  const handleIsPlayerReady = (player, playerNumber) => {
+    firebase.database().ref().child(playerNumber).push({
+      name: player,
+      token: token,
+    });
+  };
+  //captures text input for user name
+  const handleChange = (event, playerNumber) => {
+    if (playerNumber === "one") {
+      setPlayerOneName(event.target.value);
+    }
+    if (playerNumber === "two") {
+      setPlayerTwoName(event.target.value);
+    }
+  };
 
+  //these if statements are a proof of concept. that the different assigned tokens will tell the browswers, you are player one and another player two
   if (playerOne) {
     const { token: playerTokenFirebase } = Object.values(playerOne)[0];
     if (token === playerTokenFirebase) {
@@ -70,6 +71,7 @@ function GameStart(props) {
             onClick={() => {
               handleIsPlayerReady(playerOneName, "playerOne");
               setPlayerOneName("");
+              captureTheToken(token);
             }}
           >
             player one
@@ -90,6 +92,7 @@ function GameStart(props) {
             onClick={() => {
               handleIsPlayerReady(playerTwoName, "playerTwo");
               setPlayerTwoName("");
+              captureTheToken(token);
             }}
           >
             player two
