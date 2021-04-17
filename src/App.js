@@ -12,6 +12,7 @@ function App(props) {
   const [data, setData] = useState({});
   const [localAssignedToken, setLocalAssignedToken] = useState("");
   const history = useHistory();
+
   const [playerOnePath, setPlayerOnePath] = useState(false);
   const [playerTwoPath, setPlayerTwoPath] = useState(false);
 
@@ -50,7 +51,7 @@ function App(props) {
       }
     }
   }, [localAssignedToken]);
-  console.log("history", history);
+
   //THE RETURN
   return (
     <Router>
