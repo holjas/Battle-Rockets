@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-function RocketLobbyOne({ player }) {
+function RocketLobbyOne() {
   return (
     <>
       <h2>⏰ YOU'RE in lobby ONE</h2>

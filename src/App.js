@@ -6,15 +6,14 @@ import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
 import GameStart from "./GameStart";
 import RocketLobbyOne from "./RocketLobbyOne";
 import RocketLobbyTwo from "./RocketLobbyTwo";
-import DeleteLater from "./DeleteLater";
 
-function App(props) {
+function App() {
   const [data, setData] = useState({});
   const [localAssignedToken, setLocalAssignedToken] = useState("");
   const history = useHistory();
 
-  const [playerOnePath, setPlayerOnePath] = useState(false);
-  const [playerTwoPath, setPlayerTwoPath] = useState(false);
+  // const [playerOnePath, setPlayerOnePath] = useState(false);
+  // const [playerTwoPath, setPlayerTwoPath] = useState(false);
 
   //pull from firebase what's there (runs when token is assigned)
   useEffect(() => {
@@ -34,23 +33,24 @@ function App(props) {
   //capture the local token number
   function captureTheToken(localToken) {
     setLocalAssignedToken(localToken);
+    console.log(localAssignedToken);
   }
-  useEffect(() => {
-    for (const key in playerOne) {
-      const firebaseToken = playerOne[key].token;
-      if (firebaseToken === localAssignedToken) {
-        // console.log("i'm player one. set");
-        setPlayerOnePath(true);
-      }
-    }
-    for (const key in playerTwo) {
-      const firebaseToken = playerTwo[key].token;
-      if (firebaseToken === localAssignedToken) {
-        // console.log("you're player two. wait your turn");
-        setPlayerTwoPath(true);
-      }
-    }
-  }, [localAssignedToken]);
+  // useEffect(() => {
+  //   for (const key in playerOne) {
+  //     const firebaseToken = playerOne[key].token;
+  //     if (firebaseToken === localAssignedToken) {
+  //       // console.log("i'm player one. set");
+  //       setPlayerOnePath(true);
+  //     }
+  //   }
+  //   for (const key in playerTwo) {
+  //     const firebaseToken = playerTwo[key].token;
+  //     if (firebaseToken === localAssignedToken) {
+  //       // console.log("you're player two. wait your turn");
+  //       setPlayerTwoPath(true);
+  //     }
+  //   }
+  // }, [localAssignedToken]);
 
   //THE RETURN
   return (
@@ -60,7 +60,7 @@ function App(props) {
         <button
           onClick={() => {
             removeEverything();
-            history.push("/home");
+            history.push("/");
           }}
         >
           CLEAR ALL
@@ -72,7 +72,7 @@ function App(props) {
         {!playerTwo && (
           <GameStart
             playerOne={playerOne}
-            playerTwo={playerTwo}
+            // playerTwo={playerTwo}
             captureTheToken={captureTheToken}
           />
         )}

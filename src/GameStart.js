@@ -4,7 +4,7 @@ import firebase from "./firebase";
 import { Link, withRouter } from "react-router-dom";
 
 function GameStart(props) {
-  const { playerOne, playerTwo, captureTheToken } = props;
+  const { playerOne, captureTheToken } = props;
 
   const [playerOneName, setPlayerOneName] = useState("");
   const [playerTwoName, setPlayerTwoName] = useState("");
