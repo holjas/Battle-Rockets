@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import firebase from "./firebase";
 
+import { Link, withRouter } from "react-router-dom";
+
 function GameStart(props) {
   const { playerOne, playerTwo, captureTheToken } = props;
 
@@ -42,21 +44,6 @@ function GameStart(props) {
     }
   };
 
-  //these if statements are a proof of concept. that the different assigned tokens will tell the browswers, you are player one and another player two
-  if (playerOne) {
-    const { token: playerTokenFirebase } = Object.values(playerOne)[0];
-    if (token === playerTokenFirebase) {
-      console.log("You are player one");
-    }
-  }
-
-  if (playerTwo) {
-    const { token: playerTokenFirebase } = Object.values(playerTwo)[0];
-    if (token === playerTokenFirebase) {
-      console.log("You are player two");
-    }
-  }
-
   return (
     <section>
       {!playerOne && (
@@ -72,9 +59,10 @@ function GameStart(props) {
               handleIsPlayerReady(playerOneName, "playerOne");
               setPlayerOneName("");
               captureTheToken(token);
+              props.history.push("/RocketLobbyOne");
             }}
           >
-            player one
+            <Link to="/RocketLobbyOne">player one</Link>
           </button>
         </>
       )}
@@ -93,6 +81,7 @@ function GameStart(props) {
               handleIsPlayerReady(playerTwoName, "playerTwo");
               setPlayerTwoName("");
               captureTheToken(token);
+              props.history.push("/RocketLobbyTwo");
             }}
           >
             player two
@@ -103,4 +92,4 @@ function GameStart(props) {
   );
 }
 
-export default GameStart;
+export default withRouter(GameStart);

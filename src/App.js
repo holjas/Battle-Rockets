@@ -1,13 +1,17 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import GameStart from "./GameStart";
 import firebase from "./firebase";
-import RocketLobby from "./RocketLobby";
+import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
 
-function App() {
+import GameStart from "./GameStart";
+import RocketLobbyOne from "./RocketLobbyOne";
+import RocketLobbyTwo from "./RocketLobbyTwo";
+import DeleteLater from "./DeleteLater";
+
+function App(props) {
   const [data, setData] = useState({});
   const [localAssignedToken, setLocalAssignedToken] = useState("");
+  const history = useHistory();
   const [playerOnePath, setPlayerOnePath] = useState(false);
   const [playerTwoPath, setPlayerTwoPath] = useState(false);
 
@@ -34,27 +38,34 @@ function App() {
     for (const key in playerOne) {
       const firebaseToken = playerOne[key].token;
       if (firebaseToken === localAssignedToken) {
-        console.log("i'm player one. set");
+        // console.log("i'm player one. set");
         setPlayerOnePath(true);
       }
     }
     for (const key in playerTwo) {
       const firebaseToken = playerTwo[key].token;
       if (firebaseToken === localAssignedToken) {
-        console.log("you're player two. wait your turn");
+        // console.log("you're player two. wait your turn");
         setPlayerTwoPath(true);
       }
     }
   }, [localAssignedToken]);
-
+  console.log("history", history);
   //THE RETURN
   return (
     <Router>
       <div className="App">
         {/* Button for testing only */}
-        <button onClick={removeEverything}>CLEAR ALL</button>
+        <button
+          onClick={() => {
+            removeEverything();
+            history.push("/home");
+          }}
+        >
+          CLEAR ALL
+        </button>
         {/* Button for testing only */}
-        <h1>🚀👩‍🚀🚀👨‍🚀🚀BATLLE ROCKETS GOOOOOO 🚀👩‍🚀🚀👨‍🚀🚀</h1>
+        <h1>🚀👩‍🚀🚀👨‍🚀🚀BATLLE ROCKETS GO 🚀👩‍🚀🚀👨‍🚀🚀</h1>
 
         {/* once both players have both entered the game, GameStart will hide */}
         {!playerTwo && (
@@ -64,11 +75,16 @@ function App() {
             captureTheToken={captureTheToken}
           />
         )}
+
         {/* Rocket selection lobby. player diverge here to make rocket selections */}
-        {playerOnePath && !playerTwo && <RocketLobby player={playerOne} />}
-        {console.log("playerone object", playerOne)}
-        {playerTwo && <RocketLobby player={playerTwo} />}
-        {console.log("playertwo object", playerTwo)}
+
+        {/* {playerOnePath && !playerTwo && <RocketLobbyOne player={playerOne} />} */}
+        {/* {console.log("playerone object", playerOne)} */}
+
+        {/* {playerTwo && <RocketLobbyTwo player={playerTwo} />} */}
+        {/* {console.log("playertwo object", playerTwo)}s */}
+        <Route exact path="/RocketLobbyOne" component={RocketLobbyOne} />
+        <Route exact path="/RocketLobbyTwo" component={RocketLobbyTwo} />
       </div>
     </Router>
   );
