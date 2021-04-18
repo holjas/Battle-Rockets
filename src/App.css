@@ -1,3 +1,4 @@
+/* CSS */
 @import url("https://fonts.googleapis.com/css2?family=Lato&family=Teko:wght@500&display=swap");
 
 :root {
@@ -8,4 +9,19 @@
   --yellow: #fcbf49;
   --fontHeading: "Teko", sans-serif;
   --fontBody: "Lato", sans-serif;
+}
+
+h1,
+h2 {
+  font-family: var(--fontHeading);
+  margin: 0px;
+  color: var(--white);
+  font-size: 5rem;
+  text-align: center;
+  padding-top: 25px;
+}
+header {
+  background-image: url("/src/images/background.png");
+  background-size: cover;
+  height: 100vh;
 }

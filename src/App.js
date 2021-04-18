@@ -12,15 +12,11 @@ function App() {
   const [localAssignedToken, setLocalAssignedToken] = useState("");
   const history = useHistory();
 
-  // const [playerOnePath, setPlayerOnePath] = useState(false);
-  // const [playerTwoPath, setPlayerTwoPath] = useState(false);
-
   //pull from firebase what's there (runs when token is assigned)
   useEffect(() => {
     const dbRef = firebase.database().ref();
     dbRef.on("value", (response) => {
       setData(response.val());
-      // console.log(response.val());
     });
   }, []);
   const { playerOne, playerTwo } = data;
@@ -33,24 +29,7 @@ function App() {
   //capture the local token number
   function captureTheToken(localToken) {
     setLocalAssignedToken(localToken);
-    console.log(localAssignedToken);
   }
-  // useEffect(() => {
-  //   for (const key in playerOne) {
-  //     const firebaseToken = playerOne[key].token;
-  //     if (firebaseToken === localAssignedToken) {
-  //       // console.log("i'm player one. set");
-  //       setPlayerOnePath(true);
-  //     }
-  //   }
-  //   for (const key in playerTwo) {
-  //     const firebaseToken = playerTwo[key].token;
-  //     if (firebaseToken === localAssignedToken) {
-  //       // console.log("you're player two. wait your turn");
-  //       setPlayerTwoPath(true);
-  //     }
-  //   }
-  // }, [localAssignedToken]);
 
   //THE RETURN
   return (
@@ -66,7 +45,12 @@ function App() {
           CLEAR ALL
         </button>
         {/* Button for testing only */}
-        <h1>🚀👩‍🚀🚀👨‍🚀🚀BATLLE ROCKETS GO 🚀👩‍🚀🚀👨‍🚀🚀</h1>
+        <header>
+          <h1>Battle Rockets</h1>
+          {/* <div className="flexMoon">
+            <img className="moon" src={moon} />
+          </div> */}
+        </header>
 
         {/* once both players have both entered the game, GameStart will hide */}
         {!playerTwo && (
@@ -77,13 +61,6 @@ function App() {
           />
         )}
 
-        {/* Rocket selection lobby. player diverge here to make rocket selections */}
-
-        {/* {playerOnePath && !playerTwo && <RocketLobbyOne player={playerOne} />} */}
-        {/* {console.log("playerone object", playerOne)} */}
-
-        {/* {playerTwo && <RocketLobbyTwo player={playerTwo} />} */}
-        {/* {console.log("playertwo object", playerTwo)}s */}
         <Route exact path="/RocketLobbyOne" component={RocketLobbyOne} />
         <Route exact path="/RocketLobbyTwo" component={RocketLobbyTwo} />
       </div>
