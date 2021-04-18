@@ -41,9 +41,9 @@ function Game() {
 ]
 // initializing gameboard as an object with two arrays to use for game logic, and also to pass to firebase for two player integration
 const gameBoards = {
-    playerOneBoard : [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    playerOneBoard : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     playerOneMirror : ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
-    playerTwoBoard : [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    playerTwoBoard : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
     playerTwoMirror : ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
   }
 
@@ -65,7 +65,7 @@ const placeRockets = (rocket, gameBoard) => {
 
   // make sure that squares we're popping ships into aren't occupied, or aren't off the edge of the board
 
-  const isTaken = currentDirection.some( (index) => (gameBoard[randomStart + index] !== 1))
+  const isTaken = currentDirection.some( (index) => (gameBoard[randomStart + index] !== 0))
 // if current rocket is at the 6th spot in the array row (the far right edge), it can still register, but if it's higher that that it can't be placed on the board
   const atRightEdge = currentDirection.some( (index) => (
     (randomStart + index) % width === width - 1))
@@ -221,6 +221,7 @@ const [isGameOver, setIsGameOver] = useState(false);
          <div className="grid boardPlayerTwo">
          {
               boardPlayerTwo.map( (value, index) => {
+                // const cellValue = value === 0 ? null : value
                 return(
                   <button key={index} onClick ={ event => handleClick(event, index) } value={ boardPlayerTwo[index] } >{ value }</button>
 
