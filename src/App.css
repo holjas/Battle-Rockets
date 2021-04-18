@@ -18,19 +18,23 @@
 }
 
 .boardPlayerOne,
+.boardPlayerOne button,
 .mirrorPlayerOne {
     background-color: dodgerblue;
+    color: dodgerblue;
 }
 
 .boardPlayerTwo,
+.boardPlayerTwo button,
 .mirrorPlayerTwo {
     background-color: tomato;
+    color: tomato;
 }
 
 .grid button {
     width: 40px;
     height: 40px;
-    border: 2px solid black;
+    border: 2px solid azure;
     background-color: transparent;
 }
 
@@ -40,39 +44,8 @@
     height: 20px; 
 }
 
-.rocket1Container {
-    width: 40px;
-    height: 20px;
-    background-color: orange;
-    display: flex;
-}
-.rocket2Container {
-    width: 60px;
-    height: 20px;
-    background-color: purple;
-    display: flex;
-}
-.rocket3Container {
-    width: 60px;
-    height: 20px;
-    background-color: green;
-    display: flex;
+.hidden {
+    display: none;
 }
 
-.rocket1 {
-    background-color: brown;
-}
-.rocket2 {
-    background-color: black;
-}
-.rocket3 {
-    background-color: darkgreen;
-}
 
-.hit {
-    background-color: red;
-}
-
-.miss {
-    background-color: paleturquoise;
-}
