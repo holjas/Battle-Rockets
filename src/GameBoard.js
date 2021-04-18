@@ -5,7 +5,7 @@ import WinPopUp from './WinPopUp';
 
 
 
-function Game() {
+function GameBoard() {
   // since the game board is 7x7, this variable will determine the vertical space occupied by a rocket if it is rotated vertically. 
   const width = 7;
   // setting properties for each rocket as an object inside an array
@@ -112,11 +112,11 @@ const [isGameOver, setIsGameOver] = useState(false);
 
     if (playerOneScore > 1000 || playerTwoScore > 1000) {
       setIsGameOver(true);
+      // game is over: direct to pop up component to display winner
       WinPopUp();
         winPopUp.classList.remove('hidden');
         winButton.classList.remove('hidden');
 
-      // game is over: direct to another screen
     }
 
     const dbRef = firebase.database().ref();
@@ -306,4 +306,4 @@ const handleClickPlayerTwo = (event, index) => {
   );
 }
 
-export default Game;
+export default GameBoard;

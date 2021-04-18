@@ -1,13 +1,13 @@
 
 import './App.css';
-import Game from './Game';
+import GameBoard from './GameBoard';
 import WinPopUp from './WinPopUp';
 
 function App() {
   return (
     <div className="App">
       <WinPopUp />
-      <Game />
+      <GameBoard />
     </div>
   );
 }
