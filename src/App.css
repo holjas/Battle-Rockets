@@ -2,23 +2,41 @@
   text-align: center;
 }
 
+.container {
+    display: flex;
+}
 
-.gridPlayerOne,
-.gridPlayerTwo {
+.boardPlayerOne,
+.boardPlayerTwo,
+.mirrorPlayerOne,
+.mirrorPlayerTwo {
     width: 280px;
     height: 280px;
     display: flex;
     flex-wrap: wrap;
-    margin-left: 50px;
+    margin: 20px;
 }
 
-.gridPlayerOne {
+.boardPlayerOne,
+.mirrorPlayerOne {
     background-color: dodgerblue;
-    margin-bottom: 40px;
 }
 
-.gridPlayerTwo {
+.boardPlayerTwo,
+.mirrorPlayerTwo {
     background-color: tomato;
+}
+
+.P1Butt {
+    color: dodgerblue;
+}
+
+.miss {
+    background-color: brown;
+}
+
+.P2Butt {
+    color: tomato;
 }
 
 .grid button {
@@ -30,6 +48,7 @@
 
 .grid button:hover {
     background-color: grey;
+    color: grey;
 }
 
 

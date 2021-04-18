@@ -6,14 +6,14 @@ import WinPopUp from './WinPopUp'
 
 
 function Game() {
-
+  // since the game board is 7x7, this variable will determine the vertical space occupied by a rocket if it is rotated vertically. 
   const width = 7;
-
+  // setting properties for each rocket as an object inside an array
   const rocketArray = [
     {
         name: "R1",
         size: 1,
-        score: 400,
+        score: 475,
         directions: [
         // horizontal, because it's only one square wide
             [0, 1],
@@ -24,7 +24,7 @@ function Game() {
     {
         name: "R2",
         size: 2,
-        score: 300,
+        score: 375,
         directions: [
             [0, 1, 2],
             [0, width, width*2]
@@ -33,18 +33,22 @@ function Game() {
     {
         name: "R3",
         size: 2,
-        score: 300,
+        score: 375,
         directions: [
             [0, 1, 2],
             [0, width, width*2]
         ]
     },
 ]
-
+// initializing gameboard as an object with two arrays to use for game logic, and also to pass to firebase for two player integration
 const gameBoards = {
-    playerOne : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    playerTwo : ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""]
+    playerOneBoard : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    playerOneMirror : ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
+    playerTwoBoard : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    playerTwoMirror : ["","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""],
   }
+
+// this function is used to randomly rotate rockets and place them randomly on the gameboard, and in the gameboard array.
 
 const placeRockets = (rocket, gameBoard) => {
   // getting random value from ship direction array to see if ship will be pointed horizontally or vertically
@@ -72,109 +76,164 @@ const placeRockets = (rocket, gameBoard) => {
 
   if (!isTaken && !atRightEdge && !atLeftEdge) {
     currentDirection.forEach( (index) => {
-      gameBoards.playerOne[randomStart + index] = rocket.name;
+      gameBoard[randomStart + index] = rocket.name;
     })
-} else placeRockets(rocket, gameBoard)
-
+// if none of the conditions above are met to properly place a rocket on the gameboard, the process is repeated until successful.  
+  } else placeRockets(rocket, gameBoard)
 
 }
-placeRockets(rocketArray[0], gameBoards.playerOne)
-placeRockets(rocketArray[1], gameBoards.playerOne)
-placeRockets(rocketArray[2], gameBoards.playerOne)
+// this function is called three times to place each rocket into the gameboard array
+placeRockets(rocketArray[0], gameBoards.playerOneBoard)
+placeRockets(rocketArray[1], gameBoards.playerOneBoard)
+placeRockets(rocketArray[2], gameBoards.playerOneBoard)
+placeRockets(rocketArray[0], gameBoards.playerTwoBoard)
+placeRockets(rocketArray[1], gameBoards.playerTwoBoard)
+placeRockets(rocketArray[2], gameBoards.playerTwoBoard)
 
+// initializing stateful variables that will be necessary for game logic, including the player board, and the mirror of the opponent's board
+const [boardPlayerOne, setBoardPlayerOne] = useState(gameBoards.playerOneBoard);
+const [mirrorPlayerOne, setMirrorPlayerOne] = useState(gameBoards.playerOneMirror);
+const [boardPlayerTwo, setBoardPlayerTwo] = useState(gameBoards.playerTwoBoard);
+const [mirrorPlayerTwo, setMirrorPlayerTwo] = useState(gameBoards.playerTwoMirror);
+const [rocketOneSize, setRocketOneSize] = useState(rocketArray[0].size);
+const [rocketTwoSize, setRocketTwoSize] = useState(rocketArray[1].size);
+const [rocketThreeSize, setRocketThreeSize] = useState(rocketArray[2].size);
+const [shotsTaken, setShotsTaken] = useState(0);
+const [playerScore, setPlayerScore] = useState(0);
+const [playerOneTurn, setPlayerOneTurn] = useState(true);
+const [isGameOver, setIsGameOver] = useState(false);
 
-  const [click, setClick] = useState(gameBoards.playerOne);
-  const [mirror, setMirror] = useState(gameBoards.playerTwo);
-  const [rocketOneSize, setRocketOneSize] = useState(rocketArray[0].size);
-  const [rocketTwoSize, setRocketTwoSize] = useState(rocketArray[1].size);
-  const [rocketThreeSize, setRocketThreeSize] = useState(rocketArray[2].size);
-  const [shotsTaken, setShotsTaken] = useState(0);
-  const [playerScore, setPlayerScore] = useState(0);
-
-
-  // useEffect( () => {
-  //   const dbRef = firebase.database().ref();
-  //   const gameBoard = {
-  //     playerOne : click,
-  //     mirrorOne : mirror
-  //   }
-  //   dbRef.push(gameBoard);
-  // }, [])
+// set up object for player logic in firebase - includes array of rocket placement on gameboard, as well as scoring, and the current player turn
+  useEffect( () => {
 
   const winPopUp = document.querySelector('.win');
   const winButton = document.querySelector('.winButt');
-  
-  const handleClick = (event, index) => {
-    const cell = event.target.value;
-    const arrayCopy = [...click];
-    const mirrorCopy = [...mirror];
 
-    if (cell === "hit" || cell === "miss") {
-    } else {
-      setShotsTaken(shotsTaken + 1);
-      if (cell === "0") {
-        arrayCopy[index] = 'miss';
-        mirrorCopy[index] = 'miss';
-      } else if (cell === "R1" || "R2" || "R3") {
-        arrayCopy[index] = 'hit';
-        mirrorCopy[index] = 'hit';
-        if (cell === "R1") {
-          setRocketOneSize(rocketOneSize - 1);
-        if (rocketOneSize === 0) {
-          setPlayerScore(playerScore + rocketArray[0].score);
-        }
-        }
-        if (cell === "R2") {
-          setRocketTwoSize(rocketTwoSize - 1);
-        if (rocketTwoSize === 0) {
-          setPlayerScore(playerScore + rocketArray[1].score);
-        }
-        }
-        if (cell === "R3") {
-          setRocketThreeSize(rocketThreeSize - 1);
-        if (rocketThreeSize === 0) {
-          setPlayerScore(playerScore + rocketArray[2].score);
-        }
-        }
-      }
-      if (rocketOneSize <= 0 && rocketTwoSize <= 0 && rocketThreeSize <= 0) {
-        setPlayerScore(playerScore * (49 - shotsTaken))
-      }
-      setClick(arrayCopy);
-      setMirror(mirrorCopy);
-      // check for a winner
-      if (playerScore >= 1000){
-        WinPopUp();
+    if (playerScore > 1000) {
+      setIsGameOver(true);
+      WinPopUp();
         winPopUp.classList.remove('hidden')
         winButton.classList.remove('hidden')
-      }
-      // update mirror grid
-      // switch from player to player
+      // game is over: direct to another screen
     }
+
+    const dbRef = firebase.database().ref();
+    const gameBoard = {
+      playerOneGrid : boardPlayerOne,
+      mirrorOneGrid : mirrorPlayerOne,
+      playerTwoGrid : boardPlayerTwo,
+      mirrorTwoGrid : mirrorPlayerTwo,
+      playerOneScore : playerScore,
+      isPlayerOneTurn : playerOneTurn,
+      isGameOver : isGameOver
+    }
+    dbRef.set(gameBoard);
+  }, [boardPlayerOne, mirrorPlayerOne, boardPlayerTwo, mirrorPlayerTwo, playerScore,playerOneTurn, isGameOver])
+  
+
+ 
+
+// game logic is handled inside this function that is triggered when the user clicks on any square
+  const handleClick = (event, index) => {
+    // setting up connection to firebase, because its values will be updated once the game logic has run
+    const dbRef = firebase.database().ref();
+    // gathering a value from the database to see if the game is over
+    dbRef.on('value', (data) => {
+      if (!data.val().isGameOver) {
+        // this variable gathers the value mapped into the button, which corresponds to a point in the array
+        const cell = event.target.value;
+        // creating copies of both arrays that will be used to set the updated states of the game board and mirror
+        const boardCopy = [...boardPlayerOne];
+        const mirrorCopy = [...mirrorPlayerOne];
+        
+        if (cell === "hit" || cell === "miss") {
+        } else {
+          
+          setShotsTaken(shotsTaken + 1);
+          if (cell === "0") {
+            boardCopy[index] = 'miss';
+            mirrorCopy[index] = 'miss';
+          } else if (cell === "R1" || "R2" || "R3") {
+            boardCopy[index] = '💥';
+            mirrorCopy[index] = '💥';
+            if (cell === "R1") {
+              setRocketOneSize(rocketOneSize - 1);
+              if (rocketOneSize === 0) {
+                setPlayerScore(playerScore + rocketArray[0].score);
+              }
+            }
+            if (cell === "R2") {
+              setRocketTwoSize(rocketTwoSize - 1);
+              if (rocketTwoSize === 0) {
+                setPlayerScore(playerScore + rocketArray[1].score);
+              }
+            }
+            if (cell === "R3") {
+              setRocketThreeSize(rocketThreeSize - 1);
+              if (rocketThreeSize === 0) {
+                setPlayerScore(playerScore + rocketArray[2].score);
+              }
+            }
+          }
+          // 
+
+          setBoardPlayerOne(boardCopy);
+          setMirrorPlayerOne(mirrorCopy);
+
+
+          // switch from player to player
+        }
+      }
+    })
+      
   }
+
+  // useEffect( () => {
+
+  //   if (playerScore > 1000) {
+  //     setIsGameOver(true);
+  //     // game is over: direct to another screen
+  //   }
+
+  //   const dbRef = firebase.database().ref();
+  //   const gameBoard = {
+  //     playerOneGrid : boardPlayerOne,
+  //     mirrorOneGrid : mirrorPlayerOne,
+  //     playerTwoGrid : boardPlayerTwo,
+  //     mirrorTwoGrid : mirrorPlayerTwo,
+  //     playerOneScore : playerScore,
+  //     isPlayerOneTurn : playerOneTurn,
+  //     isGameOver : isGameOver
+  //   }
+  //   dbRef.update(gameBoard);
+  // }, [boardPlayerOne, mirrorPlayerOne, boardPlayerTwo, mirrorPlayerTwo, playerScore,playerOneTurn, isGameOver, handleClick])
+
 
   return (
     <div className="GameScreen">
       <WinPopUp />
-            <p>What the player interacts with and score: {playerScore}</p>
+      
+            {/* <p>What the player interacts with and score: {playerScore}</p> */}
       <div className="container">
-          <div className="grid gridPlayerOne">
+          <div className="grid boardPlayerOne">
             {
-              mirror.map( (value, index) => {
+              boardPlayerOne.map( (value, index) => {
                 return(
-                  <button key={index} onClick ={ event => handleClick(event, index) } value={ click[index] } >{ value }</button>
+                  <button key={index} onClick ={ event => handleClick(event, index) } value={ boardPlayerOne[index] }className='P1Butt' >{ value }</button>
 
                 )
               })
             }
           </div>
-           <p>Opponent tracks other player's progress here</p>
-         <div className="grid gridPlayerTwo">
+
+          
+           {/* <p>Opponent tracks other player's progress here</p> */}
+         <div className="grid boardPlayerTwo">
          {
-              click.map( (value, index) => {
-                const cellValue = value === 0 ? null : value
+              boardPlayerTwo.map( (value, index) => {
+                // const cellValue = value === 0 ? null : value
                 return(
-                  <button key={index} value={ click[index] } >{ cellValue }</button>
+                  <button key={index} onClick ={ event => handleClick(event, index) } value={ boardPlayerTwo[index] } className='P2Butt'>{ value }</button>
 
                 )
               })
@@ -182,11 +241,38 @@ placeRockets(rocketArray[2], gameBoards.playerOne)
          </div>
       </div>
 
+      <div className="container">
+          <div className="grid mirrorPlayerTwo">
+            {
+              boardPlayerTwo.map( (value, index) => {
+                return(
+                  <button key={index} onClick ={ event => handleClick(event, index) } value={ boardPlayerTwo[index] } >{ value }</button>
+
+                )
+              })
+            }
+          </div>
+
+          
+           {/* <p>Opponent tracks other player's progress here</p> */}
+         <div className="grid mirrorPlayerOne">
+         {
+              boardPlayerOne.map( (value, index) => {
+                // const cellValue = value === 0 ? null : value
+                return(
+                  <button key={index} onClick ={ event => handleClick(event, index) } value={ boardPlayerOne[index] } >{ value }</button>
+
+                )
+              })
+            }
+         </div>
+      </div>
+
+      
+
 
     </div>
-  );  
+  );
 }
 
-
 export default Game;
-

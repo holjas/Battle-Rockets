@@ -1,10 +1,6 @@
 import "./App.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import RocketStats from "./RocketStats.js";
-import UserInput from "./UserInput";
-import moon from "./images/moon-phase.png" 
-
 import Game from './Game';
 
 function App() {
