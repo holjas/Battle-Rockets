@@ -10,13 +10,13 @@ function App() {
   const [data, setData] = useState({});
   const [localAssignedToken, setLocalAssignedToken] = useState("");
   const history = useHistory();
+  console.log(localAssignedToken);
 
   //pull from firebase what's there (runs when token is assigned)
   useEffect(() => {
     const dbRef = firebase.database().ref();
     dbRef.on("value", (response) => {
       setData(response.val());
-      console.log(response.val());
     });
   }, []);
   const { playerOne, playerTwo } = data;
@@ -51,7 +51,7 @@ function App() {
         {!playerTwo && (
           <GameStart
             playerOne={playerOne}
-            playerTwo={playerTwo}
+            // playerTwo={playerTwo}
             captureTheToken={captureTheToken}
           />
         )}

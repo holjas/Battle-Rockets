@@ -4,7 +4,7 @@ import firebase from "./firebase";
 import { Link, withRouter } from "react-router-dom";
 
 function GameStart(props) {
-  const { playerOne, playerTwo, captureTheToken } = props;
+  const { playerOne, captureTheToken } = props;
 
   const [playerOneName, setPlayerOneName] = useState("");
   const [playerTwoName, setPlayerTwoName] = useState("");
@@ -39,6 +39,7 @@ function GameStart(props) {
         rockets: {
           rocketSelectionOne: "one",
           rocketSelectionTwo: "two",
+          rocketSelectionThree: "three",
         },
       });
   };
@@ -51,14 +52,7 @@ function GameStart(props) {
       setPlayerTwoName(event.target.value);
     }
   };
-
-  if (playerOne && playerOne.token === token) {
-    console.log("CONGRATULATIONSplayer one has entered");
-  }
-  if (playerTwo) {
-    console.log("player two has entered");
-  }
-
+  //variable to determine if playerOne exists in firebase AND that the tokens match from firebase and local state
   const isPlayerOne = playerOne && playerOne.token === token;
 
   return (
