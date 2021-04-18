@@ -4,8 +4,7 @@ import firebase from "./firebase";
 import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
 
 import GameStart from "./GameStart";
-import RocketLobbyOne from "./RocketLobbyOne";
-import RocketLobbyTwo from "./RocketLobbyTwo";
+import RocketLobby from "./RocketLobby";
 
 function App() {
   const [data, setData] = useState({});
@@ -17,6 +16,7 @@ function App() {
     const dbRef = firebase.database().ref();
     dbRef.on("value", (response) => {
       setData(response.val());
+      console.log(response.val());
     });
   }, []);
   const { playerOne, playerTwo } = data;
@@ -40,29 +40,24 @@ function App() {
           onClick={() => {
             removeEverything();
             history.push("/");
+            window.location.reload(false);
           }}
         >
           CLEAR ALL
         </button>
         {/* Button for testing only */}
-        <header>
-          <h1>Battle Rockets</h1>
-          {/* <div className="flexMoon">
-            <img className="moon" src={moon} />
-          </div> */}
-        </header>
-
+        <h1>Battle Rockets</h1>
         {/* once both players have both entered the game, GameStart will hide */}
         {!playerTwo && (
           <GameStart
             playerOne={playerOne}
-            // playerTwo={playerTwo}
+            playerTwo={playerTwo}
             captureTheToken={captureTheToken}
           />
         )}
 
-        <Route exact path="/RocketLobbyOne" component={RocketLobbyOne} />
-        <Route exact path="/RocketLobbyTwo" component={RocketLobbyTwo} />
+        <Route exact path="/RocketLobbyOne" component={RocketLobby} />
+        <Route exact path="/RocketLobbyTwo" component={RocketLobby} />
       </div>
     </Router>
   );

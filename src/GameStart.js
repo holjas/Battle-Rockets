@@ -4,7 +4,7 @@ import firebase from "./firebase";
 import { Link, withRouter } from "react-router-dom";
 
 function GameStart(props) {
-  const { playerOne, captureTheToken } = props;
+  const { playerOne, playerTwo, captureTheToken } = props;
 
   const [playerOneName, setPlayerOneName] = useState("");
   const [playerTwoName, setPlayerTwoName] = useState("");
@@ -27,12 +27,20 @@ function GameStart(props) {
     }
     setToken(create_UUID());
   }, []);
-  //handleClick, to confirm when players are ready by capturing their name and assigned token
+  //handleClick, to confirm when players are ready by capturing their name and assigned token & creating the structure of the database for gameplay
   const handleIsPlayerReady = (player, playerNumber) => {
-    firebase.database().ref().child(playerNumber).push({
-      name: player,
-      token: token,
-    });
+    firebase
+      .database()
+      .ref()
+      .child(playerNumber)
+      .set({
+        name: player,
+        token: token,
+        rockets: {
+          rocketSelectionOne: "one",
+          rocketSelectionTwo: "two",
+        },
+      });
   };
   //captures text input for user name
   const handleChange = (event, playerNumber) => {
@@ -43,6 +51,15 @@ function GameStart(props) {
       setPlayerTwoName(event.target.value);
     }
   };
+
+  if (playerOne && playerOne.token === token) {
+    console.log("CONGRATULATIONSplayer one has entered");
+  }
+  if (playerTwo) {
+    console.log("player two has entered");
+  }
+
+  const isPlayerOne = playerOne && playerOne.token === token;
 
   return (
     <section>
@@ -66,7 +83,8 @@ function GameStart(props) {
           </button>
         </>
       )}
-      {playerOne && (
+      {/* Once player one has entered, page will ask for player two to enter */}
+      {playerOne && !isPlayerOne && (
         <div>
           <p>Player One has already entered the game.</p>
           <p>Waiting for player two to enter the game...</p>
@@ -84,7 +102,7 @@ function GameStart(props) {
               props.history.push("/RocketLobbyTwo");
             }}
           >
-            player two
+            <Link to="/RocketLobbyTwo">player Two</Link>
           </button>
         </div>
       )}
