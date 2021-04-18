@@ -1,100 +1,65 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-// import { HashRouter, Route } from "react-router-dom";
-import GameStart from "./GameStart";
 import firebase from "./firebase";
-import Lobby from "./Lobby";
+import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
 
-function create_UUID() {
-  var dt = new Date().getTime();
-  var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-    /[xy]/g,
-    function (c) {
-      var r = (dt + Math.random() * 16) % 16 | 0;
-      dt = Math.floor(dt / 16);
-      return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
-    }
-  );
-  return uuid;
-}
+import GameStart from "./GameStart";
+import RocketLobby from "./RocketLobby";
 
 function App() {
   const [data, setData] = useState({});
-  const [token, setToken] = useState(null);
-  const [playerAssignedToken, setPlayerAssignedToken] = useState("");
+  const [localAssignedToken, setLocalAssignedToken] = useState("");
+  const history = useHistory();
+  console.log(localAssignedToken);
 
+  //pull from firebase what's there (runs when token is assigned)
   useEffect(() => {
-    //create a token
-    setToken(create_UUID());
-    //
-    setPlayerAssignedToken(token);
-    //pull from firebase what's there
     const dbRef = firebase.database().ref();
     dbRef.on("value", (response) => {
-      console.log(response.val());
       setData(response.val());
     });
   }, []);
-  console.log("iam token", token);
-  console.log("iam Player assigned token", playerAssignedToken);
-  // const handleShowGameStart = () => {
-  //   setgameStartSection(false);
-  // };
-
-  // const { plaerys: players } = data;
-
-  const { players = {} } = data;
-  const enoughPlayers = Object.keys(players).length === 2;
-
-  useEffect(() => {
-    if (enoughPlayers) {
-      const [playerOne, playerTwo] = Object.values(players);
-      const pOne = firebase.database().ref().child("playerOne");
-      const pTwo = firebase.database().ref().child("playerTwo");
-
-      pOne.push(playerOne);
-      pTwo.push(playerTwo);
-    }
-  }, [enoughPlayers]);
-
-  const { playerOne = {}, playerTwo = {} } = data;
-
-  if (Object.values(playerOne).token === token) {
-    console.log("I'm player one");
-  }
-
-  if (Object.values(playerTwo).token === token) {
-    console.log("I'm player two");
-  }
-
-  const addPlayer = (name) => {
-    const dbRef = firebase.database().ref().child("players");
-    dbRef.push({
-      playerName: name,
-      token: token,
-      rocketSelection: {
-        rocketOne: "one",
-        rocketTwo: "two",
-      },
-    });
-  };
+  const { playerOne, playerTwo } = data;
 
   // button for clearing firebase. testing only!!!!!
   const removeEverything = () => {
-    firebase.database().ref("playerOne").remove();
-    firebase.database().ref("playerTwo").remove();
-    firebase.database().ref("players").remove();
+    firebase.database().ref("playerOne").set(false);
+    firebase.database().ref("playerTwo").set(false);
   };
+  //capture the local token number
+  function captureTheToken(localToken) {
+    setLocalAssignedToken(localToken);
+  }
+
+  //THE RETURN
   return (
-    <div className="App">
-      <h1>🚀👩‍🚀🚀👨‍🚀🚀BATLLE ROCKETS GOOOOOO 🚀👩‍🚀🚀👨‍🚀🚀</h1>
+    <Router>
+      <div className="App">
+        {/* Button for testing only */}
+        <button
+          onClick={() => {
+            removeEverything();
+            history.push("/");
+            window.location.reload(false);
+          }}
+        >
+          CLEAR ALL
+        </button>
+        {/* Button for testing only */}
+        <h1>Battle Rockets</h1>
+        {/* once both players have both entered the game, GameStart will hide */}
+        {!playerTwo && (
+          <GameStart
+            playerOne={playerOne}
+            // playerTwo={playerTwo}
+            captureTheToken={captureTheToken}
+          />
+        )}
 
-      <GameStart addPlayer={addPlayer} player1={{}} player2={{}} />
-
-      <Lobby />
-      {/* Button for testing only */}
-      <button onClick={removeEverything}>CLEAR ALL</button>
-    </div>
+        <Route exact path="/RocketLobbyOne" component={RocketLobby} />
+        <Route exact path="/RocketLobbyTwo" component={RocketLobby} />
+      </div>
+    </Router>
   );
 }
 
