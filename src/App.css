@@ -2,21 +2,28 @@
   text-align: center;
 }
 
+.container {
+    display: flex;
+}
 
-.gridPlayerOne,
-.gridPlayerTwo {
+.boardPlayerOne,
+.boardPlayerTwo,
+.mirrorPlayerOne,
+.mirrorPlayerTwo {
     width: 280px;
     height: 280px;
     display: flex;
     flex-wrap: wrap;
+    margin: 20px;
 }
 
-.gridPlayerOne {
+.boardPlayerOne,
+.mirrorPlayerOne {
     background-color: dodgerblue;
-    margin-bottom: 40px;
 }
 
-.gridPlayerTwo {
+.boardPlayerTwo,
+.mirrorPlayerTwo {
     background-color: tomato;
 }
 
