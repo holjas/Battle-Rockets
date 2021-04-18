@@ -1,1 +1,80 @@
-/* CSS */
+.GameScreen {
+  text-align: center;
+}
+
+
+.gridPlayerOne,
+.gridPlayerTwo {
+    width: 280px;
+    height: 280px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 50px;
+}
+
+.gridPlayerOne {
+    background-color: dodgerblue;
+    margin-bottom: 40px;
+}
+
+.gridPlayerTwo {
+    background-color: tomato;
+}
+
+.grid button {
+    width: 40px;
+    height: 40px;
+    border: 2px solid black;
+    background-color: transparent;
+}
+
+.grid button:hover {
+    background-color: grey;
+}
+
+
+.rocket div {
+    width: 20px;
+    height: 20px; 
+}
+
+.rocket1Container {
+    width: 40px;
+    height: 20px;
+    background-color: orange;
+    display: flex;
+}
+.rocket2Container {
+    width: 60px;
+    height: 20px;
+    background-color: purple;
+    display: flex;
+}
+.rocket3Container {
+    width: 60px;
+    height: 20px;
+    background-color: green;
+    display: flex;
+}
+
+.rocket1 {
+    background-color: brown;
+}
+.rocket2 {
+    background-color: black;
+}
+.rocket3 {
+    background-color: darkgreen;
+}
+
+.hit {
+    background-color: red;
+}
+
+.miss {
+    background-color: paleturquoise;
+}
+
+.hidden {
+    display: none;
+}

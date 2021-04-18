@@ -2,6 +2,10 @@ import "./App.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import RocketStats from "./RocketStats.js";
+import UserInput from "./UserInput";
+import moon from "./images/moon-phase.png" 
+
+import Game from './Game';
 
 function App() {
   const [rocket, setRocket] = useState([]);
@@ -19,20 +23,8 @@ function App() {
   }, []);
 
   return (
-    <div className='App'>
-      <h1>🚀👩‍🚀🚀👨‍🚀🚀BATLLE ROCKETS GOOOOOO 🚀👩‍🚀🚀👨‍🚀🚀</h1>
-      {rocket.map((singleRocket) => {
-        return (
-          <RocketStats
-            name={singleRocket.name}
-            mass={singleRocket.mass.lb}
-            height={singleRocket.height.feet}
-            diameter={singleRocket.diameter.feet}
-            country={singleRocket.country}
-            description={singleRocket.description}
-          />
-        );
-      })}
+    <div className="App">
+      <Game />
     </div>
   );
 }
