@@ -2,7 +2,7 @@
 
 :root {
   --black: #121212;
-  --darkGrey: #282c34;
+  --darkGrey: #100915;
   --white: #f0f0f0;
   --blue: #003049;
   --red: #d62828;
@@ -44,15 +44,15 @@
   font-family: var(--fontHeading);
   font-size: 7.5rem;
   color: var(--yellow);
-  text-shadow: 5px 5px 0px var(--red), 10px 10px 0px #46b59b,
-    15px 15px 0px var(--blue), 20px 20px 0px var(--blue);
+  text-shadow: 5px 5px 0px #a44a66, 10px 10px 0px #693858, 15px 15px 0px #3c1329,
+    20px 20px 0px #302644;
 }
 .gameStartContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 70%;
+  width: 50%;
   text-align: center;
   background-color: var(--darkGrey);
   color: var(--white);

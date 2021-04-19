@@ -89,6 +89,7 @@ function GameStart(props) {
       {/* Once player one has entered, page will ask for player two to enter */}
       {playerOne && !isPlayerOne && (
         <section className="gameStartSection">
+          <h1>Battle Rockets</h1>
           <div className="gameStartContainer">
             <p>Player One has already entered the game.</p>
             <p>Waiting for player two to enter the game...</p>
