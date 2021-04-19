@@ -1,22 +1,23 @@
-label{
-    color:black;
+label {
+  color: black;
 }
 
 h3 {
-    color:black;
-    text-align: center;
-    font-size: 40px;
+  color: black;
+  text-align: center;
+  font-size: 40px;
 }
-input[type=checkbox] {
-    width: 30px;
-    height: 30px;
+input[type="checkbox"] {
+  width: 30px;
+  height: 30px;
 }
 .rocket1 {
-    width: 100%;
+  width: 100%;
 }
-.style, h4, .grid-container {
-    color:black;
-
+.style,
+h4,
+.grid-container {
+  color: black;
 }
 
 .grid-container {
@@ -28,18 +29,17 @@ input[type=checkbox] {
   justify-content: space-around;
 }
 .flex {
-    display: flex;
-    margin: 30px;
+  display: flex;
+  margin: 30px;
 }
 .Tittle {
-    font-family: var(--fontHeading);
-    font-size:30px;
+  font-family: var(--fontHeading);
+  font-size: 30px;
 }
 
-input[type=submit] {
-    position: relative;
-    left: 400px;
-    padding: 10px;
-    width: 50%;
-    
+input[type="submit"] {
+  position: relative;
+  left: 400px;
+  padding: 10px;
+  width: 50%;
 }

@@ -51,7 +51,6 @@ function Rockets() {
       <h3>Choose Three Rockets as your game pieces </h3>
       <form className="style" className="grid-container">
         {rocket.map((singleRocket, index) => {
-          console.log(singleRocket);
           return (
             <div key={index} className="flex">
               <div>
