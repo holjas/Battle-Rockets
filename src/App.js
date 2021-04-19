@@ -6,11 +6,12 @@ import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
 import GameStart from "./GameStart";
 import RocketLobby from "./RocketLobby";
 
+import star from "./images/star.png";
+
 function App() {
   const [data, setData] = useState({});
   const [localAssignedToken, setLocalAssignedToken] = useState("");
   const history = useHistory();
-  console.log(localAssignedToken);
 
   //pull from firebase what's there (runs when token is assigned)
   useEffect(() => {
@@ -34,19 +35,21 @@ function App() {
   //THE RETURN
   return (
     <Router>
-      <div className="App">
+      <div>
         {/* Button for testing only */}
-        <button
-          onClick={() => {
-            removeEverything();
-            history.push("/");
-            window.location.reload(false);
-          }}
-        >
-          CLEAR ALL
-        </button>
+        <div className="starAbortContainer">
+          <img
+            src={star}
+            alt="cartoon star"
+            className="starAbort"
+            onClick={() => {
+              removeEverything();
+              history.push("/");
+              window.location.reload(false);
+            }}
+          />
+        </div>
         {/* Button for testing only */}
-        <h1>Battle Rockets</h1>
         {/* once both players have both entered the game, GameStart will hide */}
         {!playerTwo && (
           <GameStart

@@ -2,10 +2,66 @@
 
 :root {
   --black: #121212;
+  --darkGrey: #100915;
   --white: #f0f0f0;
   --blue: #003049;
   --red: #d62828;
   --yellow: #fcbf49;
   --fontHeading: "Teko", sans-serif;
   --fontBody: "Lato", sans-serif;
+}
+.starAbortContainer {
+  z-index: 10;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  cursor: pointer;
+}
+.starAbort {
+  width: 50px;
+  transition: 0.3s;
+  position: relative;
+}
+.starAbort:hover,
+.starAbort:focus {
+  transform: scale(1.2);
+}
+/*  */
+
+.gameStartSection {
+  height: 100vh;
+  background-image: url(./images/background.png);
+  background-color: var(--blue);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.gameStartSection h1 {
+  font-family: var(--fontHeading);
+  font-size: 7.5rem;
+  color: var(--yellow);
+  text-shadow: 5px 5px 0px #a44a66, 10px 10px 0px #693858, 15px 15px 0px #3c1329,
+    20px 20px 0px #302644;
+}
+.gameStartContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  text-align: center;
+  background-color: var(--darkGrey);
+  color: var(--white);
+  font-family: var(--fontBody);
+  border-radius: 3px;
+  padding: 40px;
+}
+.gameStartContainer input[type="text"] {
+  padding: 10px;
+  text-align: center;
+  margin: 20px;
 }
