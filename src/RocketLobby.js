@@ -1,11 +1,11 @@
 import "./RocketLobby.css";
 import firebase from "./firebase";
+
 import axios from "axios";
 import { useEffect, useState } from "react";
 import rocket1 from "./images/rocket-1.png";
 import rocket2 from "./images/rocket-2.png";
 import rocket3 from "./images/rocket-3.png";
-import reactDom from "react-dom";
 
 function Rockets() {
   const [rocket, setRocket] = useState([]);
@@ -35,7 +35,6 @@ function Rockets() {
           };
         });
         setRocket(rocketHeight);
-        console.log(rocket);
       })
       .catch((error) => {
         console.log(error);
