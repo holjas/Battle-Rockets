@@ -4,7 +4,7 @@ import firebase from "./firebase";
 
 import { Link, withRouter } from "react-router-dom";
 
-import moonButton from "./images/moon-phase.png";
+// import moonButton from "./images/moon-phase.png";
 
 function GameStart(props) {
   const { playerOne, captureTheToken } = props;

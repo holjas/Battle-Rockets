@@ -21,7 +21,6 @@ function Rockets() {
       .then((res) => {
         const rocketHeight = res.data.map((rHeight) => {
           const singleRocketHeight = rHeight.height.meters;
-          console.log(singleRocketHeight);
           let orientation = rocket3;
           if (singleRocketHeight > 100) {
             orientation = rocket1;
@@ -60,7 +59,8 @@ function Rockets() {
   return (
     <div className="wrapper">
       <h3>Choose Three Rockets as your game pieces </h3>
-      <form className="style" className="grid-container">
+
+      <form className="style">
         {rocket.map((singleRocket, index) => {
           return (
             <div key={index} className="flex">
