@@ -1,9 +1,14 @@
 .GameScreen {
   text-align: center;
+  background-image: url('./images/93034.jpg');
+  background-size: cover;
+  height: 100vh;
 }
 
 .container {
     display: flex;
+    justify-content: space-between;
+    padding: 50px 30px 0;
 }
 
 .boardPlayerOne,
@@ -18,37 +23,29 @@
 }
 
 .boardPlayerOne,
-.mirrorPlayerOne {
-    background-color: dodgerblue;
-}
-
+.boardPlayerOne button,
+.mirrorPlayerOne,
 .boardPlayerTwo,
+.boardPlayerTwo button,
 .mirrorPlayerTwo {
-    background-color: tomato;
+    background-image: url('./images/buttonBackground.png');
 }
 
-.P1Butt {
-    color: dodgerblue;
+.mirrorPlayerTwo button,
+.mirrorPlayerOne button {
+    color: white;
 }
 
-.miss {
-    background-color: brown;
-}
-
-.P2Butt {
-    color: tomato;
-}
 
 .grid button {
     width: 40px;
     height: 40px;
-    border: 2px solid black;
+    border: 1px solid azure;
     background-color: transparent;
 }
 
 .grid button:hover {
     background-color: grey;
-    color: grey;
 }
 
 
@@ -57,43 +54,8 @@
     height: 20px; 
 }
 
-.rocket1Container {
-    width: 40px;
-    height: 20px;
-    background-color: orange;
-    display: flex;
-}
-.rocket2Container {
-    width: 60px;
-    height: 20px;
-    background-color: purple;
-    display: flex;
-}
-.rocket3Container {
-    width: 60px;
-    height: 20px;
-    background-color: green;
-    display: flex;
-}
-
-.rocket1 {
-    background-color: brown;
-}
-.rocket2 {
-    background-color: black;
-}
-.rocket3 {
-    background-color: darkgreen;
-}
-
-.hit {
-    background-color: red;
-}
-
-.miss {
-    background-color: paleturquoise;
-}
-
 .hidden {
     display: none;
 }
+
+

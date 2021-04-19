@@ -8,5 +8,4 @@ function WinPopUp() {
         </div>
     )
 }
-
 export default WinPopUp;
