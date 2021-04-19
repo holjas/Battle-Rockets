@@ -32,19 +32,10 @@ function GameStart(props) {
   }, []);
   //handleClick, to confirm when players are ready by capturing their name and assigned token & creating the structure of the database for gameplay
   const handleIsPlayerReady = (player, playerNumber) => {
-    firebase
-      .database()
-      .ref()
-      .child(playerNumber)
-      .set({
-        name: player,
-        token: token,
-        rockets: {
-          rocketSelectionOne: "one",
-          rocketSelectionTwo: "two",
-          rocketSelectionThree: "three",
-        },
-      });
+    firebase.database().ref().child(playerNumber).set({
+      name: player,
+      token: token,
+    });
   };
   //captures text input for user name
   const handleChange = (event, playerNumber) => {
