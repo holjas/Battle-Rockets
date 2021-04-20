@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
 
 import GameStart from "./GameStart";
 import RocketLobby from "./RocketLobby";
+import GameBoard from "./GameBoard";
+import PlaceHolderComponent from "./PlaceHolderComponent";
 
 import star from "./images/star.png";
 
@@ -26,12 +28,14 @@ function App() {
   const removeEverything = () => {
     firebase.database().ref("playerOne").set(false);
     firebase.database().ref("playerTwo").set(false);
+    firebase.database().ref("isGameOver").set(false);
+    firebase.database().ref("isPlayerOneTurn").set(true);
   };
   //capture the local token number
   function captureTheToken(localToken) {
     setLocalAssignedToken(localToken);
   }
-  console.log(localAssignedToken);
+
   //THE RETURN
   return (
     <Router>
@@ -54,13 +58,37 @@ function App() {
         {!playerTwo && (
           <GameStart
             playerOne={playerOne}
-            // playerTwo={playerTwo}
+            playerTwo={playerTwo}
             captureTheToken={captureTheToken}
           />
         )}
-
-        <Route exact path="/RocketLobbyOne" component={RocketLobby} />
-        <Route exact path="/RocketLobbyTwo" component={RocketLobby} />
+        {/* Routing for Rocket lobbies */}
+        <Route
+          exact
+          path="/RocketLobbyOne"
+          component={() => (
+            <RocketLobby data={data} localToken={localAssignedToken} />
+          )}
+        />
+        <Route
+          exact
+          path="/RocketLobbyTwo"
+          component={() => (
+            <RocketLobby data={data} localToken={localAssignedToken} />
+          )}
+        />
+        {/* Routing for Game boards */}
+        <Route exact path="/GameBoardOne" component={PlaceHolderComponent} />
+        <Route
+          exact
+          path="/GameBoardTwo"
+          component={() => {
+            <PlaceHolderComponent
+              data={data}
+              localToken={localAssignedToken}
+            />;
+          }}
+        />
       </div>
     </Router>
   );

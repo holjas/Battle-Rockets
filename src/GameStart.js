@@ -4,8 +4,6 @@ import firebase from "./firebase";
 
 import { Link, withRouter } from "react-router-dom";
 
-// import moonButton from "./images/moon-phase.png";
-
 function GameStart(props) {
   const { playerOne, captureTheToken } = props;
 
@@ -57,8 +55,8 @@ function GameStart(props) {
         <section className="gameStartSection">
           <h1>Battle Rockets</h1>
           <div className="gameStartContainer">
-            <h2>Let's play a game.</h2>
-            <h2>Enter your name to continue</h2>
+            <h2>Let's play a game!</h2>
+            <h2>Enter your name to start</h2>
             <input
               type="text"
               onChange={(event) => handleChange(event, "one")}
@@ -72,7 +70,7 @@ function GameStart(props) {
                 props.history.push("/RocketLobbyOne");
               }}
             >
-              <Link to="/RocketLobbyOne">join game</Link>
+              <Link to="/RocketLobbyOne">Player One START</Link>
             </button>
           </div>
         </section>
@@ -82,8 +80,8 @@ function GameStart(props) {
         <section className="gameStartSection">
           <h1>Battle Rockets</h1>
           <div className="gameStartContainer">
-            <p>Player One has already entered the game.</p>
-            <p>Waiting for player two to enter the game...</p>
+            <h2>Player One has already entered the game.</h2>
+            <h2>Waiting for player two...</h2>
 
             <input
               type="text"
@@ -98,7 +96,7 @@ function GameStart(props) {
                 props.history.push("/RocketLobbyTwo");
               }}
             >
-              <Link to="/RocketLobbyTwo">player Two</Link>
+              <Link to="/RocketLobbyTwo">Player Two START</Link>
             </button>
           </div>
         </section>
