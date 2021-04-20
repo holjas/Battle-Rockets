@@ -46,28 +46,20 @@ function Rockets({ data, localToken }) {
   }, []);
 
   //determine which player in order to submit the rocket selection to the appropriate branch in firebase
+  //also capture user name to display on screen
   useEffect(() => {
     const playerOne = data.playerOne.token === localToken;
     const playerTwo = data.playerTwo.token === localToken;
     if (playerOne) {
       setWhichPlayer("playerOne");
-    }
-    if (playerTwo) {
-      setWhichPlayer("playerTwo");
-    }
-  }, [data]);
-
-  //determine userName
-  useEffect(() => {
-    const playerOne = data.playerOne.token === localToken;
-    const playerTwo = data.playerTwo.token === localToken;
-    if (playerOne) {
       setUserName(data.playerOne.name);
     }
     if (playerTwo) {
+      setWhichPlayer("playerTwo");
       setUserName(data.playerTwo.name);
     }
   }, [data]);
+
   //captures the selected rockets, put them in an array for push to firebase once all selections are made
   const maxSelectionReach = rocketSelected.length === 3;
   const handleRocketSelected = (value) => {
@@ -127,22 +119,37 @@ function Rockets({ data, localToken }) {
             </div>
           );
         })}
-        <button
-          type="submit"
-          value="You're ready to join"
-          onClick={rocketSelectionSubmit}
-        >
-          {whichPlayer === "playerOne" && (
-            <>
-              <Link to="/GameBoardOne">Enter the Game Player One</Link>
-            </>
-          )}
-          {whichPlayer === "playerTwo" && (
-            <>
+
+        {!maxSelectionReach && (
+          <>
+            <h3>Please make your ship selections</h3>
+          </>
+        )}
+        {whichPlayer === "playerOne" && maxSelectionReach && (
+          <>
+            <Link to="/GameBoardOne">
+              <button
+                type="button"
+                value="You're ready to join"
+                onClick={rocketSelectionSubmit}
+              >
+                Enter the Game Player One
+              </button>
+            </Link>
+          </>
+        )}
+
+        {/* {whichPlayer === "playerTwo" && maxSelectionReach && (
+          <>
+            <button
+              type="submit"
+              value="You're ready to join"
+              onClick={rocketSelectionSubmit}
+            >
               <Link to="/GameBoardTwo">Enter the Game Player Two</Link>
-            </>
-          )}
-        </button>
+            </button>
+          </>
+        )} */}
       </form>
     </div>
   );

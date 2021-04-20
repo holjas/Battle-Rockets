@@ -28,6 +28,8 @@ function App() {
   const removeEverything = () => {
     firebase.database().ref("playerOne").set(false);
     firebase.database().ref("playerTwo").set(false);
+    firebase.database().ref("isGameOver").set(false);
+    firebase.database().ref("isPlayerOneTurn").set(true);
   };
   //capture the local token number
   function captureTheToken(localToken) {
@@ -76,7 +78,16 @@ function App() {
           )}
         />
         <Route exact path="/GameBoardOne" component={PlaceHolderComponent} />
-        <Route exact path="/GameBoardTwo" component={PlaceHolderComponent} />
+        <Route
+          exact
+          path="/GameBoardTwo"
+          component={() => {
+            <PlaceHolderComponent
+              data={data}
+              localToken={localAssignedToken}
+            />;
+          }}
+        />
       </div>
     </Router>
   );
