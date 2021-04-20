@@ -4,7 +4,7 @@ import firebase from "./firebase";
 
 import { Link, withRouter } from "react-router-dom";
 
-import moonButton from "./images/moon-phase.png";
+// import moonButton from "./images/moon-phase.png";
 
 function GameStart(props) {
   const { playerOne, captureTheToken } = props;
@@ -32,19 +32,10 @@ function GameStart(props) {
   }, []);
   //handleClick, to confirm when players are ready by capturing their name and assigned token & creating the structure of the database for gameplay
   const handleIsPlayerReady = (player, playerNumber) => {
-    firebase
-      .database()
-      .ref()
-      .child(playerNumber)
-      .set({
-        name: player,
-        token: token,
-        rockets: {
-          rocketSelectionOne: "one",
-          rocketSelectionTwo: "two",
-          rocketSelectionThree: "three",
-        },
-      });
+    firebase.database().ref().child(playerNumber).set({
+      name: player,
+      token: token,
+    });
   };
   //captures text input for user name
   const handleChange = (event, playerNumber) => {

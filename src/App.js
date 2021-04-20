@@ -31,7 +31,7 @@ function App() {
   function captureTheToken(localToken) {
     setLocalAssignedToken(localToken);
   }
-
+  console.log(localAssignedToken);
   //THE RETURN
   return (
     <Router>
