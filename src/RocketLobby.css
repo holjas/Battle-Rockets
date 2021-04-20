@@ -1,0 +1,45 @@
+label {
+  color: black;
+}
+
+h3 {
+  color: black;
+  text-align: center;
+  font-size: 40px;
+}
+input[type="checkbox"] {
+  width: 30px;
+  height: 30px;
+}
+.rocket1 {
+  width: 100%;
+}
+.style,
+h4,
+.grid-container {
+  color: black;
+}
+
+.grid-container {
+  display: grid;
+  font-family: var(--fontBody);
+  font-size: 16px;
+  grid-template-columns: 43% 43%;
+  padding-top: 73px;
+  justify-content: space-around;
+}
+.flex {
+  display: flex;
+  margin: 30px;
+}
+.Tittle {
+  font-family: var(--fontHeading);
+  font-size: 30px;
+}
+
+input[type="submit"] {
+  position: relative;
+  left: 400px;
+  padding: 10px;
+  width: 50%;
+}
