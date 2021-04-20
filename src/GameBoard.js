@@ -125,15 +125,16 @@ useEffect( () => {
 
 
 // game logic is handled inside this function that is triggered when the user clicks on any square
-const handleClickPlayerOne = (event, index) => {
+const handleClick = (event, index, player) => {
   // setting up connection to firebase, because its values will be updated once the game logic has run
   const dbRef = firebase.database().ref();
   // gathering a value from the database to see if the game is over
   dbRef.on('value', (data) => {
     if (!data.val().isGameOver) {
-        // this variable gathers the value mapped into the button, which corresponds to a point in the array
-        const cell = event.target.value;
-        // creating copies of both arrays that will be used to set the updated states of the game board and mirror
+      // this variable gathers the value mapped into the button, which corresponds to a point in the array
+      const cell = event.target.value;
+      // creating copies of both arrays that will be used to set the updated states of the game board and mirror
+      if (player === "playerOne") {
         const boardCopy = [...boardPlayerTwo];
         if (cell === "🚀" || cell === "⭕️") {
         } else {
@@ -147,20 +148,8 @@ const handleClickPlayerOne = (event, index) => {
           setBoardPlayerTwo(boardCopy);
           // switch from player to player
           setPlayerOneTurn(false);
-        }
-      }
-    })
-  }
-// game logic is handled inside this function that is triggered when the user clicks on any square
-const handleClickPlayerTwo = (event, index) => {
-  // setting up connection to firebase, because its values will be updated once the game logic has run
-  const dbRef = firebase.database().ref();
-  // gathering a value from the database to see if the game is over
-  dbRef.on('value', (data) => {
-    if (!data.val().isGameOver) {
-        // this variable gathers the value mapped into the button, which corresponds to a point in the array
-        const cell = event.target.value;
-        // creating copies of both arrays that will be used to set the updated states of the game board and mirror
+        } 
+      } else {
         const boardCopy = [...boardPlayerOne];
         if (cell === "🚀" || cell === "⭕️") {
         } else {
@@ -170,14 +159,16 @@ const handleClickPlayerTwo = (event, index) => {
             boardCopy[index] = '🚀';
             setPlayerTwoScore(playerTwoScore - 1);
           }
-          // this sets the state of the board for player one.
+          // this sets the state of the board for player two.
           setBoardPlayerOne(boardCopy);
           // switch from player to player
           setPlayerOneTurn(true);
         }
       }
-    })
-  }
+    }
+  })
+}
+
 
 // this useEffect checks if there is a game winner and updates firebase with the game results after every player click.
 useEffect( () => {
@@ -205,7 +196,7 @@ useEffect( () => {
   }
   dbRef.set(gameLogic);
 
-}, [handleClickPlayerOne, handleClickPlayerTwo])
+}, [handleClick])
 
 
 
@@ -225,7 +216,7 @@ useEffect( () => {
                 return(
                   <button 
                     key={index} 
-                    onClick ={ event => handleClickPlayerOne(event, index) } 
+                    onClick ={ event => handleClick(event, index, "playerOne") } 
                     value={ boardPlayerTwo[index] } 
                     disabled={playerTurn}>
                     { value }
@@ -244,7 +235,7 @@ useEffect( () => {
                 return(
                   <button 
                     key={index} 
-                    onClick ={ event => handleClickPlayerTwo(event, index) } 
+                    onClick ={ event => handleClick(event, index, "playerTwo") } 
                     value={ boardPlayerOne[index] }
                     disabled={playerTurn}>
                     { value }
