@@ -7,11 +7,12 @@ import rocket1 from "./images/rocket-1.png";
 import rocket2 from "./images/rocket-2.png";
 import rocket3 from "./images/rocket-3.png";
 
-function Rockets({ playerOne, playerTwo }) {
+function Rockets({ data, localToken }) {
   const [rocket, setRocket] = useState([]);
   const [rocketSelected, setRocketSelected] = useState([]);
-  console.log("rocketlobby", playerOne);
-  console.log("rocketlobby", playerTwo);
+  const [whichPlayer, setWhichPlayer] = useState("playerOne");
+
+  //api call to SpaceX to get the different rocket types
   useEffect(() => {
     axios({
       url: "https://api.spacexdata.com/v3/rockets/",
@@ -42,6 +43,18 @@ function Rockets({ playerOne, playerTwo }) {
       });
   }, []);
 
+  //determine which player in order to submit the rocket selection to the appropriate branch in firebase
+  useEffect(() => {
+    const playerOne = data.playerOne.token === localToken;
+    const playerTwo = data.playerTwo.token === localToken;
+    if (playerOne) {
+      setWhichPlayer("playerOne");
+    }
+    if (playerTwo) {
+      setWhichPlayer("playerTwo");
+    }
+  }, [data]);
+
   const maxSelectionReach = rocketSelected.length === 3;
 
   const handleRocketSelected = (value) => {
@@ -52,7 +65,7 @@ function Rockets({ playerOne, playerTwo }) {
   };
 
   const rocketSelectionSubmit = () => {
-    firebase.database().ref("playerOne").update({
+    firebase.database().ref(whichPlayer).update({
       rocketSelected: rocketSelected,
     });
   };

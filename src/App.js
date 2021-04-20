@@ -63,12 +63,16 @@ function App() {
         <Route
           exact
           path="/RocketLobbyOne"
-          component={() => <RocketLobby playerOne={playerOne} />}
+          component={() => (
+            <RocketLobby data={data} localToken={localAssignedToken} />
+          )}
         />
         <Route
           exact
           path="/RocketLobbyTwo"
-          component={() => <RocketLobby playerTwo={playerTwo} />}
+          component={() => (
+            <RocketLobby data={data} localToken={localAssignedToken} />
+          )}
         />
         <Route exact path="/GameBoardOne" component={GameBoard} />
         <Route exact path="/GameBoardTwo" component={GameBoard} />
