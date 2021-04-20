@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
 
 import GameStart from "./GameStart";
 import RocketLobby from "./RocketLobby";
+import GameBoard from "./GameBoard";
 
 import star from "./images/star.png";
 
@@ -31,7 +32,7 @@ function App() {
   function captureTheToken(localToken) {
     setLocalAssignedToken(localToken);
   }
-  console.log(localAssignedToken);
+
   //THE RETURN
   return (
     <Router>
@@ -54,13 +55,23 @@ function App() {
         {!playerTwo && (
           <GameStart
             playerOne={playerOne}
-            // playerTwo={playerTwo}
+            playerTwo={playerTwo}
             captureTheToken={captureTheToken}
           />
         )}
 
-        <Route exact path="/RocketLobbyOne" component={RocketLobby} />
-        <Route exact path="/RocketLobbyTwo" component={RocketLobby} />
+        <Route
+          exact
+          path="/RocketLobbyOne"
+          component={() => <RocketLobby playerOne={playerOne} />}
+        />
+        <Route
+          exact
+          path="/RocketLobbyTwo"
+          component={() => <RocketLobby playerTwo={playerTwo} />}
+        />
+        <Route exact path="/GameBoardOne" component={GameBoard} />
+        <Route exact path="/GameBoardTwo" component={GameBoard} />
       </div>
     </Router>
   );

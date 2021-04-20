@@ -7,10 +7,11 @@ import rocket1 from "./images/rocket-1.png";
 import rocket2 from "./images/rocket-2.png";
 import rocket3 from "./images/rocket-3.png";
 
-function Rockets() {
+function Rockets({ playerOne, playerTwo }) {
   const [rocket, setRocket] = useState([]);
   const [rocketSelected, setRocketSelected] = useState([]);
-
+  console.log("rocketlobby", playerOne);
+  console.log("rocketlobby", playerTwo);
   useEffect(() => {
     axios({
       url: "https://api.spacexdata.com/v3/rockets/",
