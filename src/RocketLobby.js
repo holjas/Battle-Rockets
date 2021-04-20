@@ -48,17 +48,19 @@ function Rockets({ data, localToken }) {
   //determine which player in order to submit the rocket selection to the appropriate branch in firebase
   //also capture user name to display on screen
   useEffect(() => {
-    const playerOne = data.playerOne.token === localToken;
-    const playerTwo = data.playerTwo.token === localToken;
-    if (playerOne) {
-      setWhichPlayer("playerOne");
-      setUserName(data.playerOne.name);
+    if (localToken) {
+      const playerOne = data.playerOne.token === localToken;
+      const playerTwo = data.playerTwo.token === localToken;
+      if (playerOne) {
+        setWhichPlayer("playerOne");
+        setUserName(data.playerOne.name);
+      }
+      if (playerTwo) {
+        setWhichPlayer("playerTwo");
+        setUserName(data.playerTwo.name);
+      }
     }
-    if (playerTwo) {
-      setWhichPlayer("playerTwo");
-      setUserName(data.playerTwo.name);
-    }
-  }, [data]);
+  }, [data, localToken]);
 
   //captures the selected rockets, put them in an array for push to firebase once all selections are made
   const maxSelectionReach = rocketSelected.length === 3;

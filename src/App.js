@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
 
 import GameStart from "./GameStart";
 import RocketLobby from "./RocketLobby";
-// import GameBoard from "./GameBoard";
+import GameBoard from "./GameBoard";
 import PlaceHolderComponent from "./PlaceHolderComponent";
 
 import star from "./images/star.png";
@@ -62,7 +62,7 @@ function App() {
             captureTheToken={captureTheToken}
           />
         )}
-
+        {/* Routing for Rocket lobbies */}
         <Route
           exact
           path="/RocketLobbyOne"
@@ -77,6 +77,7 @@ function App() {
             <RocketLobby data={data} localToken={localAssignedToken} />
           )}
         />
+        {/* Routing for Game boards */}
         <Route exact path="/GameBoardOne" component={PlaceHolderComponent} />
         <Route
           exact
