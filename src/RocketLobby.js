@@ -3,6 +3,7 @@ import firebase from "./firebase";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import rocket1 from "./images/rocket-1.png";
 import rocket2 from "./images/rocket-2.png";
 import rocket3 from "./images/rocket-3.png";
@@ -11,6 +12,7 @@ function Rockets({ data, localToken }) {
   const [rocket, setRocket] = useState([]);
   const [rocketSelected, setRocketSelected] = useState([]);
   const [whichPlayer, setWhichPlayer] = useState("playerOne");
+  const [userName, setUserName] = useState("");
 
   //api call to SpaceX to get the different rocket types
   useEffect(() => {
@@ -55,8 +57,19 @@ function Rockets({ data, localToken }) {
     }
   }, [data]);
 
+  //determine userName
+  useEffect(() => {
+    const playerOne = data.playerOne.token === localToken;
+    const playerTwo = data.playerTwo.token === localToken;
+    if (playerOne) {
+      setUserName(data.playerOne.name);
+    }
+    if (playerTwo) {
+      setUserName(data.playerTwo.name);
+    }
+  }, [data]);
+  //captures the selected rockets, put them in an array for push to firebase once all selections are made
   const maxSelectionReach = rocketSelected.length === 3;
-
   const handleRocketSelected = (value) => {
     if (maxSelectionReach) {
       alert("you have selected 3 rockets");
@@ -64,6 +77,7 @@ function Rockets({ data, localToken }) {
     setRocketSelected([...rocketSelected, value]);
   };
 
+  //onClick will push the rockets selected to firebase (depending on user of course)
   const rocketSelectionSubmit = () => {
     firebase.database().ref(whichPlayer).update({
       rocketSelected: rocketSelected,
@@ -72,6 +86,7 @@ function Rockets({ data, localToken }) {
 
   return (
     <div className="wrapper">
+      <h2>Welcome, {userName}!</h2>
       <h3>Choose Three Rockets as your game pieces </h3>
 
       <form className="style grid-container">
@@ -112,11 +127,22 @@ function Rockets({ data, localToken }) {
             </div>
           );
         })}
-        <input
+        <button
           type="submit"
           value="You're ready to join"
           onClick={rocketSelectionSubmit}
-        />
+        >
+          {whichPlayer === "playerOne" && (
+            <>
+              <Link to="/GameBoardOne">Enter the Game Player One</Link>
+            </>
+          )}
+          {whichPlayer === "playerTwo" && (
+            <>
+              <Link to="/GameBoardTwo">Enter the Game Player Two</Link>
+            </>
+          )}
+        </button>
       </form>
     </div>
   );
