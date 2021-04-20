@@ -5,10 +5,11 @@ import WinPopUp from './WinPopUp';
 
 
 
-const GameBoard = () => {
+function GameBoard() {
   
   // since the game board is 7x7, this variable will determine the vertical space occupied by a rocket if it is rotated vertically. 
   const width = 7;
+
   // setting properties for each rocket as an object inside an array
   const rocketArray = [
     {
@@ -37,23 +38,21 @@ const GameBoard = () => {
             [0, width, width*2]
         ]
     },
-]
+  ]
   // initializing gameboard as an object with two arrays to use for game logic, and also to pass to firebase for two player integration
   const gameBoards = {
-      playerOneBoard : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-      playerTwoBoard : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    }
+    playerOneBoard : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    playerTwoBoard : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  }
 
-  // initializing stateful variables that will be necessary for game logic, including the player board, and the mirror of the opponent's board
   let score = rocketArray[0].size + rocketArray[1].size + rocketArray[2].size;
-
+  // initializing stateful variables that will be necessary for game logic, including the player board, and the mirror of the opponent's board
   const [boardPlayerOne, setBoardPlayerOne] = useState(gameBoards.playerOneBoard);
   const [boardPlayerTwo, setBoardPlayerTwo] = useState(gameBoards.playerTwoBoard);
   const [playerOneScore, setPlayerOneScore] = useState(score);
   const [playerTwoScore, setPlayerTwoScore] = useState(score);
   const [playerOneTurn, setPlayerOneTurn] = useState(true);
   const [isGameOver, setIsGameOver] = useState(false);
-
 
 
     useEffect( () => {
@@ -65,9 +64,11 @@ const GameBoard = () => {
         if (player === "playerOneBoard") {
           gameBoard = gameBoard.playerOneBoard;
           gameLogic.playerOneGrid = gameBoard;
+          gameLogic.playerOneScore = score;
         } if (player === "playerTwoBoard") {
           gameBoard = gameBoard.playerTwoBoard;
           gameLogic.playerTwoGrid = gameBoard;
+          gameLogic.playerTwoScore = score;
         }
         // getting random value from ship direction array to see if ship will be pointed horizontally or vertically, why showing how many jumps its position will take in the array. If it's horizontal, it will increment by one, and if vertical, it will increment by 7 (the width of the board).
         let direction;
@@ -109,18 +110,20 @@ const GameBoard = () => {
       placeRockets(rocketArray[0], gameBoards, "playerTwoBoard");
       placeRockets(rocketArray[1], gameBoards, "playerTwoBoard");
       placeRockets(rocketArray[2], gameBoards, "playerTwoBoard");
-
+      const dbRef = firebase.database().ref();
+      dbRef.on('value', (data) => {
+      setBoardPlayerOne(data.val().playerOneGrid);
+      setBoardPlayerTwo(data.val().playerTwoGrid);
+      setPlayerOneScore(data.val().playerOneScore);
+      setPlayerOneScore(data.val().playerTwoScore);
+  })
     }, [])
 
 
 // this useEffect takes the values of the player one and player two arrays that are in firebase, and uses them to set state for both player boards. They need to be in firebase first in order to enable two-player play, because they'll both be working from the same DB.
-useEffect( () => {
-  const dbRef = firebase.database().ref();
-  dbRef.on('value', (data) => {
-    setBoardPlayerOne(data.val().playerOneGrid)
-    setBoardPlayerTwo(data.val().playerTwoGrid)
-  })
-}, [] )
+// useEffect( () => {
+  
+// }, [] )
   
 
 
@@ -167,11 +170,7 @@ const handleClick = (event, index, player) => {
       }
     }
   })
-}
 
-
-// this useEffect checks if there is a game winner and updates firebase with the game results after every player click.
-useEffect( () => {
 
   const winPopUp = document.querySelector('.win');
   const winButton = document.querySelector('.winButt');
@@ -185,7 +184,6 @@ useEffect( () => {
 
   }
 
-  const dbRef = firebase.database().ref();
   const gameLogic = {
     playerOneGrid : boardPlayerOne,
     playerTwoGrid : boardPlayerTwo,
@@ -194,14 +192,36 @@ useEffect( () => {
     isPlayerOneTurn : playerOneTurn,
     isGameOver : isGameOver
   }
-  dbRef.set(gameLogic);
+  dbRef.update(gameLogic);
+}
 
-}, [handleClick])
+// this useEffect checks if there is a game winner and updates firebase with the game results after every player click.
+// useEffect( () => {
 
+//   const winPopUp = document.querySelector('.win');
+//   const winButton = document.querySelector('.winButt');
 
+//   if (playerOneScore === 0 || playerTwoScore === 0) {
+//     setIsGameOver(true);
+//     // game is over: direct to pop up component to display winner
+//     WinPopUp();
+//       winPopUp.classList.remove('hidden');
+//       winButton.classList.remove('hidden');
 
+//   }
 
+//   const dbRef = firebase.database().ref();
+//   const gameLogic = {
+//     playerOneGrid : boardPlayerOne,
+//     playerTwoGrid : boardPlayerTwo,
+//     playerOneScore : playerOneScore,
+//     playerTwoScore : playerTwoScore,
+//     isPlayerOneTurn : playerOneTurn,
+//     isGameOver : isGameOver
+//   }
+//   dbRef.set(gameLogic);
 
+// }, [])
 
 
   return (
@@ -218,7 +238,8 @@ useEffect( () => {
                     key={index} 
                     onClick ={ event => handleClick(event, index, "playerOne") } 
                     value={ boardPlayerTwo[index] } 
-                    disabled={playerTurn}>
+                    disabled={playerTurn}
+                  >
                     { value }
                   </button>
                 )
@@ -226,7 +247,7 @@ useEffect( () => {
             }
           </div>
 
-          <WinPopUp />
+          
            {/* TOP RIGHT CORNER - PLAYER TWO ATTACKS PLAYER ONE HERE*/}
          <div className="grid boardPlayerTwo">
          {
