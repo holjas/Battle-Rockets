@@ -8,7 +8,7 @@ import "firebase/database";
 //   projectId: "mmm-bookshelf",
 //   storageBucket: "mmm-bookshelf.appspot.com",
 //   messagingSenderId: "131890630949",
-//   appId: "1:131890630949:web:ea83479e6fd332a6d00acc"
+//   appId: "1:131890630949:web:ea83479e6fd332a6d00acc",
 // };
 // // Initialize Firebase
 // firebase.initializeApp(firebaseConfig);

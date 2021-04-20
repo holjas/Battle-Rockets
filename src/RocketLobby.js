@@ -1,5 +1,6 @@
 import "./RocketLobby.css";
 import firebase from "./firebase";
+import Navbar from "./Navbar";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -68,7 +69,40 @@ function Rockets({ data, localToken }) {
     if (maxSelectionReach) {
       alert("you have selected 3 rockets");
     }
-    setRocketSelected([...rocketSelected, value]);
+    const rocketDetails = {};
+    if (value === "Falcon 1") {
+      rocketDetails.name = value;
+      rocketDetails.size = 2;
+      rocketDetails.directions = [
+        [0, 1],
+        [0, 7],
+      ];
+    }
+    if (value === "Falcon 9") {
+      rocketDetails.name = value;
+      rocketDetails.size = 3;
+      rocketDetails.directions = [
+        [0, 1, 2],
+        [0, 7, 14],
+      ];
+    }
+    if (value === "Falcon Heavy") {
+      rocketDetails.name = value;
+      rocketDetails.size = 4;
+      rocketDetails.directions = [
+        [0, 1, 2, 3],
+        [0, 7, 14, 21],
+      ];
+    }
+    if (value === "Starship") {
+      rocketDetails.name = value;
+      rocketDetails.size = 4;
+      rocketDetails.directions = [
+        [0, 1, 2, 3],
+        [0, 7, 14, 21],
+      ];
+    }
+    setRocketSelected([...rocketSelected, rocketDetails]);
   };
 
   //onClick will push the rockets selected to firebase (depending on user of course)
@@ -80,6 +114,7 @@ function Rockets({ data, localToken }) {
 
   return (
     <div className="wrapper">
+      <Navbar />
       <h2>Welcome, {userName}!</h2>
       <h3>Choose Three Rockets as your game pieces </h3>
 

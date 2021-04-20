@@ -27,13 +27,8 @@
 }
 /*  */
 .gameStartSection {
-  height: 100vh;
-  /* background-image: url(./images/background.png); */
-  /* background-image: url(./images/billy-huynh-W8KTS-mhFUE-unsplash.jpg); */
+  height: 95vh;
   background-image: linear-gradient(147deg, var(--blue) 50%, var(--red) 50%);
-  background-color: var(--blue);
-  background-repeat: no-repeat;
-  background-size: cover;
   position: relative;
   display: flex;
   flex-direction: column;

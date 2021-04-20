@@ -54,7 +54,7 @@ function GameStart(props) {
       {!playerOne && (
         <section className="gameStartSection">
           <h1>Battle Rockets</h1>
-          <div className="gameStartContainer">
+          <div className="gameStartContainer wrapper">
             <h2>Let's play a game!</h2>
             <h2>Enter your name to start</h2>
             <input
@@ -79,7 +79,7 @@ function GameStart(props) {
       {playerOne && !isPlayerOne && (
         <section className="gameStartSection">
           <h1>Battle Rockets</h1>
-          <div className="gameStartContainer">
+          <div className="gameStartContainer wrapper">
             <h2>Player One has already entered the game.</h2>
             <h2>Waiting for player two...</h2>
 
