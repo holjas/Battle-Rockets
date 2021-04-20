@@ -1,7 +1,7 @@
 function WinPopUp() {
     return(
         <div>
-            <h1 className='win hidden'> You Win!</h1>
+            <h2 className='win hidden'> You Win!</h2>
             <form>
                 <button className="winButt hidden">Play Again!</button>
             </form>

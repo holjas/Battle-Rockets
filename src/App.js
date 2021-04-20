@@ -1,7 +1,9 @@
 import "./App.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Game from './Game';
+
+import GameBoard from './GameBoard';
+
 
 function App() {
   const [rocket, setRocket] = useState([]);
@@ -14,13 +16,13 @@ function App() {
       params: {},
     }).then((res) => {
       setRocket(res.data);
-      console.log(res.data);
+      console.log(rocket);
     });
-  }, []);
+  },);
 
   return (
     <div className="App">
-      <Game />
+      <GameBoard />
     </div>
   );
 }

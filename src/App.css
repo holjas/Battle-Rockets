@@ -8,7 +8,7 @@
 .container {
     display: flex;
     justify-content: space-between;
-    padding: 50px 30px 0;
+    padding: 30px 30px 0;
 }
 
 .boardPlayerOne,
@@ -23,19 +23,21 @@
 }
 
 .boardPlayerOne,
-.boardPlayerOne button,
 .mirrorPlayerOne,
 .boardPlayerTwo,
-.boardPlayerTwo button,
 .mirrorPlayerTwo {
     background-image: url('./images/buttonBackground.png');
+}
+
+.boardPlayerOne button,
+.boardPlayerTwo button {
+    color: currentColor;
 }
 
 .mirrorPlayerTwo button,
 .mirrorPlayerOne button {
     color: white;
 }
-
 
 .grid button {
     width: 40px;
@@ -46,6 +48,7 @@
 
 .grid button:hover {
     background-color: grey;
+    color: grey;
 }
 
 
@@ -58,4 +61,9 @@
     display: none;
 }
 
+.win{
+    color: white;
+    margin: 0;
+
+}
 
