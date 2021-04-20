@@ -5,7 +5,7 @@ import WinPopUp from './WinPopUp';
 
 
 
-function GameBoard() {
+const GameBoard = () => {
   
   // since the game board is 7x7, this variable will determine the vertical space occupied by a rocket if it is rotated vertically. 
   const width = 7;
@@ -49,9 +49,6 @@ function GameBoard() {
 
   const [boardPlayerOne, setBoardPlayerOne] = useState(gameBoards.playerOneBoard);
   const [boardPlayerTwo, setBoardPlayerTwo] = useState(gameBoards.playerTwoBoard);
-  const [rocketOneSize, setRocketOneSize] = useState(rocketArray[0].size);
-  const [rocketTwoSize, setRocketTwoSize] = useState(rocketArray[1].size);
-  const [rocketThreeSize, setRocketThreeSize] = useState(rocketArray[2].size);
   const [playerOneScore, setPlayerOneScore] = useState(score);
   const [playerTwoScore, setPlayerTwoScore] = useState(score);
   const [playerOneTurn, setPlayerOneTurn] = useState(true);
