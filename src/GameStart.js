@@ -1,4 +1,4 @@
-import "./GameStart.css";
+import "./App.css";
 import { useState, useEffect } from "react";
 import firebase from "./firebase";
 
@@ -53,7 +53,7 @@ function GameStart(props) {
     <>
       {!playerOne && (
         <section className="gameStartSection">
-          <h1>Battle Rockets</h1>
+          <h1 className="homePage">Battle Rockets</h1>
           <div className="gameStartContainer">
             <h2>Let's play a game!</h2>
             <h2>Enter your name to start</h2>

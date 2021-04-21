@@ -1,4 +1,12 @@
+
+/* Homepage */
+/* Media Query Home Page */
+/* Gameboard styling */
+/* NavBar Styling */
+/* Footer styling  */
+/* Media query*/
 /* CSS */
+
 @import url("https://fonts.googleapis.com/css2?family=Lato&family=Teko:wght@500&display=swap");
 :root {
   --black: #121212;
@@ -261,8 +269,93 @@ template {
 a {
   text-decoration: none;
 }
+/* Homepage */
+.starAbortContainer {
+  z-index: 10;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  cursor: pointer;
+}
+.starAbort {
+  width: 50px;
+  transition: 0.3s;
+  position: relative;
+  top: -20px;
+}
+.starAbort:hover,
+.starAbort:focus {
+  transform: scale(1.2);
+}
+/*  */
+.gameStartSection {
+  height: 100vh;
+  /* background-image: url(./images/background.png); */
+  /* background-image: url(./images/billy-huynh-W8KTS-mhFUE-unsplash.jpg); */
+  background-image: linear-gradient(147deg, var(--blue) 50%, var(--red) 50%);
+  background-color: var(--blue);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.gameStartSection h1 {
+  font-family: var(--fontHeading);
+  font-size: 7.5rem;
+  color: var(--yellow);
+  text-shadow: 10px 10px 0px var(--black);
+}
+.gameStartContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  text-align: center;
+  background-color: var(--black);
+  color: var(--white);
+  font-family: var(--fontBody);
+  border-radius: 5px;
+  padding: 40px;
+}
+.gameStartContainer input[type="text"] {
+  padding: 10px;
+  text-align: center;
+  margin: 20px;
+  min-width: 300px;
+}
+.gameStartContainer button {
+  background-color: #850000;
+  border-radius: 5px;
+  border: transparent;
+  margin-top: 20px;
+  padding: 15px 25px;
+  transition: 0.5;
+}
+.gameStartContainer button:hover,
+.gameStartContainer button:focus {
+  background-color: #ac1313;
+  cursor: pointer;
+  transform: scale(1.1);
+}
+.gameStartContainer a {
+  font-size: 1.5rem;
+  letter-spacing: 1.5px;
+  font-family: var(--fontHeading);
+  color: var(--white);
+  font-weight: bold;
+}
+.gameStartContainer h2:nth-child(2) {
+  padding-top: 15px;
+}
+.homePage {
+  margin: 0px;
+}
 
-/* gameboard styling */
+/* Gameboard styling */
 
 .GameScreen {
   text-align: center;
@@ -330,3 +423,358 @@ a {
   color: white;
   margin: 0;
 }
+
+/* NavBar styling */
+
+.navbarSection {
+  height: 10vh;
+  background-image: linear-gradient(147deg, var(--blue) 50%, var(--red) 50%);
+}
+.navbarSection h1 {
+  text-align: center;
+  font-size: 5rem;
+  padding: 15px;
+  font-family: var(--fontHeading);
+  color: var(--yellow);
+  text-shadow: 10px 10px 0px var(--black);
+}
+/* Footer Styling */
+footer {
+  height: 5vh;
+  font-family: var(--fontBody);
+  background-color: var(--blue);
+  padding-bottom: 60px;
+}
+.footerSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  top: 5px;
+  color:var(--red);
+
+}
+.footerSection p {
+  color: white;
+  display: inline-block;
+  line-height: 9px;
+  padding: 20px;
+}
+.footerSection img {
+  height: 5vh;
+}
+.footerSection div:nth-child(2) {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.patrick {
+  color:var(--yellow);
+}
+.holly {
+  color:var(--red);
+}
+.mackenzie {
+  color:var(--yellow);
+}
+.karen {
+  color: var(--red);
+}
+.patrick,
+.holly, 
+.mackenzie,
+.karen {
+  border:none;
+}
+.red p {
+  color:var(--red);
+  font-weight: bold;
+}
+
+/* RocketLobby styling */
+label {
+  color:var(--black);
+}
+input[type="checkbox"] {
+  width: 30px;
+  height: 30px;
+}
+.rocket1 {
+  width: 100%;
+}
+.style,
+h4,
+.grid-container {
+  color: black;
+}
+.flex {
+  display: flex;
+  margin: 30px;
+  
+}
+.Tittle {
+  font-family: var(--fontHeading);
+  font-size: 30px;
+}
+input[type="submit"] {
+  position: relative;
+  left: 400px;
+  padding: 10px;
+  width: 50%;
+}
+
+.textDiv {
+  margin-left: 10px;
+}
+
+.flex p {
+  margin:5px;
+  line-height: 1.6;
+}
+
+span {
+  font-weight: bold;
+  border-bottom: 3px solid var(--yellow);
+  letter-spacing: 1px;
+}
+
+.welcomeText {
+  font-size: 60px;
+  font-family: var(--fontHeading);
+  margin-top:100px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+h3 {
+  color: black;
+  text-align: center;
+  font-size: 37px;
+  font-family:var( --fontBody);
+}
+.grid-container {
+  display: grid;
+  font-family: var(--fontBody);
+  font-size: 16px;
+  grid-template-columns: 50% 50%;
+  padding-top: 73px;
+  justify-content: space-around;
+  padding-bottom: 100px;
+}
+
+
+h5 {
+  width: 50px;
+  height: 50px;
+  animation: heartbeat 1s infinite;
+  color:var(--red);
+  width: 100%;
+  font-size: 28px;
+  text-align: center;
+  position: relative;
+  left: 300px;
+  top: 25px;
+}
+
+@keyframes heartbeat 
+{
+  0%
+  {
+    transform: scale( .80 );
+  }
+  20%
+  {
+    transform: scale( 1 );
+  }
+  40%
+  {
+    transform: scale( 1 );
+  }
+  60%
+  {
+    transform: scale( 1 );
+  }
+  80%
+  {
+    transform: scale( 1 );
+  }
+  100%
+  {
+    transform: scale( 1 );
+  }
+}
+
+div.flex:nth-child(3) > div:nth-child(2),
+div.flex:nth-child(1) > div:nth-child(2) {
+width: 500px;
+}
+div.flex:nth-child(4) > div:nth-child(2) {
+width: 600px;
+}
+
+
+.submitButton{
+border-radius: 17px;
+color:var(--white);
+padding: 14px 25px;
+position: relative;
+left: 467px;
+top: 25px;
+background-color:var(--yellow);
+color: var(--red);
+border: none;
+font-size: 21px;
+}
+
+div.flex:nth-child(3) > div:nth-child(3) {
+margin-left: 22px;
+}
+div.flex:nth-child(2) > div:nth-child(3) {
+margin-left: 20px;
+}
+
+/* Media query  */
+@media  (max-width: 1060px) {
+  .submitButton {
+    left:430px;
+  }
+}
+@media  (max-width: 900px) {
+   h5 {
+    font-size: 22px;
+    left: 150px;
+   }
+   .submitButton {
+     left: 300px;
+   }
+}
+ @media (max-width: 840px) {
+   section.gameStartSection h1 {
+    font-size: 6.5rem;
+  }
+  h2 {
+    font-size: 18px;
+  }
+  div.gameStartContainer {
+    font-size: 1rem;
+  }
+  div.gameStartContainer input[type="text"] {
+    min-width: 250px;
+  }
+ }
+ @media  (max-width: 700px) {
+  .navbarSection h1 {
+    font-size: 3rem;
+    padding: 41px;
+  }
+  .starAbort {
+    width: 36px;
+  }
+  .welcomeText {
+    font-size: 52px;
+    margin-top: 67px;
+  }
+  h3 {
+    font-size: 25px;
+  }
+  .grid-container {
+    grid-template-columns: 93%;
+  }
+  .rocket1 {
+    width: 81%;
+  }
+  div h5 {
+    left:initial;
+    font-size: 19px;
+  }
+  .red p {
+    font-size: 14px;
+  }
+  .submitButton{
+    left: 150px;
+    padding: 9px 19px;
+    font-size: 15px;
+  }
+}
+ @media (max-width: 640px) {
+
+  section.gameStartSection h1 {
+    font-size: 5.5rem;
+  }
+  div.gameStartContainer {
+    width: 60%;
+    margin-top: 40px;
+  }
+  div.gameStartContainer button {
+    margin-top: 8px;
+    padding: 6px 17px;
+    }
+ }
+ @media  (max-width: 540px) {
+  .red p {
+    font-size: 9px;
+  }
+  .grid-container {
+    grid-template-columns: 98%;
+  }
+  .flex {
+    margin: 3px;
+  }
+  .textDiv {
+    margin-left:initial;
+  }
+}
+
+ @media (max-width: 500px) {
+   div.gameStartContainer {
+    width: 90%;
+  }
+ }
+ @media  (max-width: 385px) {
+  .red p {
+    font-size: 7px;
+  }
+  .submitButton{
+    left: 88px;
+    top: 43px;
+  }
+}
+@media  (max-width: 360px) {
+  .textDiv p {
+    font-size: 14px;
+  }
+  
+  .footerSection img {
+    height: 2vh;
+  }
+  footer {
+    height: 1vh;
+    padding-bottom: 54px;
+  }
+  h3 {
+    font-size: 17px;
+  }
+  div h5 {
+    font-size: 15px;
+  }
+  p.Tittle {
+    font-size: 25px;
+  }
+  .navbarSection h1 {
+    font-size: 2rem;
+  }
+  .welcomeText {
+    font-size: 39px;
+  }
+  .submitButton{
+    font-size: 13px;
+  }
+}
+ @media (max-width: 320px) {
+   div.gameStartSection h1 {
+    font-size: 4.5rem;
+    }   
+ }

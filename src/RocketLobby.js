@@ -1,4 +1,6 @@
-import "./RocketLobby.css";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
+import "./App.css";
 import firebase from "./firebase";
 
 import axios from "axios";
@@ -71,88 +73,101 @@ function Rockets({ data, localToken }) {
     setRocketSelected([...rocketSelected, value]);
   };
 
-  //onClick will push the rockets selected to firebase (depending on user of course)
+  // //onClick will push the rockets selected to firebase (depending on user of course)
+  // const rocketSelectionSubmit = () => {
+  //   firebase.database().ref(whichPlayer).update({
+  //     rocketSelected: rocketSelected,
+  //   });
+  // };
+
   const rocketSelectionSubmit = () => {
-    firebase.database().ref(whichPlayer).update({
+    firebase.database().ref("playerOne").update({
       rocketSelected: rocketSelected,
     });
-  };
+  }
 
-  return (
-    <div className="wrapper">
-      <h2>Welcome, {userName}!</h2>
-      <h3>Choose Three Rockets as your game pieces </h3>
+   return (
+    <div>
+      <Navbar />
+      <div className="wrapper">
+        <h2 className="welcomeText">Welcome, {userName}!</h2>
+        <h3>Choose 3 Rockets as your game pieces </h3>
 
-      <form className="style grid-container">
-        {rocket.map((singleRocket, index) => {
-          return (
-            <div key={index} className="flex">
-              <div>
-                <input
-                  disabled={maxSelectionReach}
-                  type="checkbox"
-                  id={singleRocket.rocket_id}
-                  name={singleRocket.rocket_id}
-                  onClick={() => {
-                    handleRocketSelected(singleRocket.rocket_name);
-                  }}
-                />
+        <form className="style grid-container">
+          {rocket.map((singleRocket, index) => {
+
+            return (
+              <div key={index} className="flex">
+                <div>
+                  <input
+                    disabled={maxSelectionReach}
+                    type="checkbox"
+                    id={singleRocket.rocket_id}
+                    name={singleRocket.rocket_id}
+                    onClick={() => {
+                      handleRocketSelected(singleRocket.rocket_name);
+                    }}
+                  />
+                </div>
+                <div className="imageSize"> 
+                  <img
+                    className="rocket1"
+                    src={singleRocket.orientation}
+                    alt={singleRocket.rocket_name}
+                  />
+                </div>
+
+                <div className="textDiv">
+                  <label
+                    className="visually-hidden"
+                    htmlFor={singleRocket.rocket_id}
+                  >
+                    {singleRocket.rocket_name}
+                  </label>
+                  <p className="Tittle">{singleRocket.rocket_name}</p>
+                  <p><span>Diameter:</span>  {singleRocket.diameter.feet}</p>
+                  <p><span>Country</span>:  {singleRocket.country}</p>
+                  <p><span>Description:</span>  {singleRocket.description}</p>
+                </div>
               </div>
-              <div>
-                <img
-                  className="rocket1"
-                  src={singleRocket.orientation}
-                  alt={singleRocket.rocket_name}
-                />
-              </div>
+            );
+          })}
 
-              <div>
-                <label
-                  className="visually-hidden"
-                  htmlFor={singleRocket.rocket_id}
+          {!maxSelectionReach && (
+            <>
+              <h5>You need 3 rockets to start the game</h5>
+            </>
+          )}
+          {whichPlayer === "playerOne" && maxSelectionReach && (
+            <>
+              <Link to="/GameBoardOne">
+                <button
+                  className="submitButton"
+                  type="button"
+                  value="You're ready to join"
+                  onClick={rocketSelectionSubmit}
                 >
-                  {singleRocket.rocket_name}
-                </label>
-                <p className="Tittle">{singleRocket.rocket_name}</p>
-                <p>Diameter: {singleRocket.diameter.feet}</p>
-                <p>Country: {singleRocket.country}</p>
-                <p>Description:{singleRocket.description}</p>
-              </div>
-            </div>
-          );
-        })}
+                  Enter the Game Player One
+                </button>
+              </Link>
+            </>
+          )}
 
-        {!maxSelectionReach && (
-          <>
-            <h3>Please make your ship selections</h3>
-          </>
-        )}
-        {whichPlayer === "playerOne" && maxSelectionReach && (
-          <>
-            <Link to="/GameBoardOne">
+          {whichPlayer === "playerTwo" && maxSelectionReach && (
+            <>
               <button
-                type="button"
+                className="enterGameButton"
+                type="submit"
                 value="You're ready to join"
                 onClick={rocketSelectionSubmit}
               >
-                Enter the Game Player One
+                <Link to="/GameBoardTwo">Enter the Game Player Two</Link>
               </button>
-            </Link>
-          </>
-        )}
-
-        {/* {whichPlayer === "playerTwo" && maxSelectionReach && (
-          <>
-            <button
-              type="submit"
-              value="You're ready to join"
-              onClick={rocketSelectionSubmit}
-            >
-              <Link to="/GameBoardTwo">Enter the Game Player Two</Link>
-            </button>
-          </>
-        )} */}
-      </form>
+            </>
+          )}
+        </form>
+      </div>
+      <Footer />
     </div>
   );
 }
