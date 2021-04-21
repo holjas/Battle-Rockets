@@ -3,40 +3,28 @@ import firebase from "./firebase";
 import "./App.css";
 import WinPopUp from "./WinPopUp";
 
-function GameBoard({ data }) {
-  console.log(data);
-  // since the game board is 7x7, this variable will determine the vertical space occupied by a rocket if it is rotated vertically.
-  const width = 7;
+function GameBoard({ data, localToken }) {
+  const [whichPlayer, setWhichPlayer] = useState("");
+  const [rocketSelections, setRocketSelections] = useState([]);
 
-  // setting properties for each rocket as an object inside an array
-  const rocketArray = [
-    {
-      name: "R1",
-      size: 2,
-      directions: [
-        // horizontal, because it's only one square wide
-        [0, 1],
-        // vertical, because it jumps every seven spots in the array
-        [0, width],
-      ],
-    },
-    {
-      name: "R2",
-      size: 3,
-      directions: [
-        [0, 1, 2],
-        [0, width, width * 2],
-      ],
-    },
-    {
-      name: "R3",
-      size: 3,
-      directions: [
-        [0, 1, 2],
-        [0, width, width * 2],
-      ],
-    },
-  ];
+  useEffect(() => {
+    if (localToken) {
+      const playerOne = data.playerOne.token === localToken;
+      const playerTwo = data.playerTwo.token === localToken;
+      if (playerOne) {
+        setWhichPlayer("playerOne");
+        setRocketSelections(data.playerOne.rocketSelected);
+      }
+      if (playerTwo) {
+        setWhichPlayer("playerTwo");
+        setRocketSelections(data.playerTwo.rocketSelected);
+      }
+    }
+  }, [data, localToken]);
+
+  console.log(whichPlayer);
+  console.log(rocketSelections);
+
   // initializing gameboard as an object with two arrays to use for game logic, and also to pass to firebase for two player integration
   const gameBoards = {
     playerOneBoard: [
@@ -143,7 +131,7 @@ function GameBoard({ data }) {
     ],
   };
 
-  let score = rocketArray[0].size + rocketArray[1].size + rocketArray[2].size;
+  let score = 10;
   // initializing stateful variables that will be necessary for game logic, including the player board, and the mirror of the opponent's board
   const [boardPlayerOne, setBoardPlayerOne] = useState(
     gameBoards.playerOneBoard
@@ -197,11 +185,11 @@ function GameBoard({ data }) {
       );
       // if current rocket is at the 6th spot in the array row (the far right edge), it can still register, but if it's higher that that it can't be placed on the board
       const atRightEdge = currentDirection.some(
-        (index) => (randomStart + index) % width === width - 1
+        (index) => (randomStart + index) % 7 === 6
       );
       // if current rocket is at the 1st spot in the array row (row 0, the far left edge), it can still register, but if it's lower than that it can't be placed on the board
       const atLeftEdge = currentDirection.some(
-        (index) => (randomStart + index) % width === 0
+        (index) => (randomStart + index) % 7 === 0
       );
       // if the rocket position meets all these conditions by not being in a taken space, and not being over the left or right edge of the board, it can be placed on the board
       if (!isTaken && !atRightEdge && !atLeftEdge) {
@@ -352,7 +340,7 @@ function GameBoard({ data }) {
             return (
               <button
                 key={index}
-                onClick={(event) => handleClick(event, index, "playerOne")}
+                onClick={(event) => handleClick(event, index, whichPlayer)}
                 value={boardPlayerTwo[index]}
                 disabled={playerTurn}
               >
@@ -369,7 +357,7 @@ function GameBoard({ data }) {
             return (
               <button
                 key={index}
-                onClick={(event) => handleClick(event, index, "playerTwo")}
+                onClick={(event) => handleClick(event, index, whichPlayer)}
                 value={boardPlayerOne[index]}
                 disabled={playerTurn}
               >

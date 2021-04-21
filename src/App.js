@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
 import GameStart from "./GameStart";
 import RocketLobby from "./RocketLobby";
 import GameBoard from "./GameBoard";
-import PlaceHolderComponent from "./PlaceHolderComponent";
+// import PlaceHolderComponent from "./PlaceHolderComponent";
 
 import star from "./images/star.png";
 
@@ -98,18 +98,24 @@ function App() {
         <Route
           exact
           path="/GameBoardOne"
-          // component={() => (
+          component={() => (
+            <GameBoard data={data} localToken={localAssignedToken} />
+          )}
+          // component={PlaceHolderComponent}
+          // render={() => (
           //   <GameBoard data={data} localToken={localAssignedToken} />
           // )}
-          component={PlaceHolderComponent}
         />
         <Route
           exact
           path="/GameBoardTwo"
-          // component={() => {
-          //   <GameBoard data={data} localToken={localAssignedToken} />;
-          // }}
-          component={PlaceHolderComponent}
+          component={() => (
+            <GameBoard data={data} localToken={localAssignedToken} />
+          )}
+          // component={PlaceHolderComponent}
+          // render={() => (
+          //   <GameBoard data={data} localToken={localAssignedToken} />
+          // )}
         />
       </div>
     </Router>
