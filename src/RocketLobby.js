@@ -134,10 +134,10 @@ function Rockets({ data, localToken }) {
       <Navbar />
       <section className="rocketLobbySection">
         <div className="wrapper">
-          <h2>Welcome, {userName}!</h2>
-
           {!hideForm && (
             <>
+              <h2>Welcome, {userName}!</h2>
+
               <h3>Choose Three Rockets as your game pieces </h3>
 
               <form className="style grid-container">
@@ -213,7 +213,15 @@ function Rockets({ data, localToken }) {
             </>
           )}
           {!allPlayersReady && maxSelectionReach && (
-            <h2>Still waiting for other player to confirm selections...</h2>
+            <div className="rocketLobbyWaiting">
+              <h2>
+                Still waiting for other player to confirm their selections.
+              </h2>
+              <h3>
+                You will be automatically taken to the game board when both
+                sides are ready
+              </h3>
+            </div>
           )}
         </div>
       </section>
