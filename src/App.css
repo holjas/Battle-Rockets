@@ -1,14 +1,14 @@
 /* CSS */
-@import url("https://fonts.googleapis.com/css2?family=Lato&family=Teko:wght@500&display=swap");
-:root {
-  --black: #121212;
-  --white: #f0f0f0;
-  --blue: #003049;
-  --red: #d62828;
-  --yellow: #fcbf49;
-  --fontHeading: "Teko", sans-serif;
-  --fontBody: "Lato", sans-serif;
-}
+/* 
+- imports
+- setup snippet
+- general stylings (variables, wrapper)
+-
+*/
+/* imports */
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;900&family=Teko:wght@500&display=swap");
+
+/* setup snippet start */
 html {
   font-size: 18px;
   line-height: 1.15;
@@ -253,6 +253,18 @@ template {
   clip: rect(1px, 1px, 1px, 1px);
   white-space: nowrap; /* added line */
 }
+/* setup snippet end */
+
+/* general styling start */
+:root {
+  --black: #121212;
+  --white: #f0f0f0;
+  --blue: #003049;
+  --red: #d62828;
+  --yellow: #fcbf49;
+  --fontHeading: "Teko", sans-serif;
+  --fontBody: "Lato", sans-serif;
+}
 .wrapper {
   max-width: 1200px;
   margin: 0 auto;
@@ -261,9 +273,9 @@ template {
 a {
   text-decoration: none;
 }
+/* general styling end */
 
 /* gameboard styling */
-
 .GameScreen {
   text-align: center;
   background-image: url("./images/93034.jpg");

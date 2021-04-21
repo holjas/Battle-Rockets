@@ -6,8 +6,7 @@ import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
 import GameStart from "./GameStart";
 import RocketLobby from "./RocketLobby";
 import GameBoard from "./GameBoard";
-// import PlaceHolderComponent from "./PlaceHolderComponent";
-// import Footer from "./Footer";
+import PlaceHolderComponent from "./PlaceHolderComponent";
 
 import star from "./images/star.png";
 
@@ -64,37 +63,54 @@ function App() {
             captureTheToken={captureTheToken}
           />
         )}
+
         {/* Routing for Rocket lobbies */}
         <Route
           exact
           path="/RocketLobbyOne"
-          component={() => (
+          render={() => (
             <RocketLobby data={data} localToken={localAssignedToken} />
           )}
+          // component={() => (
+          //   <RocketLobby
+          //     key={"RocketLobbyOne"}
+          //     data={data}
+          //     localToken={localAssignedToken}
+          //   />
+          // )}
         />
         <Route
           exact
           path="/RocketLobbyTwo"
-          component={() => (
+          render={() => (
             <RocketLobby data={data} localToken={localAssignedToken} />
           )}
+          // component={() => (
+          //   <RocketLobby
+          //     key={"RocketLobbyTwo"}
+          //     data={data}
+          //     localToken={localAssignedToken}
+          //   />
+          // )}
         />
+
         {/* Routing for Game boards */}
         <Route
           exact
           path="/GameBoardOne"
-          component={() => (
-            <GameBoard data={data} localToken={localAssignedToken} />
-          )}
+          // component={() => (
+          //   <GameBoard data={data} localToken={localAssignedToken} />
+          // )}
+          component={PlaceHolderComponent}
         />
         <Route
           exact
           path="/GameBoardTwo"
-          component={() => {
-            <GameBoard data={data} localToken={localAssignedToken} />;
-          }}
+          // component={() => {
+          //   <GameBoard data={data} localToken={localAssignedToken} />;
+          // }}
+          component={PlaceHolderComponent}
         />
-        {/* <Footer /> */}
       </div>
     </Router>
   );
