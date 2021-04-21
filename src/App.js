@@ -98,24 +98,24 @@ function App() {
         <Route
           exact
           path="/GameBoardOne"
-          component={() => (
-            <GameBoard data={data} localToken={localAssignedToken} />
-          )}
-          // component={PlaceHolderComponent}
-          // render={() => (
+          // component={() => (
           //   <GameBoard data={data} localToken={localAssignedToken} />
           // )}
+          // component={PlaceHolderComponent}
+          render={() => (
+            <GameBoard data={data} localToken={localAssignedToken} />
+          )}
         />
         <Route
           exact
           path="/GameBoardTwo"
-          component={() => (
-            <GameBoard data={data} localToken={localAssignedToken} />
-          )}
-          // component={PlaceHolderComponent}
-          // render={() => (
+          // component={() => (
           //   <GameBoard data={data} localToken={localAssignedToken} />
           // )}
+          // component={PlaceHolderComponent}
+          render={() => (
+            <GameBoard data={data} localToken={localAssignedToken} />
+          )}
         />
       </div>
     </Router>

@@ -127,7 +127,6 @@ function Rockets({ data, localToken }) {
       }
     }
   }, [allPlayersReady]);
-  console.log(hideForm);
 
   return (
     <>
