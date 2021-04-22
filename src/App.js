@@ -29,7 +29,7 @@ function App() {
     firebase.database().ref("playerOne").set(false);
     firebase.database().ref("playerTwo").set(false);
     firebase.database().ref("isGameOver").set(false);
-    firebase.database().ref("isPlayerOneTurn").set(true);
+    firebase.database().ref("turn").set(true);
   };
   //capture the local token number
   function captureTheToken(localToken) {

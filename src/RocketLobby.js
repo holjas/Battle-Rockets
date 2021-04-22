@@ -1,5 +1,6 @@
 import firebase from "./firebase";
 import Navbar from "./Navbar";
+import placeRockets from "./placeRockets";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -108,12 +109,24 @@ function Rockets({ data, localToken }) {
   };
 
   //onClick will push the rockets selected to firebase (depending on user of course)
+  let areWeReady = false;
   const rocketSelectionSubmit = (e) => {
     e.preventDefault();
     setHideForm(true);
-    firebase.database().ref(whichPlayer).update({
-      rocketSelected: rocketSelected,
-    });
+    firebase
+      .database()
+      .ref(whichPlayer)
+      .update({
+        rocketSelected: rocketSelected,
+        score:
+          rocketSelected[0].size +
+          rocketSelected[1].size +
+          rocketSelected[2].size,
+      });
+    setTimeout(() => placeRockets(rocketSelected[0], whichPlayer), 500);
+    setTimeout(() => placeRockets(rocketSelected[1], whichPlayer), 1000);
+    setTimeout(() => placeRockets(rocketSelected[2], whichPlayer), 1500);
+    areWeReady = true;
   };
 
   //determine whether firebase has received all the information from both players before proceeding to the gameBoard
