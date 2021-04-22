@@ -100,128 +100,143 @@ function GameBoard({ data, localToken }) {
       }
     });
   }, []);
-  console.log(userName);
+
   return (
-    <>
+    <div className="gameBackground">
       {readyToGo ? (
         <div className="GameScreen">
           {/* TOP LEFT CORNER - PLAYER ONE ATTACKS PLAYER TWO HERE*/}
+          <p className="playerName">{userName}</p>
           {whichPlayer === "playerOne" && (
             <div className="container">
-              <div className="grid boardPlayerOne">
-                {boardPlayerTwo.map((value, index) => {
-                  const cellValue =
-                    value === 0
-                      ? null
-                      : value === "Falcon 1"
-                      ? null
-                      : value === "Falcon 9"
-                      ? null
-                      : value === "Falcon Heavy"
-                      ? null
-                      : value === "Starship"
-                      ? null
-                      : value;
-                  return (
-                    <button
-                      key={index}
-                      onClick={
-                        data.turn === "playerOne"
-                          ? (event) => handleClick(event, index, "playerTwo")
-                          : null
-                      }
-                      value={boardPlayerTwo[index]}
-                    >
-                      {cellValue}
-                    </button>
-                  );
-                })}
-              </div>
-              {/* BOTTOM LEFT CORNER - PLAYER ONE TRACKS THEIR STATUS HERE*/}
-              <div className="grid mirrorPlayerOne">
-                {boardPlayerOne.map((value, index) => {
-                  const cellValue =
-                    value === 0 ? null : value === "Falcon 1" ? (
-                      <img src={falcon1} alt="Falcon 1 rocket"></img>
-                    ) : value === "Falcon 9" ? (
-                      <img src={falcon9} alt="Falcon 1 rocket"></img>
-                    ) : value === "Falcon Heavy" ? (
-                      <img src={falconHeavy} alt="Falcon 1 rocket"></img>
-                    ) : value === "Starship" ? (
-                      <img src={starship} alt="Falcon 1 rocket"></img>
-                    ) : (
-                      value
+              <div>
+                <p className="whosBoard">Opponents Board</p>
+
+                <div className="grid boardPlayerOne">
+                  {boardPlayerTwo.map((value, index) => {
+                    const cellValue =
+                      value === 0
+                        ? null
+                        : value === "Falcon 1"
+                        ? null
+                        : value === "Falcon 9"
+                        ? null
+                        : value === "Falcon Heavy"
+                        ? null
+                        : value === "Starship"
+                        ? null
+                        : value;
+                    return (
+                      <button
+                        key={index}
+                        onClick={
+                          data.turn === "playerOne"
+                            ? (event) => handleClick(event, index, "playerTwo")
+                            : null
+                        }
+                        value={boardPlayerTwo[index]}
+                      >
+                        {cellValue}
+                      </button>
                     );
-                  return (
-                    <button key={index} value={boardPlayerOne[index]}>
-                      {cellValue}
-                    </button>
-                  );
-                })}
+                  })}
+                </div>
+              </div>
+
+              <div>
+                <p className="whosBoard">Players Board</p>
+                {/* BOTTOM LEFT CORNER - PLAYER ONE TRACKS THEIR STATUS HERE*/}
+                <div className="grid mirrorPlayerOne">
+                  {boardPlayerOne.map((value, index) => {
+                    const cellValue =
+                      value === 0 ? null : value === "Falcon 1" ? (
+                        <img src={falcon1} alt="Falcon 1 rocket"></img>
+                      ) : value === "Falcon 9" ? (
+                        <img src={falcon9} alt="Falcon 1 rocket"></img>
+                      ) : value === "Falcon Heavy" ? (
+                        <img src={falconHeavy} alt="Falcon 1 rocket"></img>
+                      ) : value === "Starship" ? (
+                        <img src={starship} alt="Falcon 1 rocket"></img>
+                      ) : (
+                        value
+                      );
+                    return (
+                      <button key={index} value={boardPlayerOne[index]}>
+                        {cellValue}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           )}
 
           {whichPlayer === "playerTwo" && (
             <div className="container">
-              {/* TOP RIGHT CORNER - PLAYER TWO ATTACKS PLAYER ONE HERE*/}
-              <div className="grid boardPlayerTwo">
-                {boardPlayerOne.map((value, index) => {
-                  const cellValue =
-                    value === 0
-                      ? null
-                      : value === "Falcon 1"
-                      ? null
-                      : value === "Falcon 9"
-                      ? null
-                      : value === "Falcon Heavy"
-                      ? null
-                      : value === "Starship"
-                      ? null
-                      : value;
-                  return (
-                    <button
-                      key={index}
-                      onClick={
-                        data.turn === "playerTwo"
-                          ? (event) => handleClick(event, index, "playerOne")
-                          : null
-                      }
-                      value={boardPlayerOne[index]}
-                    >
-                      {cellValue}
-                    </button>
-                  );
-                })}
+              <div>
+                <p className="whosBoard">Opponents Board</p>
+                {/* TOP RIGHT CORNER - PLAYER TWO ATTACKS PLAYER ONE HERE*/}
+                <div className="grid boardPlayerTwo">
+                  {boardPlayerOne.map((value, index) => {
+                    const cellValue =
+                      value === 0
+                        ? null
+                        : value === "Falcon 1"
+                        ? null
+                        : value === "Falcon 9"
+                        ? null
+                        : value === "Falcon Heavy"
+                        ? null
+                        : value === "Starship"
+                        ? null
+                        : value;
+                    return (
+                      <button
+                        key={index}
+                        onClick={
+                          data.turn === "playerTwo"
+                            ? (event) => handleClick(event, index, "playerOne")
+                            : null
+                        }
+                        value={boardPlayerOne[index]}
+                      >
+                        {cellValue}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
               {/* BOTTOM RIGHT CORNER - PLAYER TWO TRACKS THEIR STATUS */}
-              <div className="grid mirrorPlayerTwo">
-                {boardPlayerTwo.map((value, index) => {
-                  const cellValue =
-                    value === 0 ? null : value === "Falcon 1" ? (
-                      <img src={falcon1} alt="Falcon 1 rocket"></img>
-                    ) : value === "Falcon 9" ? (
-                      <img src={falcon9} alt="Falcon 1 rocket"></img>
-                    ) : value === "Falcon Heavy" ? (
-                      <img src={falconHeavy} alt="Falcon 1 rocket"></img>
-                    ) : value === "Starship" ? (
-                      <img src={starship} alt="Falcon 1 rocket"></img>
-                    ) : (
-                      value
+              <div>
+                <p className="whosBoard">Players Board</p>
+                <div className="grid mirrorPlayerTwo">
+                  {boardPlayerTwo.map((value, index) => {
+                    const cellValue =
+                      value === 0 ? null : value === "Falcon 1" ? (
+                        <img src={falcon1} alt="Falcon 1 rocket"></img>
+                      ) : value === "Falcon 9" ? (
+                        <img src={falcon9} alt="Falcon 1 rocket"></img>
+                      ) : value === "Falcon Heavy" ? (
+                        <img src={falconHeavy} alt="Falcon 1 rocket"></img>
+                      ) : value === "Starship" ? (
+                        <img src={starship} alt="Falcon 1 rocket"></img>
+                      ) : (
+                        value
+                      );
+                    return (
+                      <button key={index} value={boardPlayerTwo[index]}>
+                        {cellValue}
+                      </button>
                     );
-                  return (
-                    <button key={index} value={boardPlayerTwo[index]}>
-                      {cellValue}
-                    </button>
-                  );
-                })}
+                  })}
+                </div>
               </div>
             </div>
           )}
         </div>
       ) : null}
-    </>
+    </div>
   );
 }
 

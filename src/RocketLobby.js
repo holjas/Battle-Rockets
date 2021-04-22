@@ -109,7 +109,7 @@ function Rockets({ data, localToken }) {
   };
 
   //onClick will push the rockets selected to firebase (depending on user of course)
-  let areWeReady = false;
+  // let areWeReady = false;
   const rocketSelectionSubmit = (e) => {
     e.preventDefault();
     setHideForm(true);
@@ -126,7 +126,7 @@ function Rockets({ data, localToken }) {
     setTimeout(() => placeRockets(rocketSelected[0], whichPlayer), 500);
     setTimeout(() => placeRockets(rocketSelected[1], whichPlayer), 1000);
     setTimeout(() => placeRockets(rocketSelected[2], whichPlayer), 1500);
-    areWeReady = true;
+    // areWeReady = true;
   };
 
   //determine whether firebase has received all the information from both players before proceeding to the gameBoard
@@ -141,7 +141,7 @@ function Rockets({ data, localToken }) {
         history.push("/GameBoardTwo");
       }
     }
-  }, [allPlayersReady]);
+  }, [allPlayersReady, whichPlayer, history]);
   //
   // THE RETURN
   return (
@@ -246,7 +246,7 @@ function Rockets({ data, localToken }) {
               </h2>
               <h3>
                 You will be automatically taken to the game board when both
-                sides are ready to
+                sides are ready to play!
               </h3>
             </div>
           )}
