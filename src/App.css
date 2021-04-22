@@ -351,72 +351,6 @@ a {
   padding-top: 15px;
 }
 
-/* Gameboard styling */
-
-.GameScreen {
-  text-align: center;
-  background-image: url("./images/93034.jpg");
-  background-size: cover;
-  height: 100vh;
-}
-
-.container {
-  display: flex;
-  justify-content: space-between;
-  padding: 30px 30px 0;
-}
-
-.boardPlayerOne,
-.boardPlayerTwo,
-.mirrorPlayerOne,
-.mirrorPlayerTwo {
-  width: 280px;
-  height: 280px;
-  display: flex;
-  flex-wrap: wrap;
-  margin: 20px;
-}
-
-.boardPlayerOne,
-.mirrorPlayerOne,
-.boardPlayerTwo,
-.mirrorPlayerTwo {
-  background-image: url("./images/buttonBackground.png");
-}
-
-.boardPlayerOne button,
-.boardPlayerTwo button {
-  color: currentColor;
-}
-
-.mirrorPlayerTwo button,
-.mirrorPlayerOne button {
-  color: white;
-}
-
-.grid button {
-  width: 40px;
-  height: 40px;
-  border: 1px solid azure;
-  background-color: transparent;
-}
-
-.grid button:hover {
-  background-color: grey;
-  color: grey;
-}
-.rocket div {
-  width: 20px;
-  height: 20px;
-}
-.hidden {
-  display: none;
-}
-.win {
-  color: white;
-  margin: 0;
-}
-
 /* NavBar styling */
 
 .navbarSection {
@@ -747,5 +681,92 @@ div.flex:nth-child(2) > div:nth-child(3) {
 @media (max-width: 320px) {
   div.gameStartSection h1 {
     font-size: 4.5rem;
+  }
+}
+/*  */
+/* Gameboard styling */
+.gameBackground {
+  text-align: center;
+  background-image: linear-gradient(90deg, var(--red) 50%, var(--blue) 50%);
+  position: cover;
+  min-height: 80vh;
+  border-top: 7px solid black;
+  border-bottom: 7px solid black;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 100px 0;
+}
+.boardPlayerOne,
+.boardPlayerTwo,
+.mirrorPlayerOne,
+.mirrorPlayerTwo {
+  width: 280px;
+  height: 280px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px;
+}
+.boardPlayerOne,
+.mirrorPlayerOne,
+.boardPlayerTwo,
+.mirrorPlayerTwo {
+  background-image: url("./images/buttonBackground.png");
+}
+.playerName {
+  color: var(--yellow);
+  text-shadow: 5px 5px 0px var(--black);
+  font-family: var(--fontHeading);
+  text-transform: capitalize;
+  font-size: 2.5rem;
+  padding-top: 30px;
+}
+.whosBoard {
+  font-family: var(--fontBody);
+  font-size: 1.5rem;
+  color: var(--yellow);
+}
+.whosBoardText {
+  padding-top: 10px;
+  font-family: var(--fontBody);
+  color: var(--yellow);
+  font-size: 1rem;
+}
+.boardPlayerOne button,
+.boardPlayerTwo button {
+  color: currentColor;
+}
+.mirrorPlayerTwo button,
+.mirrorPlayerOne button {
+  color: white;
+}
+.grid button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid azure;
+  background-color: transparent;
+}
+.grid button:hover {
+  background-color: grey;
+  color: grey;
+}
+.rocket div {
+  width: 20px;
+  height: 20px;
+}
+.hidden {
+  display: none;
+}
+.win,
+.hit,
+.miss {
+  color: white;
+  margin: 0;
+}
+@media (max-width: 840px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
   }
 }
