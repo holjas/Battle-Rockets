@@ -1,21 +1,45 @@
 import junoLogo from "./images/junoLogo.jpg";
-import "./Navbar.css";
 
 function Footer() {
   return (
     <footer>
       <div className="footerSection wrapper">
-        <div className="red">
-          <p>
-            Coded by <span className="patrick">Patrick</span>
-            <span className="holly">Holly</span>
-            <span className="mackenzie">Mackenzie</span>
-            <span className="karen">Karen</span>
+        <div>
+          <p className="redText">
+            Coded by
+            <a
+              className="yellowText"
+              href="https://www.linkedin.com/in/mmmccormack/"
+              rel="noreferrer"
+            >
+              Patrick
+            </a>
+            <a
+              className="redText"
+              href="https://www.linkedin.com/in/hollyjasiura/"
+              rel="noreferrer"
+            >
+              Holly
+            </a>
+            <a
+              className="yellowText"
+              href="https://www.linkedin.com/in/mackenzie-howey-a4299a207/"
+              rel="noreferrer"
+            >
+              Mackenzie
+            </a>
+            <a
+              className="redText"
+              href="https://www.linkedin.com/in/karengonzalez000/"
+              rel="noreferrer"
+            >
+              Karen
+            </a>
           </p>
         </div>
-        <div className="red">
+        <div>
           <p>Created at Juno College</p>
-          <a href="http://www.junocollege.com" target="_blank">
+          <a href="http://www.junocollege.com" target="_blank" rel="noreferrer">
             <img src={junoLogo} alt="Juno College of Technology Company Logo" />
           </a>
         </div>

@@ -71,13 +71,6 @@ function App() {
           render={() => (
             <RocketLobby data={data} localToken={localAssignedToken} />
           )}
-          // component={() => (
-          //   <RocketLobby
-          //     key={"RocketLobbyOne"}
-          //     data={data}
-          //     localToken={localAssignedToken}
-          //   />
-          // )}
         />
         <Route
           exact
@@ -85,13 +78,6 @@ function App() {
           render={() => (
             <RocketLobby data={data} localToken={localAssignedToken} />
           )}
-          // component={() => (
-          //   <RocketLobby
-          //     key={"RocketLobbyTwo"}
-          //     data={data}
-          //     localToken={localAssignedToken}
-          //   />
-          // )}
         />
 
         {/* Routing for Game boards */}
@@ -105,6 +91,9 @@ function App() {
           render={() => (
             <GameBoard data={data} localToken={localAssignedToken} />
           )}
+          // render={() => (
+          //   <PlaceHolderComponent data={data} localToken={localAssignedToken} />
+          // )}
         />
         <Route
           exact
@@ -116,6 +105,9 @@ function App() {
           render={() => (
             <GameBoard data={data} localToken={localAssignedToken} />
           )}
+          // render={() => (
+          //   <PlaceHolderComponent data={data} localToken={localAssignedToken} />
+          // )}
         />
       </div>
     </Router>

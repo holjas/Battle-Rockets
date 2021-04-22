@@ -1,22 +1,32 @@
+/* Homepage */
+/* Media Query Home Page */
+/* RocketLobby styling */
+/* Gameboard styling */
+/* NavBar Styling */
+/* Footer styling  */
+/* Media query*/
 /* CSS */
-/* 
-- imports
-- setup snippet
-- general stylings (variables, wrapper)
--
-*/
-/* imports */
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;900&family=Teko:wght@500&display=swap");
 
-/* setup snippet start */
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;900&family=Teko:wght@500&display=swap");
+:root {
+  --black: #121212;
+  --white: #f0f0f0;
+  --blue: #003049;
+  --red: #d62828;
+  --yellow: #fcbf49;
+  --fontHeading: "Teko", sans-serif;
+  --fontBody: "Lato", sans-serif;
+}
 html {
   font-size: 18px;
+  font-size: 125%;
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  background-color: var(--white);
 }
 body {
   margin: 0;
@@ -36,6 +46,7 @@ h3,
 h4,
 h5,
 p {
+  color: var(--black);
   margin: 0;
   padding: 0;
 }
@@ -253,18 +264,6 @@ template {
   clip: rect(1px, 1px, 1px, 1px);
   white-space: nowrap; /* added line */
 }
-/* setup snippet end */
-
-/* general styling start */
-:root {
-  --black: #121212;
-  --white: #f0f0f0;
-  --blue: #003049;
-  --red: #d62828;
-  --yellow: #fcbf49;
-  --fontHeading: "Teko", sans-serif;
-  --fontBody: "Lato", sans-serif;
-}
 .wrapper {
   max-width: 1200px;
   margin: 0 auto;
@@ -273,20 +272,98 @@ template {
 a {
   text-decoration: none;
 }
-/* general styling end */
+/* Homepage */
+.starAbortContainer {
+  z-index: 10;
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  cursor: pointer;
+}
+.starAbort {
+  width: 50px;
+  transition: 0.3s;
+}
+.starAbort:hover,
+.starAbort:focus {
+  transform: scale(1.2);
+}
+/*  */
+.gameStartSection {
+  height: 92vh;
+  background-image: linear-gradient(147deg, var(--blue) 50%, var(--red) 50%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.gameStartSection h1 {
+  font-family: var(--fontHeading);
+  font-size: 7.5rem;
+  color: var(--yellow);
+  text-shadow: 10px 10px 0px var(--black);
+}
+.gameStartContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  text-align: center;
+  background-color: var(--black);
+  color: var(--white);
+  font-family: var(--fontBody);
+  border-radius: 5px;
+  padding: 40px;
+}
+.gameStartContainer input[type="text"] {
+  padding: 10px;
+  text-align: center;
+  margin: 20px;
+  min-width: 300px;
+}
+.gameStartContainer h2 {
+  color: var(--white);
+}
+.gameStartContainer button {
+  background-color: #850000;
+  border-radius: 5px;
+  border: transparent;
+  margin-top: 20px;
+  padding: 15px 25px;
+  transition: 0.5;
+}
+.gameStartContainer button:hover,
+.gameStartContainer button:focus {
+  background-color: #ac1313;
+  cursor: pointer;
+  transform: scale(1.1);
+}
+.gameStartContainer a {
+  font-size: 1.5rem;
+  letter-spacing: 1.5px;
+  font-family: var(--fontHeading);
+  color: var(--white);
+  font-weight: bold;
+}
+.gameStartContainer h2:nth-child(2) {
+  padding-top: 15px;
+}
 
-/* gameboard styling */
+/* Gameboard styling */
 
 .GameScreen {
   text-align: center;
-  background-image: linear-gradient(147deg, var(--blue) 50%, var(--red) 50%);
+  background-image: url("./images/93034.jpg");
+  background-size: cover;
   height: 100vh;
 }
 
 .container {
   display: flex;
   justify-content: space-between;
-  padding: 50px 100px 0;
+  padding: 30px 30px 0;
 }
 
 .boardPlayerOne,
@@ -328,37 +405,347 @@ a {
   background-color: grey;
   color: grey;
 }
-
 .rocket div {
   width: 20px;
   height: 20px;
 }
-
 .hidden {
   display: none;
 }
-
-.win,
-.hit,
-.miss {
+.win {
   color: white;
   margin: 0;
 }
 
-.boardTitle {
-  color: white;
-  position: absolute;
-  left: 120px;
+/* NavBar styling */
+
+.navbarSection {
+  height: 120px;
+  background-image: linear-gradient(147deg, var(--blue) 50%, var(--red) 50%);
+}
+.navbarSection h1 {
+  text-align: center;
+  font-size: 5rem;
+  padding-top: 8px;
   font-family: var(--fontHeading);
-  font-size: 35px;
-}
-
-.top {
-  top: 35px;
-  color: var(--red);
-}
-
-.bottom {
-  top: 405px;
   color: var(--yellow);
+  text-shadow: 10px 10px 0px var(--black);
+}
+/* Footer Styling */
+footer {
+  height: 8vh;
+  font-family: var(--fontBody);
+  background-color: var(--blue);
+}
+.footerSection {
+  height: 8vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--red);
+  font-weight: bold;
+}
+.footerSection img {
+  height: 8vh;
+  padding-left: 10px;
+}
+.footerSection div:nth-child(2) {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.yellowText {
+  color: var(--yellow);
+  padding-left: 10px;
+}
+.redText,
+.footerSection p {
+  color: var(--red);
+  padding-left: 10px;
+}
+
+/* RocketLobby styling */
+.rocketLobbySection h2,
+.rocketLobbySection h3 {
+  text-align: center;
+}
+.rocketLobbySection h2 {
+  font-family: var(--fontHeading);
+  padding: 40px 0 20px 0;
+  font-size: 4.5rem;
+}
+.rocketLobbySection h3 {
+  font-family: var(--fontBody);
+  font-size: 2.05rem;
+}
+input[type="checkbox"] {
+  width: 30px;
+  height: 30px;
+}
+.rocketImages {
+  width: 100%;
+}
+.flex {
+  display: flex;
+  margin: 30px;
+}
+.rocketTitle {
+  font-family: var(--fontHeading);
+  font-size: 30px;
+}
+input[type="submit"] {
+  position: relative;
+  left: 400px;
+  padding: 10px;
+  width: 50%;
+}
+.textDiv {
+  margin-left: 10px;
+}
+.flex p {
+  font-size: 1rem;
+  margin: 5px;
+  line-height: 1.6;
+}
+
+span {
+  font-weight: bold;
+  border-bottom: 3px solid var(--yellow);
+  letter-spacing: 1px;
+}
+
+.welcomeText {
+  font-size: 60px;
+  font-family: var(--fontHeading);
+  margin-top: 100px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.grid-container {
+  display: grid;
+  font-family: var(--fontBody);
+  font-size: 16px;
+  grid-template-columns: 50% 50%;
+  padding-top: 73px;
+  justify-content: space-around;
+  margin-bottom: 70px;
+}
+
+.rocketLobbySection h5 {
+  animation: heartbeat 1s infinite;
+  color: var(--red);
+  width: 100%;
+  font-size: 28px;
+  text-align: center;
+  grid-area: 3 / span 2;
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(0.8);
+  }
+  20% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+div.flex:nth-child(3) > div:nth-child(2),
+div.flex:nth-child(1) > div:nth-child(2) {
+  width: 500px;
+}
+div.flex:nth-child(4) > div:nth-child(2) {
+  width: 600px;
+}
+.submitButton {
+  grid-area: 3 / span 2;
+  border-radius: 17px;
+  padding: 14px 25px;
+  background-color: var(--yellow);
+  font-size: 1rem;
+  color: var(--red);
+  border: none;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.submitButton:hover,
+.submitButton:focus {
+  background-color: #f5b63a;
+  font-weight: bold;
+}
+
+div.flex:nth-child(3) > div:nth-child(3) {
+  margin-left: 22px;
+}
+div.flex:nth-child(2) > div:nth-child(3) {
+  margin-left: 20px;
+}
+.rocketLobbyWaiting {
+  margin-top: 5rem;
+  border: 5px solid var(--blue);
+  border-radius: 3px;
+  margin-bottom: 30px;
+}
+.rocketLobbyWaiting h2 {
+  font-size: 3rem;
+}
+.rocketLobbyWaiting h3 {
+  padding-bottom: 40px;
+  font-size: 1.4rem;
+}
+
+/* Media query  */
+@media (max-width: 1060px) {
+  .submitButton {
+    left: 430px;
+  }
+}
+@media (max-width: 900px) {
+  h5 {
+    font-size: 22px;
+    left: 150px;
+  }
+  .submitButton {
+    left: 300px;
+  }
+}
+@media (max-width: 840px) {
+  section.gameStartSection h1 {
+    font-size: 6.5rem;
+  }
+  h2 {
+    font-size: 18px;
+  }
+  div.gameStartContainer {
+    font-size: 1rem;
+  }
+  div.gameStartContainer input[type="text"] {
+    min-width: 250px;
+  }
+}
+@media (max-width: 700px) {
+  .navbarSection h1 {
+    font-size: 3rem;
+    padding: 41px;
+  }
+  .starAbort {
+    width: 36px;
+  }
+  .welcomeText {
+    font-size: 52px;
+    margin-top: 67px;
+  }
+  h3 {
+    font-size: 25px;
+  }
+  .grid-container {
+    grid-template-columns: 93%;
+  }
+  .rocket1 {
+    width: 81%;
+  }
+  div h5 {
+    left: initial;
+    font-size: 19px;
+  }
+  .red p {
+    font-size: 14px;
+  }
+  .submitButton {
+    left: 150px;
+    padding: 9px 19px;
+    font-size: 15px;
+  }
+}
+@media (max-width: 640px) {
+  section.gameStartSection h1 {
+    font-size: 5.5rem;
+  }
+  div.gameStartContainer {
+    width: 60%;
+    margin-top: 40px;
+  }
+  div.gameStartContainer button {
+    margin-top: 8px;
+    padding: 6px 17px;
+  }
+}
+@media (max-width: 540px) {
+  .red p {
+    font-size: 9px;
+  }
+  .grid-container {
+    grid-template-columns: 98%;
+  }
+  .flex {
+    margin: 3px;
+  }
+  .textDiv {
+    margin-left: initial;
+  }
+}
+
+@media (max-width: 500px) {
+  div.gameStartContainer {
+    width: 90%;
+  }
+}
+@media (max-width: 385px) {
+  .red p {
+    font-size: 7px;
+  }
+  .submitButton {
+    left: 88px;
+    top: 43px;
+  }
+}
+@media (max-width: 360px) {
+  .textDiv p {
+    font-size: 14px;
+  }
+
+  .footerSection img {
+    height: 2vh;
+  }
+  footer {
+    height: 1vh;
+    padding-bottom: 54px;
+  }
+  h3 {
+    font-size: 17px;
+  }
+  div h5 {
+    font-size: 15px;
+  }
+  p.Tittle {
+    font-size: 25px;
+  }
+  .navbarSection h1 {
+    font-size: 2rem;
+  }
+  .welcomeText {
+    font-size: 39px;
+  }
+  .submitButton {
+    font-size: 13px;
+  }
+}
+@media (max-width: 320px) {
+  div.gameStartSection h1 {
+    font-size: 4.5rem;
+  }
 }

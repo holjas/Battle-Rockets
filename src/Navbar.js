@@ -1,4 +1,3 @@
-import "./Navbar.css";
 function Navbar() {
   return (
     <section className="navbarSection">

@@ -15,7 +15,7 @@ function GameBoard({ data, localToken }) {
       const playerTwo = data.playerTwo.token === localToken;
       if (playerOne) {
         setWhichPlayer("playerOne");
-        setRocketSelections(data.playerOne.rocketSelected);
+
         setUserName(data.playerOne.name);
       }
       if (playerTwo) {
@@ -274,81 +274,78 @@ function GameBoard({ data, localToken }) {
   console.log(`${whichPlayer} is ${userName}`);
   //HOLLY STUFF ENDS HERE
   return (
-    <section className="GameScreen wrapper">
+    <div className="GameScreen wrapper">
       {/* playerone screen start */}
 
       {/* TOP LEFT CORNER - PLAYER ONE ATTACKS PLAYER TWO HERE*/}
-      {whichPlayer === "playerOne" && (
-        <div className="container">
-          <p>{userName}</p>
-          <div className="grid boardPlayerOne">
-            {boardPlayerTwo.map((value, index) => {
-              const playerTurn = playerOneTurn ? false : true;
-              return (
-                <button
-                  key={index}
-                  onClick={(event) => handleClick(event, index, whichPlayer)}
-                  value={boardPlayerTwo[index]}
-                  disabled={playerTurn}
-                >
-                  {value}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* TOP RIGHT CORNER - PLAYER TWO ATTACKS PLAYER ONE HERE*/}
-          <div className="grid boardPlayerTwo">
-            {boardPlayerOne.map((value, index) => {
-              const playerTurn = playerOneTurn ? true : false;
-              return (
-                <button
-                  key={index}
-                  onClick={(event) => handleClick(event, index, whichPlayer)}
-                  value={boardPlayerOne[index]}
-                  disabled={playerTurn}
-                >
-                  {value}
-                </button>
-              );
-            })}
-          </div>
+      <div className="container">
+        <p>{userName}</p>
+        <div className="grid boardPlayerOne">
+          {boardPlayerTwo.map((value, index) => {
+            const playerTurn = playerOneTurn ? false : true;
+            return (
+              <button
+                key={index}
+                onClick={(event) => handleClick(event, index, whichPlayer)}
+                value={boardPlayerTwo[index]}
+                disabled={playerTurn}
+              >
+                {value}
+              </button>
+            );
+          })}
         </div>
-      )}
+
+        {/* TOP RIGHT CORNER - PLAYER TWO ATTACKS PLAYER ONE HERE*/}
+        <div className="grid boardPlayerTwo">
+          {boardPlayerOne.map((value, index) => {
+            const playerTurn = playerOneTurn ? true : false;
+            return (
+              <button
+                key={index}
+                onClick={(event) => handleClick(event, index, whichPlayer)}
+                value={boardPlayerOne[index]}
+                disabled={playerTurn}
+              >
+                {value}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       {/* playerone screen end */}
 
       {/* playerTwo screen start */}
-      {whichPlayer === "playerTwo" && (
-        <div className="container">
-          <p>{userName}</p>
-          {/* BOTTOM LEFT CORNER - PLAYER ONE TRACKS THEIR STATUS HERE*/}
-          <div className="grid mirrorPlayerOne">
-            <p>left top board</p>
-            {boardPlayerOne.map((value, index) => {
-              const cellValue = value === 0 ? null : value;
-              return (
-                <button key={index} value={boardPlayerOne[index]}>
-                  {cellValue}
-                </button>
-              );
-            })}
-          </div>
 
-          {/* BOTTOM RIGHT CORNER - PLAYER TWO TRACKS THEIR STATUS */}
-          <div className="grid mirrorPlayerTwo">
-            <p>left bottom board</p>
-            {boardPlayerTwo.map((value, index) => {
-              const cellValue = value === 0 ? null : value;
-              return (
-                <button key={index} value={boardPlayerTwo[index]}>
-                  {cellValue}
-                </button>
-              );
-            })}
-          </div>
+      <div className="container">
+        <p>{userName}</p>
+
+        {/* BOTTOM LEFT CORNER - PLAYER ONE TRACKS THEIR STATUS HERE*/}
+        <div className="grid mirrorPlayerOne">
+          {boardPlayerOne.map((value, index) => {
+            const cellValue = value === 0 ? null : value;
+            return (
+              <button key={index} value={boardPlayerOne[index]}>
+                {cellValue}
+              </button>
+            );
+          })}
         </div>
-      )}
-    </section>
+
+        {/* BOTTOM RIGHT CORNER - PLAYER TWO TRACKS THEIR STATUS */}
+        <div className="grid mirrorPlayerTwo">
+          {boardPlayerTwo.map((value, index) => {
+            const cellValue = value === 0 ? null : value;
+            return (
+              <button key={index} value={boardPlayerTwo[index]}>
+                {cellValue}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </div>
   );
 }
 

@@ -1,4 +1,3 @@
-import "./RocketLobby.css";
 import firebase from "./firebase";
 import Navbar from "./Navbar";
 
@@ -16,6 +15,7 @@ function Rockets({ data, localToken }) {
   const [userName, setUserName] = useState("");
   const [hideForm, setHideForm] = useState(false);
   const history = useHistory();
+
   //api call to SpaceX to get the different rocket types
   useEffect(() => {
     axios({
@@ -24,6 +24,7 @@ function Rockets({ data, localToken }) {
       dataResponse: "json",
       params: {},
     })
+      //adding in our own key:value to assign images base on the height value of the individual object items
       .then((res) => {
         const rocketHeight = res.data.map((rHeight) => {
           const singleRocketHeight = rHeight.height.meters;
@@ -115,6 +116,7 @@ function Rockets({ data, localToken }) {
     });
   };
 
+  //determine whether firebase has received all the information from both players before proceeding to the gameBoard
   const allPlayersReady =
     data.playerOne.rocketSelected && data.playerTwo.rocketSelected;
   useEffect(() => {
@@ -127,17 +129,19 @@ function Rockets({ data, localToken }) {
       }
     }
   }, [allPlayersReady]);
-
+  //
+  // THE RETURN
   return (
     <>
       <Navbar />
       <section className="rocketLobbySection">
         <div className="wrapper">
+          {/* hide the form when user has selected and submitted their rocket choice */}
           {!hideForm && (
             <>
               <h2>Welcome, {userName}!</h2>
 
-              <h3>Choose Three Rockets as your game pieces </h3>
+              <h3>Please Choose Three Rockets As Your Game Pieces</h3>
 
               <form className="style grid-container">
                 {rocket.map((singleRocket, index) => {
@@ -154,25 +158,34 @@ function Rockets({ data, localToken }) {
                           }}
                         />
                       </div>
-                      <div>
+                      <div className="rocketImageSize">
                         <img
-                          className="rocket1"
+                          className="rocketImages"
                           src={singleRocket.orientation}
                           alt={singleRocket.rocket_name}
                         />
                       </div>
 
-                      <div>
+                      <div className="textDiv">
                         <label
                           className="visually-hidden"
                           htmlFor={singleRocket.rocket_id}
                         >
                           {singleRocket.rocket_name}
                         </label>
-                        <p className="Tittle">{singleRocket.rocket_name}</p>
-                        <p>Diameter: {singleRocket.diameter.feet}</p>
-                        <p>Country: {singleRocket.country}</p>
-                        <p>Description:{singleRocket.description}</p>
+                        <h4 className="rocketTitle">
+                          {singleRocket.rocket_name}
+                        </h4>
+                        <p>
+                          <span>Height:</span> {singleRocket.height.meters}
+                          meters
+                        </p>
+                        <p>
+                          <span>Country</span>: {singleRocket.country}
+                        </p>
+                        <p>
+                          <span>Description:</span> {singleRocket.description}
+                        </p>
                       </div>
                     </div>
                   );
@@ -188,11 +201,12 @@ function Rockets({ data, localToken }) {
                 {whichPlayer === "playerOne" && maxSelectionReach && (
                   <>
                     <button
+                      className="submitButton"
                       type="button"
                       value="You're ready to join"
                       onClick={rocketSelectionSubmit}
                     >
-                      Enter the Game {userName}
+                      Click Here to Start the Game
                     </button>
                   </>
                 )}
@@ -200,25 +214,26 @@ function Rockets({ data, localToken }) {
                 {/* playerTwo submit selections start */}
                 {whichPlayer === "playerTwo" && maxSelectionReach && (
                   <button
+                    className="submitButton"
                     type="submit"
                     value="You're ready to join"
                     onClick={rocketSelectionSubmit}
                   >
-                    Enter the Game {userName}
+                    Click Here to Start the Game
                   </button>
                 )}
                 {/* playerTwo submit selections end */}
               </form>
             </>
           )}
-          {!allPlayersReady && maxSelectionReach && (
+          {!allPlayersReady && hideForm && (
             <div className="rocketLobbyWaiting">
               <h2>
                 Still waiting for other player to confirm their selections.
               </h2>
               <h3>
                 You will be automatically taken to the game board when both
-                sides are ready
+                sides are ready to
               </h3>
             </div>
           )}
