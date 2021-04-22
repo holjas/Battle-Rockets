@@ -137,7 +137,33 @@ function GameBoard({ data, localToken }) {
                   );
                 })}
               </div>
+              {/* BOTTOM LEFT CORNER - PLAYER ONE TRACKS THEIR STATUS HERE*/}
+              <div className="grid mirrorPlayerOne">
+                {boardPlayerOne.map((value, index) => {
+                  const cellValue =
+                    value === 0 ? null : value === "Falcon 1" ? (
+                      <img src={falcon1} alt="Falcon 1 rocket"></img>
+                    ) : value === "Falcon 9" ? (
+                      <img src={falcon9} alt="Falcon 1 rocket"></img>
+                    ) : value === "Falcon Heavy" ? (
+                      <img src={falconHeavy} alt="Falcon 1 rocket"></img>
+                    ) : value === "Starship" ? (
+                      <img src={starship} alt="Falcon 1 rocket"></img>
+                    ) : (
+                      value
+                    );
+                  return (
+                    <button key={index} value={boardPlayerOne[index]}>
+                      {cellValue}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
+          {whichPlayer === "playerTwo" && (
+            <div className="container">
               {/* TOP RIGHT CORNER - PLAYER TWO ATTACKS PLAYER ONE HERE*/}
               <div className="grid boardPlayerTwo">
                 {boardPlayerOne.map((value, index) => {
@@ -163,33 +189,6 @@ function GameBoard({ data, localToken }) {
                       }
                       value={boardPlayerOne[index]}
                     >
-                      {cellValue}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* BOTTOM LEFT CORNER - PLAYER ONE TRACKS THEIR STATUS HERE*/}
-          {whichPlayer === "playerTwo" && (
-            <div className="container">
-              <div className="grid mirrorPlayerOne">
-                {boardPlayerOne.map((value, index) => {
-                  const cellValue =
-                    value === 0 ? null : value === "Falcon 1" ? (
-                      <img src={falcon1} alt="Falcon 1 rocket"></img>
-                    ) : value === "Falcon 9" ? (
-                      <img src={falcon9} alt="Falcon 1 rocket"></img>
-                    ) : value === "Falcon Heavy" ? (
-                      <img src={falconHeavy} alt="Falcon 1 rocket"></img>
-                    ) : value === "Starship" ? (
-                      <img src={starship} alt="Falcon 1 rocket"></img>
-                    ) : (
-                      value
-                    );
-                  return (
-                    <button key={index} value={boardPlayerOne[index]}>
                       {cellValue}
                     </button>
                   );

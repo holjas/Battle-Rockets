@@ -80,6 +80,11 @@ function GameBoard({ data }) {
         // ADD MACKENZIE'S STUFF HERE!
       }
     });
+    return () => {
+      unsubscribe();
+      dbRef.unsubscribe();
+      dbRef.cancel();
+    };
   }, []);
 
   return (

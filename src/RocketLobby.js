@@ -1,6 +1,6 @@
 import firebase from "./firebase";
 import Navbar from "./Navbar";
-import placeRockets from "./placeRockets";
+import placeRockets from "./placerockets";
 
 import axios from "axios";
 import { useEffect, useState } from "react";
