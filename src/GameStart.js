@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 import "./App.css";
+=======
+>>>>>>> sugarplum
 import { useState, useEffect } from "react";
 import firebase from "./firebase";
 
 import { Link, withRouter } from "react-router-dom";
+import Footer from "./Footer";
 
 function GameStart(props) {
   const { playerOne, captureTheToken } = props;
@@ -52,54 +56,60 @@ function GameStart(props) {
   return (
     <>
       {!playerOne && (
-        <section className="gameStartSection">
-          <h1 className="homePage">Battle Rockets</h1>
-          <div className="gameStartContainer">
-            <h2>Let's play a game!</h2>
-            <h2>Enter your name to start</h2>
-            <input
-              type="text"
-              onChange={(event) => handleChange(event, "one")}
-              value={playerOneName}
-            ></input>
-            <button
-              onClick={() => {
-                handleIsPlayerReady(playerOneName, "playerOne");
-                setPlayerOneName("");
-                captureTheToken(token);
-                props.history.push("/RocketLobbyOne");
-              }}
-            >
-              <Link to="/RocketLobbyOne">Player One START</Link>
-            </button>
-          </div>
-        </section>
+        <>
+          <section className="gameStartSection">
+            <h1>Battle Rockets</h1>
+            <div className="gameStartContainer wrapper">
+              <h2>Let's play a game!</h2>
+              <h2>Enter your name to start</h2>
+              <input
+                type="text"
+                onChange={(event) => handleChange(event, "one")}
+                value={playerOneName}
+              ></input>
+              <button
+                onClick={() => {
+                  handleIsPlayerReady(playerOneName, "playerOne");
+                  setPlayerOneName("");
+                  captureTheToken(token);
+                  props.history.push("/RocketLobbyOne");
+                }}
+              >
+                <Link to="/RocketLobbyOne">Player One START</Link>
+              </button>
+            </div>
+          </section>
+          <Footer />
+        </>
       )}
       {/* Once player one has entered, page will ask for player two to enter */}
       {playerOne && !isPlayerOne && (
-        <section className="gameStartSection">
-          <h1>Battle Rockets</h1>
-          <div className="gameStartContainer">
-            <h2>Player One has already entered the game.</h2>
-            <h2>Waiting for player two...</h2>
+        <>
+          <section className="gameStartSection">
+            <h1>Battle Rockets</h1>
+            <div className="gameStartContainer wrapper">
+              <h2>Player One has already entered the game.</h2>
+              <h2>Waiting for player two...</h2>
 
-            <input
-              type="text"
-              onChange={(event) => handleChange(event, "two")}
-              value={playerTwoName}
-            ></input>
-            <button
-              onClick={() => {
-                handleIsPlayerReady(playerTwoName, "playerTwo");
-                setPlayerTwoName("");
-                captureTheToken(token);
-                props.history.push("/RocketLobbyTwo");
-              }}
-            >
-              <Link to="/RocketLobbyTwo">Player Two START</Link>
-            </button>
-          </div>
-        </section>
+              <input
+                type="text"
+                onChange={(event) => handleChange(event, "two")}
+                value={playerTwoName}
+              ></input>
+              <button
+                onClick={() => {
+                  handleIsPlayerReady(playerTwoName, "playerTwo");
+                  setPlayerTwoName("");
+                  captureTheToken(token);
+                  props.history.push("/RocketLobbyTwo");
+                }}
+              >
+                <Link to="/RocketLobbyTwo">Player Two START</Link>
+              </button>
+            </div>
+          </section>
+          <Footer />
+        </>
       )}
     </>
   );

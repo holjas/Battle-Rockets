@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
 
 import GameStart from "./GameStart";
 import RocketLobby from "./RocketLobby";
-import GameBoard from "./GameBoard";
+// import GameBoard from "./GameBoard";
 import PlaceHolderComponent from "./PlaceHolderComponent";
 
 import star from "./images/star.png";
@@ -29,7 +29,7 @@ function App() {
     firebase.database().ref("playerOne").set(false);
     firebase.database().ref("playerTwo").set(false);
     firebase.database().ref("isGameOver").set(false);
-    firebase.database().ref("isPlayerOneTurn").set(true);
+    firebase.database().ref("turn").set("playerOne");
   };
   //capture the local token number
   function captureTheToken(localToken) {
@@ -54,6 +54,7 @@ function App() {
           />
         </div>
         {/* Button for testing only */}
+
         {/* once both players have both entered the game, GameStart will hide */}
         {!playerTwo && (
           <GameStart
@@ -62,32 +63,51 @@ function App() {
             captureTheToken={captureTheToken}
           />
         )}
+
         {/* Routing for Rocket lobbies */}
         <Route
           exact
           path="/RocketLobbyOne"
-          component={() => (
+          render={() => (
             <RocketLobby data={data} localToken={localAssignedToken} />
           )}
         />
         <Route
           exact
           path="/RocketLobbyTwo"
-          component={() => (
+          render={() => (
             <RocketLobby data={data} localToken={localAssignedToken} />
           )}
         />
+
         {/* Routing for Game boards */}
-        <Route exact path="/GameBoardOne" component={PlaceHolderComponent} />
+        <Route
+          exact
+          path="/GameBoardOne"
+          // component={() => (
+          //   <GameBoard data={data} localToken={localAssignedToken} />
+          // )}
+          // component={PlaceHolderComponent}
+          // render={() => (
+          //   <GameBoard data={data} localToken={localAssignedToken} />
+          // )}
+          render={() => (
+            <PlaceHolderComponent data={data} localToken={localAssignedToken} />
+          )}
+        />
         <Route
           exact
           path="/GameBoardTwo"
-          component={() => {
-            <PlaceHolderComponent
-              data={data}
-              localToken={localAssignedToken}
-            />;
-          }}
+          // component={() => (
+          //   <GameBoard data={data} localToken={localAssignedToken} />
+          // )}
+          // component={PlaceHolderComponent}
+          // render={() => (
+          //   <GameBoard data={data} localToken={localAssignedToken} />
+          // )}
+          render={() => (
+            <PlaceHolderComponent data={data} localToken={localAssignedToken} />
+          )}
         />
       </div>
     </Router>

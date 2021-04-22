@@ -1,13 +1,13 @@
-
 /* Homepage */
 /* Media Query Home Page */
+/* RocketLobby styling */
 /* Gameboard styling */
 /* NavBar Styling */
 /* Footer styling  */
 /* Media query*/
 /* CSS */
 
-@import url("https://fonts.googleapis.com/css2?family=Lato&family=Teko:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;900&family=Teko:wght@500&display=swap");
 :root {
   --black: #121212;
   --white: #f0f0f0;
@@ -19,12 +19,14 @@
 }
 html {
   font-size: 18px;
+  font-size: 125%;
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  background-color: var(--white);
 }
 body {
   margin: 0;
@@ -44,6 +46,7 @@ h3,
 h4,
 h5,
 p {
+  color: var(--black);
   margin: 0;
   padding: 0;
 }
@@ -273,15 +276,13 @@ a {
 .starAbortContainer {
   z-index: 10;
   position: absolute;
-  top: 1.5rem;
+  top: 1rem;
   right: 1.5rem;
   cursor: pointer;
 }
 .starAbort {
   width: 50px;
   transition: 0.3s;
-  position: relative;
-  top: -20px;
 }
 .starAbort:hover,
 .starAbort:focus {
@@ -289,13 +290,8 @@ a {
 }
 /*  */
 .gameStartSection {
-  height: 100vh;
-  /* background-image: url(./images/background.png); */
-  /* background-image: url(./images/billy-huynh-W8KTS-mhFUE-unsplash.jpg); */
+  height: 92vh;
   background-image: linear-gradient(147deg, var(--blue) 50%, var(--red) 50%);
-  background-color: var(--blue);
-  background-repeat: no-repeat;
-  background-size: cover;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -327,6 +323,9 @@ a {
   margin: 20px;
   min-width: 300px;
 }
+.gameStartContainer h2 {
+  color: var(--white);
+}
 .gameStartContainer button {
   background-color: #850000;
   border-radius: 5px;
@@ -350,9 +349,6 @@ a {
 }
 .gameStartContainer h2:nth-child(2) {
   padding-top: 15px;
-}
-.homePage {
-  margin: 0px;
 }
 
 /* Gameboard styling */
@@ -409,16 +405,13 @@ a {
   background-color: grey;
   color: grey;
 }
-
 .rocket div {
   width: 20px;
   height: 20px;
 }
-
 .hidden {
   display: none;
 }
-
 .win {
   color: white;
   margin: 0;
@@ -427,42 +420,35 @@ a {
 /* NavBar styling */
 
 .navbarSection {
-  height: 10vh;
+  height: 120px;
   background-image: linear-gradient(147deg, var(--blue) 50%, var(--red) 50%);
 }
 .navbarSection h1 {
   text-align: center;
   font-size: 5rem;
-  padding: 15px;
+  padding-top: 8px;
   font-family: var(--fontHeading);
   color: var(--yellow);
   text-shadow: 10px 10px 0px var(--black);
 }
 /* Footer Styling */
 footer {
-  height: 5vh;
+  height: 8vh;
   font-family: var(--fontBody);
   background-color: var(--blue);
-  padding-bottom: 60px;
 }
 .footerSection {
+  height: 8vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  position: relative;
-  top: 5px;
-  color:var(--red);
-
-}
-.footerSection p {
-  color: white;
-  display: inline-block;
-  line-height: 9px;
-  padding: 20px;
+  color: var(--red);
+  font-weight: bold;
 }
 .footerSection img {
-  height: 5vh;
+  height: 8vh;
+  padding-left: 10px;
 }
 .footerSection div:nth-child(2) {
   display: flex;
@@ -470,52 +456,42 @@ footer {
   justify-content: flex-start;
   align-items: center;
 }
-
-.patrick {
-  color:var(--yellow);
+.yellowText {
+  color: var(--yellow);
+  padding-left: 10px;
 }
-.holly {
-  color:var(--red);
-}
-.mackenzie {
-  color:var(--yellow);
-}
-.karen {
+.redText,
+.footerSection p {
   color: var(--red);
-}
-.patrick,
-.holly, 
-.mackenzie,
-.karen {
-  border:none;
-}
-.red p {
-  color:var(--red);
-  font-weight: bold;
+  padding-left: 10px;
 }
 
 /* RocketLobby styling */
-label {
-  color:var(--black);
+.rocketLobbySection h2,
+.rocketLobbySection h3 {
+  text-align: center;
+}
+.rocketLobbySection h2 {
+  font-family: var(--fontHeading);
+  padding: 40px 0 20px 0;
+  font-size: 4.5rem;
+}
+.rocketLobbySection h3 {
+  font-family: var(--fontBody);
+  font-size: 2.05rem;
 }
 input[type="checkbox"] {
   width: 30px;
   height: 30px;
 }
-.rocket1 {
+.rocketImages {
   width: 100%;
-}
-.style,
-h4,
-.grid-container {
-  color: black;
 }
 .flex {
   display: flex;
   margin: 30px;
-  
 }
-.Tittle {
+.rocketTitle {
   font-family: var(--fontHeading);
   font-size: 30px;
 }
@@ -525,13 +501,12 @@ input[type="submit"] {
   padding: 10px;
   width: 50%;
 }
-
 .textDiv {
   margin-left: 10px;
 }
-
 .flex p {
-  margin:5px;
+  font-size: 1rem;
+  margin: 5px;
   line-height: 1.6;
 }
 
@@ -544,17 +519,11 @@ span {
 .welcomeText {
   font-size: 60px;
   font-family: var(--fontHeading);
-  margin-top:100px;
+  margin-top: 100px;
   margin-bottom: 25px;
   text-align: center;
 }
 
-h3 {
-  color: black;
-  text-align: center;
-  font-size: 37px;
-  font-family:var( --fontBody);
-}
 .grid-container {
   display: grid;
   font-family: var(--fontBody);
@@ -562,97 +531,100 @@ h3 {
   grid-template-columns: 50% 50%;
   padding-top: 73px;
   justify-content: space-around;
-  padding-bottom: 100px;
+  margin-bottom: 70px;
 }
 
-
-h5 {
-  width: 50px;
-  height: 50px;
+.rocketLobbySection h5 {
   animation: heartbeat 1s infinite;
-  color:var(--red);
+  color: var(--red);
   width: 100%;
   font-size: 28px;
   text-align: center;
-  position: relative;
-  left: 300px;
-  top: 25px;
+  grid-area: 3 / span 2;
 }
 
-@keyframes heartbeat 
-{
-  0%
-  {
-    transform: scale( .80 );
+@keyframes heartbeat {
+  0% {
+    transform: scale(0.8);
   }
-  20%
-  {
-    transform: scale( 1 );
+  20% {
+    transform: scale(1);
   }
-  40%
-  {
-    transform: scale( 1 );
+  40% {
+    transform: scale(1);
   }
-  60%
-  {
-    transform: scale( 1 );
+  60% {
+    transform: scale(1);
   }
-  80%
-  {
-    transform: scale( 1 );
+  80% {
+    transform: scale(1);
   }
-  100%
-  {
-    transform: scale( 1 );
+  100% {
+    transform: scale(1);
   }
 }
 
 div.flex:nth-child(3) > div:nth-child(2),
 div.flex:nth-child(1) > div:nth-child(2) {
-width: 500px;
+  width: 500px;
 }
 div.flex:nth-child(4) > div:nth-child(2) {
-width: 600px;
+  width: 600px;
 }
-
-
-.submitButton{
-border-radius: 17px;
-color:var(--white);
-padding: 14px 25px;
-position: relative;
-left: 467px;
-top: 25px;
-background-color:var(--yellow);
-color: var(--red);
-border: none;
-font-size: 21px;
+.submitButton {
+  grid-area: 3 / span 2;
+  border-radius: 17px;
+  padding: 14px 25px;
+  background-color: var(--yellow);
+  font-size: 1rem;
+  color: var(--red);
+  border: none;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.submitButton:hover,
+.submitButton:focus {
+  background-color: #f5b63a;
+  font-weight: bold;
 }
 
 div.flex:nth-child(3) > div:nth-child(3) {
-margin-left: 22px;
+  margin-left: 22px;
 }
 div.flex:nth-child(2) > div:nth-child(3) {
-margin-left: 20px;
+  margin-left: 20px;
+}
+.rocketLobbyWaiting {
+  margin-top: 5rem;
+  border: 5px solid var(--blue);
+  border-radius: 3px;
+  margin-bottom: 30px;
+}
+.rocketLobbyWaiting h2 {
+  font-size: 3rem;
+}
+.rocketLobbyWaiting h3 {
+  padding-bottom: 40px;
+  font-size: 1.4rem;
 }
 
 /* Media query  */
-@media  (max-width: 1060px) {
+@media (max-width: 1060px) {
   .submitButton {
-    left:430px;
+    left: 430px;
   }
 }
-@media  (max-width: 900px) {
-   h5 {
+@media (max-width: 900px) {
+  h5 {
     font-size: 22px;
     left: 150px;
-   }
-   .submitButton {
-     left: 300px;
-   }
+  }
+  .submitButton {
+    left: 300px;
+  }
 }
- @media (max-width: 840px) {
-   section.gameStartSection h1 {
+@media (max-width: 840px) {
+  section.gameStartSection h1 {
     font-size: 6.5rem;
   }
   h2 {
@@ -664,8 +636,8 @@ margin-left: 20px;
   div.gameStartContainer input[type="text"] {
     min-width: 250px;
   }
- }
- @media  (max-width: 700px) {
+}
+@media (max-width: 700px) {
   .navbarSection h1 {
     font-size: 3rem;
     padding: 41px;
@@ -687,20 +659,19 @@ margin-left: 20px;
     width: 81%;
   }
   div h5 {
-    left:initial;
+    left: initial;
     font-size: 19px;
   }
   .red p {
     font-size: 14px;
   }
-  .submitButton{
+  .submitButton {
     left: 150px;
     padding: 9px 19px;
     font-size: 15px;
   }
 }
- @media (max-width: 640px) {
-
+@media (max-width: 640px) {
   section.gameStartSection h1 {
     font-size: 5.5rem;
   }
@@ -711,9 +682,9 @@ margin-left: 20px;
   div.gameStartContainer button {
     margin-top: 8px;
     padding: 6px 17px;
-    }
- }
- @media  (max-width: 540px) {
+  }
+}
+@media (max-width: 540px) {
   .red p {
     font-size: 9px;
   }
@@ -724,29 +695,29 @@ margin-left: 20px;
     margin: 3px;
   }
   .textDiv {
-    margin-left:initial;
+    margin-left: initial;
   }
 }
 
- @media (max-width: 500px) {
-   div.gameStartContainer {
+@media (max-width: 500px) {
+  div.gameStartContainer {
     width: 90%;
   }
- }
- @media  (max-width: 385px) {
+}
+@media (max-width: 385px) {
   .red p {
     font-size: 7px;
   }
-  .submitButton{
+  .submitButton {
     left: 88px;
     top: 43px;
   }
 }
-@media  (max-width: 360px) {
+@media (max-width: 360px) {
   .textDiv p {
     font-size: 14px;
   }
-  
+
   .footerSection img {
     height: 2vh;
   }
@@ -769,12 +740,12 @@ margin-left: 20px;
   .welcomeText {
     font-size: 39px;
   }
-  .submitButton{
+  .submitButton {
     font-size: 13px;
   }
 }
- @media (max-width: 320px) {
-   div.gameStartSection h1 {
+@media (max-width: 320px) {
+  div.gameStartSection h1 {
     font-size: 4.5rem;
-    }   
- }
+  }
+}
