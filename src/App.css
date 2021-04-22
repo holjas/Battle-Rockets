@@ -689,7 +689,9 @@ div.flex:nth-child(2) > div:nth-child(3) {
   text-align: center;
   background-image: linear-gradient(90deg, var(--red) 50%, var(--blue) 50%);
   position: cover;
-  min-height: 100vh;
+  min-height: 80vh;
+  border-top: 7px solid black;
+  border-bottom: 7px solid black;
 }
 .container {
   display: flex;
@@ -724,6 +726,12 @@ div.flex:nth-child(2) > div:nth-child(3) {
   font-family: var(--fontBody);
   font-size: 1.5rem;
   color: var(--yellow);
+}
+.whosBoardText {
+  padding-top: 10px;
+  font-family: var(--fontBody);
+  color: var(--yellow);
+  font-size: 1rem;
 }
 .boardPlayerOne button,
 .boardPlayerTwo button {

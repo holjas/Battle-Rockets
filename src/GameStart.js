@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import firebase from "./firebase";
 
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import Footer from "./Footer";
 
 function GameStart(props) {
@@ -47,8 +47,10 @@ function GameStart(props) {
   //variable to determine if playerOne exists in firebase AND that the tokens match from firebase and local state
   const isPlayerOne = playerOne && playerOne.token === token;
 
-  //
-  //
+  //given time for states to set before component unmounts and goes to next
+  const delayForUnmount = () => {
+    setTimeout(() => props.history.push("/RocketLobbyTwo"), 200);
+  };
   return (
     <>
       {!playerOne && (
@@ -68,11 +70,13 @@ function GameStart(props) {
                   handleIsPlayerReady(playerOneName, "playerOne");
                   setPlayerOneName("");
                   captureTheToken(token);
-                  props.history.push("/RocketLobbyOne");
+                  delayForUnmount();
                 }}
               >
-                <Link to="/RocketLobbyOne">Player One START</Link>
+                Player One START
+                {/* <Link to="/RocketLobbyOne">Player One START</Link>  */}
               </button>
+              {/* <button onClick={newClickStuff}>new button</button> */}
             </div>
           </section>
           <Footer />
@@ -97,10 +101,11 @@ function GameStart(props) {
                   handleIsPlayerReady(playerTwoName, "playerTwo");
                   setPlayerTwoName("");
                   captureTheToken(token);
-                  props.history.push("/RocketLobbyTwo");
+                  delayForUnmount();
                 }}
               >
-                <Link to="/RocketLobbyTwo">Player Two START</Link>
+                Player Two START
+                {/* <Link to="/RocketLobbyTwo"></Link> */}
               </button>
             </div>
           </section>
