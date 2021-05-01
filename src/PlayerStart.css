@@ -1,0 +1,66 @@
+/* reset game star button. appears on all screens */
+.starAbortButton {
+  z-index: 10;
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+.starAbort {
+  width: 50px;
+  transition: 0.3s;
+  display: block;
+  margin: 0 auto;
+}
+/* playerStart section */
+.playerStartSection {
+  height: 92vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(147deg, var(--blue) 50%, var(--red) 50%);
+}
+.playerStartSection h1 {
+  font-family: var(--fontHeading);
+  font-size: 7.5rem;
+  color: var(--yellow);
+  text-shadow: 10px 10px 0px var(--black);
+}
+.playerStartContainer {
+  width: 50%;
+  text-align: center;
+  background-color: var(--black);
+  font-family: var(--fontBody);
+  border-radius: 5px;
+  padding: 40px;
+}
+.playerStartContainer h2 {
+  font-size: 1.2rem;
+  color: var(--white);
+  letter-spacing: 2px;
+  line-height: 40px;
+}
+.playerStartContainer input[type="text"] {
+  padding: 10px;
+  text-align: center;
+  margin: 20px 20px 40px 20px;
+  min-width: 300px;
+}
+.playerStartContainer button {
+  background-color: #850000;
+  color: var(--white);
+  font-weight: bold;
+  border-radius: 5px;
+  border: transparent;
+  padding: 15px 25px;
+  transition: 0.5s;
+}
+.playerStartContainer button:hover,
+.playerStartContainer button:focus {
+  background-color: #ac1313;
+  cursor: pointer;
+  transform: scale(1.05);
+}

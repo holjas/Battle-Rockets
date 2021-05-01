@@ -1,11 +1,14 @@
+import "./App.css";
+import "./PlayerStart.css";
 import { useState, useEffect } from "react";
 import firebase from "./firebase";
 
 import { withRouter } from "react-router-dom";
 import Footer from "./Footer";
+import star from "./images/star.png";
 
-function GameStart(props) {
-  const { playerOne, captureTheToken } = props;
+function PlayerStart(props) {
+  const { playerOne, captureTheToken, removeEverything, history } = props;
 
   const [playerOneName, setPlayerOneName] = useState("");
   const [playerTwoName, setPlayerTwoName] = useState("");
@@ -55,9 +58,20 @@ function GameStart(props) {
     <>
       {!playerOne && (
         <>
-          <section className="gameStartSection">
+          <section className="playerStartSection">
             <h1>Battle Rockets</h1>
-            <div className="gameStartContainer wrapper">
+            <div className="playerStartContainer wrapper displayFlexCol">
+              <button
+                className="starAbortButton"
+                onClick={() => {
+                  removeEverything();
+                  history.push("/");
+                  window.location.reload(false);
+                }}
+              >
+                <img src={star} alt="cartoon star" className="starAbort" />
+                reset game
+              </button>
               <h2>Let's play a game!</h2>
               <h2>Enter your name to start</h2>
               <input
@@ -85,9 +99,22 @@ function GameStart(props) {
       {/* Once player one has entered, page will ask for player two to enter */}
       {playerOne && !isPlayerOne && (
         <>
-          <section className="gameStartSection">
+          <section className="playerStartSection">
             <h1>Battle Rockets</h1>
-            <div className="gameStartContainer wrapper">
+            <div className="playerStartContainer wrapper displayFlexCol">
+              <button className="starAbortButton">
+                <img
+                  src={star}
+                  alt="cartoon star"
+                  className="starAbort"
+                  onClick={() => {
+                    removeEverything();
+                    history.push("/");
+                    window.location.reload(false);
+                  }}
+                />
+                reset game
+              </button>
               <h2>Player One has already entered the game.</h2>
               <h2>Waiting for player two...</h2>
 
@@ -116,4 +143,4 @@ function GameStart(props) {
   );
 }
 
-export default withRouter(GameStart);
+export default withRouter(PlayerStart);

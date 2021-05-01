@@ -1,0 +1,41 @@
+/* Footer Styling */
+footer {
+  height: 8vh;
+  font-family: var(--fontBody);
+  background-color: var(--blue);
+}
+.footerSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.footerJuno {
+  width: 50%;
+}
+.footerJuno:first-child {
+  justify-content: flex-start;
+}
+.footerJuno:last-child {
+  justify-content: flex-end;
+}
+.footerJuno p {
+  color: var(--red);
+  padding: 0 20px;
+}
+.footerJuno a {
+  padding-left: 15px;
+  color: var(--white);
+}
+.footerJuno a:hover,
+.footerJuno a:focus {
+  text-decoration: underline;
+  font-weight: bold;
+}
+.footerImageContainer {
+  width: 8vh;
+}
+.footerImageContainer img {
+  width: 100%;
+  height: auto;
+}

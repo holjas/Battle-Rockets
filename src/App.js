@@ -3,11 +3,12 @@ import { useState, useEffect } from "react";
 import firebase from "./firebase";
 import { BrowserRouter as Router, Route, useHistory } from "react-router-dom";
 
-import GameStart from "./GameStart";
+// import Navbar from "./Navbar";
+import PlayerStart from "./PlayerStart";
 import RocketLobby from "./RocketLobby";
 import GameBoard from "./GameBoard";
 
-import star from "./images/star.png";
+// import star from "./images/star.png";
 
 function App() {
   const [data, setData] = useState({});
@@ -38,28 +39,28 @@ function App() {
   //THE RETURN
   return (
     <Router>
-      <div>
-        {/* Button for resetting the game */}
-        <div className="starAbortContainer">
-          <img
-            src={star}
-            alt="cartoon star"
-            className="starAbort"
-            onClick={() => {
-              removeEverything();
-              history.push("/");
-              window.location.reload(false);
-            }}
-          />
-        </div>
-
-        {/* once both players have both entered the game, GameStart will hide */}
+      <>
+        <button
+          className="starAbortButton"
+          onClick={() => {
+            removeEverything();
+            history.push("/");
+            window.location.reload(false);
+          }}
+        >
+          reset game
+        </button>
+        {/* once both players have both entered the game, playerStart will hide */}
         {!playerTwo && (
-          <GameStart
-            playerOne={playerOne}
-            playerTwo={playerTwo}
-            captureTheToken={captureTheToken}
-          />
+          <>
+            <PlayerStart
+              playerOne={playerOne}
+              playerTwo={playerTwo}
+              captureTheToken={captureTheToken}
+              removeEverything={removeEverything}
+              history={history}
+            />
+          </>
         )}
 
         {/* Routing for Rocket lobbies */}
@@ -94,7 +95,7 @@ function App() {
             <GameBoard data={data} localToken={localAssignedToken} />
           )}
         />
-      </div>
+      </>
     </Router>
   );
 }
