@@ -1,19 +1,6 @@
 
 /* NavBar styling */
 
-.navbarSection {
-    height: 120px;
-    background-image: linear-gradient(147deg, var(--blue) 50%, var(--red) 50%);
-  }
-  .navbarSection h1 {
-    text-align: center;
-    font-size: 5rem;
-    padding-top: 8px;
-    font-family: var(--fontHeading);
-    color: var(--yellow);
-    text-shadow: 10px 10px 0px var(--black);
-  }
-  
   
   /* RocketLobby styling */
   .rocketLobbySection h2,

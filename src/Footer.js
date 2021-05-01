@@ -1,11 +1,10 @@
 import "./App.css";
 import "./Footer.css";
-import junoLogo from "./images/junoLogo.jpg";
 
 function Footer() {
   return (
     <footer>
-      <div className="footerSection wrapper">
+      <div className="footerSection wrapper wrapperPadding">
         <div className="footerJuno displayFlexRow">
           <p>
             Created by
@@ -33,19 +32,16 @@ function Footer() {
           </p>
         </div>
         <div className="footerJuno displayFlexRow">
-          <p>Created at Juno College</p>
-          <div className="footerImageContainer">
+          <p>
+            Created at
             <a
               href="http://www.junocollege.com"
               target="_blank"
               rel="noreferrer"
             >
-              <img
-                src={junoLogo}
-                alt="Juno College of Technology Company Logo"
-              />
+              Juno College
             </a>
-          </div>
+          </p>
         </div>
       </div>
     </footer>

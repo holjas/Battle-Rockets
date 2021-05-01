@@ -5,10 +5,9 @@ import firebase from "./firebase";
 
 import { withRouter } from "react-router-dom";
 import Footer from "./Footer";
-import star from "./images/star.png";
 
 function PlayerStart(props) {
-  const { playerOne, captureTheToken, removeEverything, history } = props;
+  const { playerOne, captureTheToken } = props;
 
   const [playerOneName, setPlayerOneName] = useState("");
   const [playerTwoName, setPlayerTwoName] = useState("");
@@ -52,7 +51,12 @@ function PlayerStart(props) {
 
   //given time for states to set before component unmounts and goes to next
   const delayForUnmount = () => {
-    setTimeout(() => props.history.push("/RocketLobbyTwo"), 200);
+    if (!playerOne) {
+      setTimeout(() => props.history.push("/RocketLobbyOne"), 200);
+    }
+    if (playerOne && !isPlayerOne) {
+      setTimeout(() => props.history.push("/RocketLobbyTwo"), 200);
+    }
   };
   return (
     <>
@@ -61,17 +65,6 @@ function PlayerStart(props) {
           <section className="playerStartSection">
             <h1>Battle Rockets</h1>
             <div className="playerStartContainer wrapper displayFlexCol">
-              <button
-                className="starAbortButton"
-                onClick={() => {
-                  removeEverything();
-                  history.push("/");
-                  window.location.reload(false);
-                }}
-              >
-                <img src={star} alt="cartoon star" className="starAbort" />
-                reset game
-              </button>
               <h2>Let's play a game!</h2>
               <h2>Enter your name to start</h2>
               <input
@@ -88,9 +81,7 @@ function PlayerStart(props) {
                 }}
               >
                 Player One START
-                {/* <Link to="/RocketLobbyOne">Player One START</Link>  */}
               </button>
-              {/* <button onClick={newClickStuff}>new button</button> */}
             </div>
           </section>
           <Footer />
@@ -102,19 +93,6 @@ function PlayerStart(props) {
           <section className="playerStartSection">
             <h1>Battle Rockets</h1>
             <div className="playerStartContainer wrapper displayFlexCol">
-              <button className="starAbortButton">
-                <img
-                  src={star}
-                  alt="cartoon star"
-                  className="starAbort"
-                  onClick={() => {
-                    removeEverything();
-                    history.push("/");
-                    window.location.reload(false);
-                  }}
-                />
-                reset game
-              </button>
               <h2>Player One has already entered the game.</h2>
               <h2>Waiting for player two...</h2>
 
@@ -132,7 +110,6 @@ function PlayerStart(props) {
                 }}
               >
                 Player Two START
-                {/* <Link to="/RocketLobbyTwo"></Link> */}
               </button>
             </div>
           </section>

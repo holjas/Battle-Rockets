@@ -2,6 +2,7 @@
 - imports
 - shared variables
 - setup snippet
+- shared class styles
 */
 
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;900&family=Teko:wght@500&display=swap");
@@ -28,6 +29,7 @@ html {
 body {
   margin: 0;
   padding: 0;
+  background-color: var(--white);
 }
 article,
 aside,
@@ -272,10 +274,14 @@ template {
 a {
   text-decoration: none;
 }
+/* shared styles */
 .wrapper {
   max-width: 1200px;
   margin: 0 auto;
   height: auto;
+}
+.wrapperPadding {
+  padding: 0 20px;
 }
 .displayFlexRow {
   display: flex;
@@ -288,4 +294,31 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+/* reset game star button. appears on all screens */
+.starAbortButton {
+  z-index: 10;
+  position: absolute;
+  top: 35px;
+  right: 1.5rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+button {
+  background-color: #850000;
+  color: var(--white);
+  font-weight: bold;
+  border-radius: 5px;
+  border: transparent;
+  padding: 15px 25px;
+  transition: 0.5s;
+}
+
+button:hover,
+button:focus {
+  background-color: #ac1313;
+  cursor: pointer;
+  transform: scale(1.05);
 }

@@ -1,3 +1,5 @@
+import "./App.css";
+import "./RocketLobby.css";
 import firebase from "./firebase";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -147,7 +149,7 @@ function Rockets({ data, localToken }) {
   return (
     <>
       <Navbar />
-      <section className="rocketLobbySection">
+      <section className="rocketLobbySection displayFlexCol">
         <div className="wrapper">
           {/* hide the form when user has selected and submitted their rocket choice */}
           {!hideForm && (

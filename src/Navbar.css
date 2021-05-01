@@ -1,16 +1,12 @@
-/* reset game star button. appears on all screens */
-.starAbortButton {
-  z-index: 10;
-  position: absolute;
-  top: 1rem;
-  right: 1.5rem;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-size: 0.8rem;
+.navbarSection {
+  height: 120px;
+  background-image: linear-gradient(147deg, var(--blue) 50%, var(--red) 50%);
 }
-.starAbort {
-  width: 50px;
-  transition: 0.3s;
-  display: block;
-  margin: 0 auto;
+.navbarSection h1 {
+  text-align: center;
+  font-size: 5rem;
+  padding-top: 8px;
+  font-family: var(--fontHeading);
+  color: var(--yellow);
+  text-shadow: 10px 10px 0px var(--black);
 }

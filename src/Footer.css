@@ -1,10 +1,11 @@
 /* Footer Styling */
 footer {
-  height: 8vh;
   font-family: var(--fontBody);
   background-color: var(--blue);
+  overflow-y: hidden;
 }
 .footerSection {
+  height: 8vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -18,11 +19,13 @@ footer {
 }
 .footerJuno:last-child {
   justify-content: flex-end;
+  overflow-x: hidden;
 }
 .footerJuno p {
   color: var(--red);
   padding: 0 20px;
 }
+
 .footerJuno a {
   padding-left: 15px;
   color: var(--white);
@@ -31,11 +34,4 @@ footer {
 .footerJuno a:focus {
   text-decoration: underline;
   font-weight: bold;
-}
-.footerImageContainer {
-  width: 8vh;
-}
-.footerImageContainer img {
-  width: 100%;
-  height: auto;
 }

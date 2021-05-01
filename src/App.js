@@ -57,8 +57,6 @@ function App() {
               playerOne={playerOne}
               playerTwo={playerTwo}
               captureTheToken={captureTheToken}
-              removeEverything={removeEverything}
-              history={history}
             />
           </>
         )}

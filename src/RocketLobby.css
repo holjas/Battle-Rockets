@@ -1,0 +1,9 @@
+.rocketLobbySection h2 {
+  width: 100%;
+  background-color: tomato;
+  text-align: center;
+}
+.rocketLobbySection h3 {
+  background-color: teal;
+  text-align: center;
+}
