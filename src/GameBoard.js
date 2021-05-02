@@ -144,7 +144,29 @@ function GameBoard({ data, localToken }) {
       }
     });
   }, [history]);
-  console.log(data.status);
+
+  const whosTurnIsIt = () => {
+    if (data.turn === "playerOne") {
+      return (
+        <>
+          <p className="whosTurnText">{data.status}</p>
+          <p className="whosTurnText">
+            {data.playerOne.name}'s turn to make a move
+          </p>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <p className="whosTurnText">{data.status}</p>
+          <p className="whosTurnText">
+            {data.playerTwo.name}'s turn to make a move
+          </p>
+        </>
+      );
+    }
+  };
+  whosTurnIsIt();
   return (
     <>
       <Navbar />
@@ -155,11 +177,11 @@ function GameBoard({ data, localToken }) {
               {data.isGameOver ? <WinPopUp data={data} /> : null}
               {/* TOP - PLAYER ONE ATTACKS PLAYER TWO HERE*/}
               <div>
-                <p className="playerName">{userName}'s Turn!</p>
+                <p className="playerName">{userName}'s Game Board</p>
                 <p className="whosTurnText">
                   {data.status
-                    ? data.status
-                    : "Click Square to Attack your Opponent"}
+                    ? whosTurnIsIt()
+                    : `${whosTurnIsIt()} goes first! Click Square to Attack your Opponent`}
                 </p>
               </div>
 
