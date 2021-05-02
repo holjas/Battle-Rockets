@@ -245,13 +245,15 @@ function Rockets({ data, localToken }) {
 
                 {/* playerTwo submit selections  */}
                 {whichPlayer === "playerTwo" && maxSelectionReach && (
-                  <button
-                    type="submit"
-                    value="You're ready to join"
-                    onClick={rocketSelectionSubmit}
-                  >
-                    Click Here to Start the Game
-                  </button>
+                  <div className="rocketLobbyStart displayFlexRow">
+                    <button
+                      type="submit"
+                      value="You're ready to join"
+                      onClick={rocketSelectionSubmit}
+                    >
+                      Click Here to Start the Game
+                    </button>
+                  </div>
                 )}
               </form>
             </>

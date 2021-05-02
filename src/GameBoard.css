@@ -3,13 +3,16 @@
   background-image: linear-gradient(90deg, var(--red) 50%, var(--blue) 50%);
   position: cover;
   min-height: 80vh;
-  border-top: 7px solid black;
-  border-bottom: 7px solid black;
+  border-top: 7px solid var(--black);
+  border-bottom: 7px solid var(--black);
 }
 .container {
   display: flex;
   justify-content: space-between;
   padding: 20px 100px 0;
+}
+.gameBoardContainer {
+  margin-bottom: 40px;
 }
 .boardPlayerOne,
 .boardPlayerTwo,
@@ -35,24 +38,30 @@
   font-size: 2.5rem;
   padding-top: 30px;
 }
-.whosBoard {
-  font-family: var(--fontBody);
-  font-size: 1.5rem;
-  color: var(--yellow);
-}
+.whosTurnText,
 .whosBoardText {
   padding-top: 10px;
   font-family: var(--fontBody);
   color: var(--yellow);
+}
+.whosTurnText {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.whosBoardText {
   font-size: 1rem;
 }
+.whosBoard {
+  padding-top: 45px;
+  font-family: var(--fontBody);
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--yellow);
+}
+
 .boardPlayerOne button,
 .boardPlayerTwo button {
   color: currentColor;
-}
-.mirrorPlayerTwo button,
-.mirrorPlayerOne button {
-  color: white;
 }
 .grid button {
   width: 44px;
@@ -61,13 +70,16 @@
   border: 1px solid azure;
   background-color: transparent;
 }
-
 .grid button img {
   max-width: 100%;
 }
-.grid button:hover {
+.boardPlayerOne button:hover,
+.boardPlayerTwo button:hover {
   background-color: grey;
-  color: grey;
+}
+.mirrorPlayerOne button,
+.mirrorPlayerTwo button {
+  cursor: not-allowed;
 }
 .hidden {
   display: none;

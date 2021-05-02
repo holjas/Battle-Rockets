@@ -20,6 +20,7 @@
   background-color: var(--black);
   font-family: var(--fontBody);
   border-radius: 5px;
+  margin-bottom: 40px;
   padding: 40px;
 }
 .playerStartContainer h2 {

@@ -148,23 +148,27 @@ function GameBoard({ data, localToken }) {
   return (
     <>
       <Navbar />
-      <section className="gameBackground">
+      <section className="gameBackground ">
         <div className="wrapper">
           {readyToGo ? (
             <div className="GameScreen">
               {data.isGameOver ? <WinPopUp data={data} /> : null}
               {/* TOP - PLAYER ONE ATTACKS PLAYER TWO HERE*/}
-              <p className="playerName">{userName}</p>
+              <div>
+                <p className="playerName">{userName}'s Turn!</p>
+                <p className="whosTurnText">
+                  {data.status
+                    ? data.status
+                    : "Click Square to Attack your Opponent"}
+                </p>
+              </div>
+
               {whichPlayer === "playerOne" && (
                 <div className="container">
-                  <div>
+                  <div className="gameBoardContainer">
                     <p className="whosBoard">Opponents Board</p>
+                    <p className="whosBoardText">Make your moves here!</p>
 
-                    <p className="whosBoardText">
-                      {data.status
-                        ? data.status
-                        : "Click Square to Attack your Opponent"}
-                    </p>
                     <div className="grid boardPlayerOne">
                       {boardPlayerTwo.map((value, index) => {
                         // these ternary operators ensure that the only things seen in the grid are hit or miss markers.
@@ -204,7 +208,7 @@ function GameBoard({ data, localToken }) {
                   <div>
                     <p className="whosBoard">Players Board</p>
                     <p className="whosBoardText">
-                      Where Your Rockets have Been Hit
+                      See which of your Rockets have been hit
                     </p>
                     {/* BOTTOM - PLAYER ONE TRACKS THEIR STATUS HERE*/}
                     <div className="grid mirrorPlayerOne">
@@ -231,6 +235,7 @@ function GameBoard({ data, localToken }) {
                             style={{ backgroundImage: cellValue }}
                             key={index}
                             value={boardPlayerOne[index]}
+                            disabled
                           ></button>
                         );
                       })}
@@ -241,13 +246,9 @@ function GameBoard({ data, localToken }) {
 
               {whichPlayer === "playerTwo" && (
                 <div className="container">
-                  <div>
+                  <div className="gameBoardContainer">
                     <p className="whosBoard">Opponents Board</p>
-                    <p className="whosBoardText">
-                      {data.status
-                        ? data.status
-                        : "Click Square to Attack your Opponent"}
-                    </p>
+                    <p className="whosBoardText">Make your moves here!</p>
                     {/* TOP - PLAYER TWO ATTACKS PLAYER ONE HERE*/}
                     <div className="grid boardPlayerTwo">
                       {boardPlayerOne.map((value, index) => {
@@ -289,7 +290,7 @@ function GameBoard({ data, localToken }) {
                   <div>
                     <p className="whosBoard">Players Board</p>
                     <p className="whosBoardText">
-                      Where Your Rockets have Been Hit
+                      See which of your Rockets have been hit
                     </p>
                     <div className="grid mirrorPlayerTwo">
                       {boardPlayerTwo.map((value, index) => {

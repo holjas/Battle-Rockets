@@ -295,8 +295,8 @@ a {
   justify-content: center;
   align-items: center;
 }
-/* reset game star button. appears on all screens */
-.starAbortButton {
+/* reset game  button. appears on all screens */
+.resetButton {
   z-index: 10;
   position: absolute;
   top: 35px;

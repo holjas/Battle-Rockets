@@ -41,7 +41,7 @@ function App() {
     <Router>
       <>
         <button
-          className="starAbortButton"
+          className="resetButton"
           onClick={() => {
             removeEverything();
             history.push("/");
