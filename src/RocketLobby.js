@@ -8,9 +8,10 @@ import { useHistory } from "react-router-dom";
 import Navbar from "./Navbar";
 import placeRockets from "./placerockets";
 
-import rocket1 from "./images/rocket-1.png";
-import rocket2 from "./images/rocket-2.png";
-import rocket3 from "./images/rocket-3.png";
+import falcon1 from "./images/falcon1.png";
+import falcon9 from "./images/falcon9.png";
+import falconHeavy from "./images/falconHeavy.png";
+import starship from "./images/starship.png";
 
 function Rockets({ data, localToken }) {
   const [rocket, setRocket] = useState([]);
@@ -30,22 +31,23 @@ function Rockets({ data, localToken }) {
     })
       //adding in our own key:value to assign images base on the height value of the individual object items
       .then((res) => {
-        const rocketHeight = res.data.map((rHeight) => {
-          const singleRocketHeight = rHeight.height.meters;
-          let orientation = rocket3;
-          if (singleRocketHeight > 100) {
-            orientation = rocket1;
-          } else if (singleRocketHeight > 50) {
-            orientation = rocket2;
+        const rocketWeight = res.data.map((rWeight) => {
+          const singleRocketWeight = rWeight.mass.kg;
+          let weight = falconHeavy;
+          if (singleRocketWeight < 100000) {
+            weight = falcon1;
+          } else if (singleRocketWeight < 800000) {
+            weight = falcon9;
+          } else if (singleRocketWeight < 1400000) {
+            weight = starship;
           } else {
-            orientation = rocket3;
           }
           return {
-            ...rHeight,
-            orientation: orientation,
+            ...rWeight,
+            weight: weight,
           };
         });
-        setRocket(rocketHeight);
+        setRocket(rocketWeight);
       })
       .catch((error) => {
         console.log(error);
@@ -144,6 +146,10 @@ function Rockets({ data, localToken }) {
       }
     }
   }, [allPlayersReady, whichPlayer, history]);
+  //return number with commas. looks nicer
+  const formatNumber = (num) => {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+  };
   //
   // THE RETURN
   return (
@@ -158,66 +164,76 @@ function Rockets({ data, localToken }) {
 
               <h3>Please Choose Three Rockets As Your Game Pieces</h3>
               {/* form with all of the rockets */}
-              <form className="style grid-container">
+              <form className="rocketLobbyGridContainer">
                 {rocket.map((singleRocket, index) => {
                   return (
-                    <div key={index} className="flex">
-                      <div>
-                        <input
-                          disabled={maxSelectionReach}
-                          type="checkbox"
-                          id={singleRocket.rocket_id}
-                          name={singleRocket.rocket_id}
-                          onClick={() => {
-                            handleRocketSelected(singleRocket.rocket_name);
-                          }}
-                        />
-                      </div>
-                      <div className="rocketImageSize">
-                        <img
-                          className="rocketImages"
-                          src={singleRocket.orientation}
-                          alt={singleRocket.rocket_name}
-                        />
+                    <>
+                      <div key={index} className="rocketCardGridContainer">
+                        <div className="rocketLabel">
+                          {/*grid container start  */}
+                          <input
+                            disabled={maxSelectionReach}
+                            type="checkbox"
+                            id={singleRocket.rocket_id}
+                            name={singleRocket.rocket_id}
+                            onClick={() => {
+                              handleRocketSelected(singleRocket.rocket_name);
+                            }}
+                          />
+                          <label htmlFor={singleRocket.rocket_id}>
+                            {singleRocket.rocket_name}
+                          </label>
+                        </div>
+
+                        <div className="rocketImage">
+                          <img
+                            src={singleRocket.weight}
+                            alt={singleRocket.rocket_name}
+                          />
+                        </div>
+                        <div className="rocketDescriptions">
+                          <p>
+                            <span>Country:</span> {singleRocket.country}
+                          </p>
+                          <p>
+                            <span>Height:</span> {singleRocket.height.meters}{" "}
+                            meters
+                          </p>
+                          <p>
+                            <span>Mass:</span>{" "}
+                            {formatNumber(singleRocket.mass.kg)} kg
+                          </p>
+                          <p>
+                            <span>First Flight:</span>
+                            {singleRocket.first_flight}
+                          </p>
+                          <p>
+                            <span>Cost Per Launch:</span>$
+                            {formatNumber(singleRocket.cost_per_launch)}
+                          </p>
+                          <p>
+                            <span>Status:</span>
+                            {singleRocket.active ? "ACTIVE" : "Decommissioned"}
+                          </p>
+                        </div>
                       </div>
 
-                      <div className="textDiv">
-                        <label
-                          className="visually-hidden"
-                          htmlFor={singleRocket.rocket_id}
-                        >
-                          {singleRocket.rocket_name}
-                        </label>
-                        <h4 className="rocketTitle">
-                          {singleRocket.rocket_name}
-                        </h4>
-                        <p>
-                          <span>Height:</span> {singleRocket.height.meters}
-                          meters
-                        </p>
-                        <p>
-                          <span>Country</span>: {singleRocket.country}
-                        </p>
-                        <p>
-                          <span>Description:</span> {singleRocket.description}
-                        </p>
-                      </div>
-                    </div>
+                      {/*grid container end  */}
+                    </>
                   );
                 })}
 
                 {/* waiting for players to chose 3 rockets before allowing to continue */}
                 {!maxSelectionReach && (
-                  <>
-                    <h5>Please make your ship selections</h5>
-                  </>
+                  <div className="rocketLobbyPrompt">
+                    <h3>Please make your ship selections to continue</h3>
+                  </div>
                 )}
 
                 {/* playerOne submit selections  */}
                 {whichPlayer === "playerOne" && maxSelectionReach && (
                   <>
                     <button
-                      className="submitButton"
                       type="button"
                       value="You're ready to join"
                       onClick={rocketSelectionSubmit}
@@ -230,7 +246,6 @@ function Rockets({ data, localToken }) {
                 {/* playerTwo submit selections  */}
                 {whichPlayer === "playerTwo" && maxSelectionReach && (
                   <button
-                    className="submitButton"
                     type="submit"
                     value="You're ready to join"
                     onClick={rocketSelectionSubmit}

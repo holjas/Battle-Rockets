@@ -1,9 +1,89 @@
 .rocketLobbySection h2 {
   width: 100%;
-  background-color: tomato;
+  padding-top: 40px;
   text-align: center;
+  text-transform: capitalize;
+  font-family: var(--fontHeading);
+  font-size: 4rem;
 }
 .rocketLobbySection h3 {
-  background-color: teal;
+  font-family: var(--fontBody);
+  font-size: 1.5rem;
   text-align: center;
+}
+.rocketLobbySection p {
+  font-size: 1rem;
+}
+/* rocket grid, (dynamic) start */
+.rocketLobbyGridContainer {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-flow: row;
+  grid-auto-rows: 350px;
+  gap: 20px;
+}
+.rocketCardGridContainer {
+  border: 1px solid var(--black);
+  border-radius: 3px;
+  box-shadow: 3px 3px 5px darkgray;
+  display: grid;
+  grid-template-columns: 0.7fr 1fr;
+  grid-template-rows: 1fr 300px;
+}
+.rocketLabel {
+  grid-area: 1 / 1 /2 /3;
+  font-family: var(--fontHeading);
+  font-size: 2.4rem;
+}
+.rocketLabel label {
+  margin-top: 30px;
+  padding-left: 60px;
+}
+.rocketLabel input[type="checkbox"] {
+  margin-top: 30px;
+  margin-left: 60px;
+  width: 30px;
+  height: 30px;
+}
+.rocketImage {
+  height: fit-content;
+  width: 90px;
+  padding-top: 30px;
+  margin: 0 auto;
+}
+.rocketDescriptions {
+  height: fit-content;
+  padding: 10px 0;
+}
+.rocketImage img {
+  width: 100%;
+}
+.rocketCardGridContainer span {
+  font-weight: bold;
+  padding-right: 10px;
+}
+.rocketCardGridContainer p {
+  line-height: 1.7rem;
+}
+.rocketLobbyPrompt {
+  grid-area: 3/1/4 / span 2;
+  margin-top: 60px;
+  height: 50px;
+  background-color: var(--yellow);
+}
+.rocketLobbyGridContainer button {
+  height: 100px;
+  margin-top: 60px;
+  grid-area: 3/1/4 / span 2;
+}
+/* grid end */
+.rocketLobbyWaiting {
+  width: 75%;
+  margin: 0 auto;
+  padding-top: 60px;
+  text-align: center;
+}
+.rocketLobbyWaiting h3 {
+  padding-top: 20px;
 }
