@@ -34,3 +34,29 @@ footer {
 .footerJuno a:focus {
   text-decoration: underline;
 }
+
+/* media queries */
+@media (max-width: 800px) {
+  .footerSection {
+    flex-direction: column;
+    height: fit-content;
+  }
+  .footerJuno:first-child,
+  .footerJuno:last-child {
+    width: 100%;
+    justify-content: center;
+  }
+  .footerJuno:first-child {
+    padding-top: 20px;
+  }
+  .footerJuno:last-child {
+    padding: 10px 0 20px 0;
+  }
+}
+
+@media (max-width: 660px) {
+  .footerJuno p {
+    text-align: center;
+    font-size: 0.8rem;
+  }
+}

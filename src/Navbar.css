@@ -10,3 +10,20 @@
   color: var(--yellow);
   text-shadow: 10px 10px 0px var(--black);
 }
+
+/* media queries */
+@media (max-width: 1140px) {
+  .rocketLobbyGridContainer {
+    grid-template-columns: 1fr;
+  }
+  .rocketCardGridContainer {
+    grid-template-columns: 0.4fr 1fr;
+  }
+}
+
+@media (max-width: 960px) {
+  .navbarSection h1 {
+    text-align: left;
+    margin-left: 60px;
+  }
+}

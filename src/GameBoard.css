@@ -14,6 +14,9 @@
 .gameBoardContainer {
   margin-bottom: 40px;
 }
+.gameScreen {
+  margin-top: 60px;
+}
 .boardPlayerOne,
 .boardPlayerTwo,
 .mirrorPlayerOne,
@@ -52,7 +55,7 @@
   font-size: 1rem;
 }
 .whosBoard {
-  padding-top: 45px;
+  padding-top: 35px;
   font-family: var(--fontBody);
   font-size: 1.5rem;
   font-weight: bold;
@@ -90,9 +93,9 @@
   color: white;
   margin: 0;
 }
-@media (max-width: 840px) {
+/* @media (max-width: 940px) {
   .container {
     flex-direction: column;
     align-items: center;
   }
-}
+} */

@@ -145,6 +145,7 @@ function GameBoard({ data, localToken }) {
     });
   }, [history]);
 
+  //
   const whosTurnIsIt = () => {
     if (data.turn === "playerOne") {
       return (
@@ -181,7 +182,7 @@ function GameBoard({ data, localToken }) {
                 <p className="whosTurnText">
                   {data.status
                     ? whosTurnIsIt()
-                    : `${whosTurnIsIt()} goes first! Click Square to Attack your Opponent`}
+                    : `${data.playerOne.name} goes first! Click Square to Attack your Opponent`}
                 </p>
               </div>
 
