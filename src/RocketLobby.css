@@ -21,7 +21,10 @@
   grid-template-columns: 1fr 1fr;
   grid-auto-flow: row;
   grid-auto-rows: 350px;
-  gap: 20px;
+  gap: 60px 40px;
+}
+.rocketLobbyGridContainer span {
+  height: fit-content;
 }
 .rocketCardGridContainer {
   border: 1px solid var(--black);
@@ -70,14 +73,22 @@
   grid-area: 3/1/4 / span 2;
   margin-top: 60px;
   height: 50px;
+}
+.rocketLobbyPrompt h3 {
   background-color: var(--yellow);
+  width: 70%;
+  padding: 15px;
 }
 .rocketLobbyGridContainer button {
+  width: 70%;
   height: 100px;
-  margin-top: 60px;
+
   grid-area: 3/1/4 / span 2;
 }
 /* grid end */
+.rocketLobbyStart {
+  grid-area: 3/1/4 / span 2;
+}
 .rocketLobbyWaiting {
   width: 75%;
   margin: 0 auto;

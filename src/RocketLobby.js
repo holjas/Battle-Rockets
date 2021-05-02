@@ -167,7 +167,7 @@ function Rockets({ data, localToken }) {
               <form className="rocketLobbyGridContainer">
                 {rocket.map((singleRocket, index) => {
                   return (
-                    <div key={index}>
+                    <span key={index}>
                       <div className="rocketCardGridContainer">
                         <div className="rocketLabel">
                           {/*grid container start  */}
@@ -219,20 +219,20 @@ function Rockets({ data, localToken }) {
                       </div>
 
                       {/*grid container end  */}
-                    </div>
+                    </span>
                   );
                 })}
 
                 {/* waiting for players to chose 3 rockets before allowing to continue */}
                 {!maxSelectionReach && (
-                  <div className="rocketLobbyPrompt">
+                  <div className="rocketLobbyPrompt displayFlexRow">
                     <h3>Please make your ship selections to continue</h3>
                   </div>
                 )}
 
                 {/* playerOne submit selections  */}
                 {whichPlayer === "playerOne" && maxSelectionReach && (
-                  <>
+                  <div className="rocketLobbyStart displayFlexRow">
                     <button
                       type="button"
                       value="You're ready to join"
@@ -240,7 +240,7 @@ function Rockets({ data, localToken }) {
                     >
                       Click Here to Start the Game
                     </button>
-                  </>
+                  </div>
                 )}
 
                 {/* playerTwo submit selections  */}

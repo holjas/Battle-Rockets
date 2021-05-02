@@ -1,0 +1,29 @@
+.winPop {
+  position: absolute;
+  padding: 50px 30px;
+  width: 80%;
+  left: 50%;
+  top: 50%;
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+}
+.win {
+  color: var(--yellow);
+  text-shadow: 5px 5px 0px var(--black);
+  font-family: var(--fontHeading);
+  text-transform: capitalize;
+  font-size: 2.5rem;
+  padding-top: 30px;
+}
+.winButt {
+  font-family: var(--fontHeading);
+  color: var(--white);
+  font-size: 1.7rem;
+  background-color: var(--red);
+  border-radius: 5px;
+  border: transparent;
+  margin-top: 20px;
+  padding: 15px 25px;
+  transition: 0.3s;
+}
