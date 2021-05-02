@@ -28,6 +28,8 @@ function App() {
     firebase.database().ref("playerTwo").set(false);
     firebase.database().ref("isGameOver").set(false);
     firebase.database().ref("turn").set("playerOne");
+    firebase.database().ref("status").set("");
+    firebase.database().ref("winner").set("");
   };
   //capture the local token number
   function captureTheToken(localToken) {

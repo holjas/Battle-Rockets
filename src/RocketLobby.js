@@ -167,8 +167,8 @@ function Rockets({ data, localToken }) {
               <form className="rocketLobbyGridContainer">
                 {rocket.map((singleRocket, index) => {
                   return (
-                    <>
-                      <div key={index} className="rocketCardGridContainer">
+                    <div key={index}>
+                      <div className="rocketCardGridContainer">
                         <div className="rocketLabel">
                           {/*grid container start  */}
                           <input
@@ -219,7 +219,7 @@ function Rockets({ data, localToken }) {
                       </div>
 
                       {/*grid container end  */}
-                    </>
+                    </div>
                   );
                 })}
 
