@@ -330,3 +330,8 @@ button:focus {
 }
 
 /* media queries */
+@media (max-width: 500px) {
+  .resetButton {
+    padding: 10px;
+  }
+}

@@ -12,18 +12,31 @@
 }
 
 /* media queries */
-@media (max-width: 1140px) {
-  .rocketLobbyGridContainer {
-    grid-template-columns: 1fr;
-  }
-  .rocketCardGridContainer {
-    grid-template-columns: 0.4fr 1fr;
-  }
-}
-
 @media (max-width: 960px) {
   .navbarSection h1 {
     text-align: left;
     margin-left: 60px;
+  }
+}
+
+@media (max-width: 760px) {
+  .navbarSection h1 {
+    padding-top: 15px;
+    font-size: 4rem;
+    margin-left: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .navbarSection h1 {
+    width: 60%;
+    font-size: 3rem;
+    line-height: 3.2rem;
+  }
+  .navbarSection {
+    height: 150px;
+  }
+  .navbarSection h1 {
+    padding: 10px;
   }
 }
