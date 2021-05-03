@@ -93,9 +93,34 @@
   color: white;
   margin: 0;
 }
-/* @media (max-width: 940px) {
+@media (max-width: 940px) {
   .container {
     flex-direction: column;
     align-items: center;
   }
-} */
+}
+@media (max-width: 500px) {
+  .container {
+    padding: 0;
+  }
+  .whosBoard {
+    font-size: 1rem;
+  }
+  .whosTurnText {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .boardPlayerOne,
+  .boardPlayerTwo,
+  .mirrorPlayerOne,
+  .mirrorPlayerTwo {
+    width: 280px;
+    height: 280px;
+  }
+  .grid button {
+    width: 40px;
+    height: 40px;
+  }
+}

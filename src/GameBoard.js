@@ -172,9 +172,9 @@ function GameBoard({ data, localToken }) {
     <>
       <Navbar />
       <section className="gameBackground ">
-        <div className="wrapper">
+        <div className="wrapper ">
           {readyToGo ? (
-            <div className="GameScreen">
+            <div className="GameScreen wrapperPadding">
               {data.isGameOver ? <WinPopUp data={data} /> : null}
               {/* TOP - PLAYER ONE ATTACKS PLAYER TWO HERE*/}
               <div>
