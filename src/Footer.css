@@ -19,7 +19,6 @@ footer {
 }
 .footerJuno:last-child {
   justify-content: flex-end;
-  overflow-x: hidden;
 }
 .footerJuno p {
   color: var(--red);
